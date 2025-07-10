@@ -3,32 +3,32 @@ using namespace std;
 
 class Sorter {
 private:
-  vector<int> vec;
+  vector<int> v;
 
 public:
-  Sorter(vector<int> &v) : vec(v) {}
+  Sorter(vector<int> &v) : v(v) {}
 
-  int partition(vector<int> &vec, int low, int high) {
-    int pivot = vec[high];
+  int partition(vector<int> &v, int low, int high) {
+    int pivot = v[high];
     int i = low - 1;
 
     for (int j = low; j <= high - 1; j++) {
-      if (vec[j] <= pivot) {
+      if (v[j] <= pivot) {
         i++;
-        swap(vec[i], vec[j]);
+        swap(v[i], v[j]);
       }
     }
 
-    swap(vec[i + 1], vec[high]);
+    swap(v[i + 1], v[high]);
     return (i + 1);
   }
 
-  void quickSort(vector<int> &vec, int low, int high) {
+  void quickSort(vector<int> &v, int low, int high) {
     if (low < high) {
-      int pi = partition(vec, low, high);
+      int pi = partition(v, low, high);
 
-      quickSort(vec, low, pi - 1);
-      quickSort(vec, pi + 1, high);
+      quickSort(v, low, pi - 1);
+      quickSort(v, pi + 1, high);
     }
   }
 };

@@ -23,7 +23,7 @@ func partition(arr []int, low, high int) int {
 			arr[i], arr[j] = arr[j], arr[i]
 		}
 	}
-	
+
 	// Swap pivot to correct position
 	arr[i+1], arr[high] = arr[high], arr[i+1]
 	return i + 1
@@ -33,5 +33,5 @@ func main() {
 	arr := []int{4, 1, 47, 64, 23, 6, 37,69}
 
 	quickSort(arr, 0, len(arr)-1)
-	fmt.Println("Sorted array : ", arr)
+	fmt.Println("Sorted array: ", arr)
 }

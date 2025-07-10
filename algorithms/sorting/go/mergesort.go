@@ -12,7 +12,7 @@ func mergeSort(arr []int) []int {
 	left := mergeSort(arr[:mid])
 	right := mergeSort(arr[mid:])
 
-	// conuqer
+	// conquer
 	return merge(left, right)
 }
 
@@ -42,5 +42,5 @@ func main() {
 	arr := []int{4, 1, 47, 64, 23, 6, 37,69}
 
 	sorted := mergeSort(arr)
-	fmt.Println("Sorted array :  ", sorted)
+	fmt.Println("Sorted array: ", sorted)
 }
