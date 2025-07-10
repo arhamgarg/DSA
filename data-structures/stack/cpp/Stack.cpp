@@ -51,5 +51,5 @@ public:
 
   int top() { return head->data; }
 
-  bool isEmpty() { return size == 0; }
+  bool empty() { return size == 0; }
 };
