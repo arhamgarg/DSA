@@ -3,24 +3,24 @@ using namespace std;
 
 class Sorter {
 private:
-  vector<int> vec;
+  vector<int> v;
 
 public:
-  Sorter(vector<int> &v) : vec(v) {}
+  Sorter(vector<int> &v) : v(v) {}
 
-  void insertionSort(vector<int> &vec) {
-    int n = vec.size();
+  void insertionSort(vector<int> &v) {
+    int n = v.size();
 
     for (int i = 1; i < n; i++) {
-      int key = vec[i];
+      int key = v[i];
       int j = i - 1;
 
-      while (j >= 0 && vec[j] > key) {
-        vec[j + 1] = vec[j];
+      while (j >= 0 && v[j] > key) {
+        v[j + 1] = v[j];
         j--;
       }
 
-      vec[j + 1] = key;
+      v[j + 1] = key;
     }
   }
 };
