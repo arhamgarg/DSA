@@ -14,12 +14,12 @@ public:
 
 class Stack {
   Node *head;
-  int size;
+  int length;
 
 public:
   Stack() {
     head = nullptr;
-    size = 0;
+    length = 0;
   }
 
   void push(int value) {
@@ -27,13 +27,13 @@ public:
 
     if (head == nullptr) {
       head = newNode;
-      size++;
+      length++;
       return;
     }
 
     newNode->next = head;
     head = newNode;
-    size++;
+    length++;
   }
 
   void pop() {
@@ -46,10 +46,12 @@ public:
     head = head->next;
     temp->next = nullptr;
     delete temp;
-    size--;
+    length--;
   }
 
   int top() { return head->data; }
 
-  bool empty() { return size == 0; }
+  bool empty() { return length == 0; }
+
+  int size() { return length; }
 };
