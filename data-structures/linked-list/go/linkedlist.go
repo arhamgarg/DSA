@@ -150,6 +150,6 @@ func main() {
 
 	ll.Print()
 
-	fmt.Println("Search 69:", ll.Search(69))
-	fmt.Println("Search Topesh Roll No : ", ll.Search(6))
+	fmt.Println("Search 69: ", ll.Search(69))
+	fmt.Println("Search Roll No: ", ll.Search(6))
 }
