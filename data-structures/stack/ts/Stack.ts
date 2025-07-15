@@ -1,67 +1,16 @@
 /**
  * @file Stack.ts
- * @description Provides Userdefined stack and node
+ * @description Provides Userdefined stack 
  * @author JestiferHarold
  * @created 2025-07-14
  * 
  * This File Includes:
- * - NewNode
  * - Stack
  */
 
-/**
- * Represents a Node in a stack 
- */
-class NewNode{ 
-
-    /**
-     * This is to store the value 
-     * @memberof NewNode
-     */
-    private value: number;
-
-    /**
-     * This is to store the nextnode 
-     * 
-     * @memberof NewNode
-     */
-    private nextNode: NewNode | null;
-
-    /**
-     * Initializes a new instance of the NewNode class
-     * @param value 
-     * @param nextNode 
-     */
-    constructor (value: number, nextNode: NewNode | null) {
-        this.value = value;
-        this.nextNode = nextNode;
-    }
-
-    /**
-     * gets the value stored by the node
-     * @returns The number stored by the node
-     */
-    getValue(): number {
-        return this.value;
-    }
-
-    /**
-     * gets the nextnode
-     * @returns the nextnode member, could be another newnode or null
-     */
-    getNextNode() : NewNode | null {
-        return this.nextNode;
-    }
-
-    /**
-     * sets the nextnode of the NewNode class
-     * @param nextNode - an object of the NewNode or null
-     * @return void
-     */
-    setNextNode(nextNode: NewNode | null): void {
-        this.nextNode = nextNode;
-    }
-}
+import { NewNode } from "../../Node/Node";
+//@ts-ignore
+import { process } from "node:process";
 
 /**
  * Repesents an abstract data type Stack using Nodes
@@ -139,9 +88,17 @@ class Stack {
 
         return this.head;
     }
+
+    display(): void {
+        let n: NewNode | null = this.head;
+        for (; n?.getNextNode() != null; n = n.getNextNode())
+            //@ts-ignore
+            process.std.write(`${n.getValue()} -> `);
+        //@ts-ignore
+        process.std.write();
+    }
 }
 
 export {
-    NewNode,
     Stack
 }
