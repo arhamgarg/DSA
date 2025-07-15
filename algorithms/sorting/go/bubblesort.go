@@ -25,6 +25,5 @@ func main(){
 	arr := []int{4, 1, 47, 64, 23, 6, 37,69}
 
 	bubbleSort(arr)
-	fmt.Println("Sorted array : ",arr)
-
+	fmt.Println("Sorted array: ",arr)
 }
