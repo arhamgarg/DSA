@@ -1,104 +1,55 @@
-/**
- * @file Stack.ts
- * @description Provides Userdefined stack 
- * @author JestiferHarold
- * @created 2025-07-14
- * 
- * This File Includes:
- * - Stack
- */
-
-import { NewNode } from "../../Node/Node";
+import { Node } from "../../node/ts/Node";
 //@ts-ignore
 import { process } from "node:process";
 
-/**
- * Repesents an abstract data type Stack using Nodes
- */
 class Stack {
-   
-    /**
-     * Stores the first node of the list
-     * @memberof Stack
-     */
-    private head: NewNode | null;
+  private head: Node | null;
+  private size: number;
 
-    /**
-     * Stores the size of the stack
-     * @memberof Stack
-     */
-    private size: number;
+  constructor(head: Node | null = null) {
+    this.head = head;
+    this.size = 0;
+  }
 
-    /**
-     * Initializes a new stack
-     * @param head - the first node of the stack, could be null
-     * @return void
-     */
-    constructor (head: NewNode | null = null) {
-        this.head = head;
-        this.size = 0;
-    } 
+  getHead(): Node | null {
+    return this.head;
+  }
 
-    /**
-     * gets the first node of the stack
-     * @returns the top node of the stack, could be null
-     */
-    getHead(): NewNode | null {return this.head;}
+  getSize(): number {
+    return this.size;
+  }
 
-    /**
-     * gets the total number of nodes in the stack
-     * @returns size of the stack
-     */
-    getSize(): number {return this.size;}
+  push(node: Node): void {
+    node.setNextNode(this.head);
+    this.head = node;
+  }
 
-    /**
-     * pushes a node to the top of the stack
-     * @param node - the node to be pushed on top
-     * @returns void
-     */
-    push(node: NewNode): void {
-        node.setNextNode(this.head);
-        this.head = node;
-    }    
-
-    /**
-     * pops and returns the top node
-     * @throws StackUnderflow Exception if the stack is empty
-     * @returns the top node
-     */
-    pop(): NewNode {
-        if (this.head == null) {
-            throw Error("Stack UnderFlow Exception");
-        }
-
-        let poppedNode: NewNode = this.head;
-        this.head = this.head.getNextNode();
-        return poppedNode;
+  pop(): Node {
+    if (this.head == null) {
+      throw Error("Stack UnderFlow Exception");
     }
 
-    /**
-     * returns the top node without removing it out of the stack
-     * @throws StackUnderflow Exception if the stack is empty
-     * @returns the top node of the stack
-     */
-    top(): NewNode {
-        if (this.head == null) {
-            throw Error("Stack UnderFlow Exception");
-        }
+    let poppedNode: Node = this.head;
+    this.head = this.head.getNextNode();
+    return poppedNode;
+  }
 
-        return this.head;
+  top(): Node {
+    if (this.head == null) {
+      throw Error("Stack UnderFlow Exception");
     }
 
-    display(): void {
-        let n: NewNode | null = this.head;
-        for (; n?.getNextNode() != null; n = n.getNextNode())
-            //@ts-ignore
-            process.std.write(`${n.getValue()} -> `);
-        //@ts-ignore
-        process.std.write();
-    }
+    return this.head;
+  }
+
+  display(): void {
+    let n: Node | null = this.head;
+    for (; n?.getNextNode() != null; n = n.getNextNode())
+      //@ts-ignore
+      process.std.write(`${n.getValue()} -> `);
+    //@ts-ignore
+    process.std.write();
+  }
 }
 
-export {
-    Stack
-}
+export { Stack };
