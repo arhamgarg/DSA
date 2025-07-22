@@ -11,6 +11,10 @@ public class SinglyLinkedList {
       this.next = null;
     }
   }
+  
+  public SinglyLinkedList() {
+    head = null;
+  }
 
   public void AddFront(int data) {
     Node newNode = new Node(data);

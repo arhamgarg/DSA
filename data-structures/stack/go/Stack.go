@@ -15,8 +15,8 @@ type Stack struct {
 }
 
 func(s * Stack) Push(data int) {
-    newNode: = & StackNode {
-        data: data
+    newNode:= & StackNode {
+        data: data,
     }
     newNode.next = s.head
     s.head = newNode
@@ -28,7 +28,7 @@ func(s * Stack) Pop() int {
         fmt.Println("Stack is empty")
         return -1
     }
-    val: = s.head.data
+    val:= s.head.data
     s.head = s.head.next
     s.size--
         return val
