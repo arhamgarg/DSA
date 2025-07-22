@@ -17,7 +17,7 @@ type LinkedList struct {
 func (ll *LinkedList) AddFront(data int) {
 	newNode := &Node{data: data, next: ll.head}
 	// & is used to get the memory address of the variable
-	
+
 	if(ll.head == nil){
 		ll.head = newNode
 		return
