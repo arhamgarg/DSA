@@ -92,4 +92,3 @@ func (dll *DoublyLinkedList) DisplayBackward() {
 	}
 	fmt.Println()
 }
-
