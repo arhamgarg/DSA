@@ -15,8 +15,8 @@ type Queue struct {
 }
 
 func(q * Queue) Enqueue(data int) {
-    newNode: = & QueueNode {
-        data: data
+    newNode := & QueueNode {
+        data:data,
     }
     if q.head == nil {
         q.head = newNode
@@ -24,7 +24,7 @@ func(q * Queue) Enqueue(data int) {
             return
     }
 
-    curr: = q.head
+    curr:= q.head
     for curr.next != nil {
         curr = curr.next
     }
@@ -37,7 +37,7 @@ func(q * Queue) Dequeue() int {
         fmt.Println("Queue is empty")
         return -1
     }
-    val: = q.head.data
+    val:= q.head.data
     q.head = q.head.next
     q.size--
         return val
