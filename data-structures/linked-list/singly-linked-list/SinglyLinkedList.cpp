@@ -12,12 +12,12 @@ public:
   }
 };
 
-class List {
+class SinglyLinkedList {
   Node *head;
   Node *tail;
 
 public:
-  List() { head = tail = nullptr; }
+  SinglyLinkedList() { head = tail = nullptr; }
 
   void push_front(int value) {
     Node *newNode = new Node(value);
@@ -45,7 +45,7 @@ public:
 
   void pop_front() {
     if (head == nullptr) {
-      cout << "Linked List is empty!\n";
+      cout << "Singly Linked List is empty!\n";
       return;
     }
 
@@ -61,7 +61,7 @@ public:
 
   void pop_back() {
     if (head == nullptr) {
-      cout << "Linked List is empty!\n";
+      cout << "Singly Linked List is empty!\n";
       return;
     }
 
