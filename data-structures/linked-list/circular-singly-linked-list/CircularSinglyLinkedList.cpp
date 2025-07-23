@@ -53,6 +53,7 @@ public:
       head = tail = nullptr;
     } else {
       Node *temp = head;
+      
       head = head->next;
       tail->next = head;
       temp->next = nullptr;

@@ -1,52 +1,49 @@
 #include <vector>
 using namespace std;
 
-class Sorter {
-private:
-  vector<int> v;
+class MergeSort {
+  vector<int> vec;
 
 public:
-  Sorter(vector<int> &v) : v(v) {}
+  MergeSort(vector<int> &vec) { vec = vec; }
 
-  void merge(vector<int> &v, int l, int r, int m) {
+  void merge(vector<int> &vec, int start, int mid, int end) {
     vector<int> temp;
+    int i = start, j = mid + 1;
 
-    int left = l;
-    int right = m + 1;
-
-    while (left <= m && right <= r) {
-      if (v[left] < v[right]) {
-        temp.push_back(v[left]);
-        left++;
+    while (i <= mid && j <= end) {
+      if (vec[i] < vec[j]) {
+        temp.push_back(vec[i]);
+        i++;
       } else {
-        temp.push_back(v[right]);
-        right++;
+        temp.push_back(vec[j]);
+        j++;
       }
     }
 
-    while (left <= m) {
-      temp.push_back(v[left]);
-      left++;
+    while (i <= mid) {
+      temp.push_back(vec[i]);
+      i++;
     }
 
-    while (right <= r) {
-      temp.push_back(v[right]);
-      right++;
+    while (j <= end) {
+      temp.push_back(vec[j]);
+      j++;
     }
 
-    for (int i = l; i <= r; i++) {
-      v[i] = temp[i - l];
+    for (int index = 0; index < temp.size(); index++) {
+      vec[index + start] = temp[index];
     }
   }
 
-  void mergeSort(vector<int> &v, int l, int r) {
-    if (l < r) {
-      int mid = (l + r) / 2;
+  void mergeSort(vector<int> &vec, int start, int end) {
+    if (start < end) {
+      int mid = start + (end - start) / 2;
 
-      mergeSort(v, l, mid);
-      mergeSort(v, mid + 1, r);
+      mergeSort(vec, start, mid);
+      mergeSort(vec, mid + 1, end);
 
-      merge(v, l, r, mid);
+      merge(vec, start, mid, end);
     }
   }
 };

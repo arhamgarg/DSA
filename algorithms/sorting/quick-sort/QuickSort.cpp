@@ -1,34 +1,33 @@
 #include <vector>
 using namespace std;
 
-class Sorter {
-private:
-  vector<int> v;
+class QuickSort {
+  vector<int> vec;
 
 public:
-  Sorter(vector<int> &v) : v(v) {}
+  QuickSort(vector<int> &vec) { vec = vec; }
 
-  int partition(vector<int> &v, int low, int high) {
-    int pivot = v[high];
-    int i = low - 1;
+  int partition(vector<int> &vec, int start, int end) {
+    int i = start - 1, pivot = vec[end];
 
-    for (int j = low; j <= high - 1; j++) {
-      if (v[j] <= pivot) {
+    for (int j = start; j < end; j++) {
+      if (vec[j] <= pivot) {
         i++;
-        swap(v[i], v[j]);
+        swap(vec[i], vec[j]);
       }
     }
 
-    swap(v[i + 1], v[high]);
-    return (i + 1);
+    i++;
+    swap(vec[i], vec[end]);
+    return (i);
   }
 
-  void quickSort(vector<int> &v, int low, int high) {
-    if (low < high) {
-      int pi = partition(v, low, high);
+  void quickSort(vector<int> &vec, int start, int end) {
+    if (start < end) {
+      int pi = partition(vec, start, end);
 
-      quickSort(v, low, pi - 1);
-      quickSort(v, pi + 1, high);
+      quickSort(vec, start, pi - 1);
+      quickSort(vec, pi + 1, end);
     }
   }
 };
