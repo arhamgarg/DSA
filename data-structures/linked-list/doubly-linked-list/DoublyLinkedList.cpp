@@ -53,6 +53,7 @@ public:
     }
 
     Node *temp = head;
+
     head = head->next;
 
     if (head != nullptr) {
@@ -80,6 +81,7 @@ public:
     }
 
     Node *temp = tail;
+    
     tail = tail->prev;
 
     if (tail != nullptr) {

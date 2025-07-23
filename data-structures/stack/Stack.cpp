@@ -43,6 +43,7 @@ public:
     }
 
     Node *temp = head;
+    
     head = head->next;
     temp->next = nullptr;
     delete temp;

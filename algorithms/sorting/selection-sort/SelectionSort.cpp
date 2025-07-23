@@ -1,27 +1,26 @@
 #include <vector>
 using namespace std;
 
-class Sorter {
-private:
-  vector<int> v;
+class SelectionSort {
+  vector<int> vec;
 
 public:
-  Sorter(vector<int> &v) : v(v) {}
+  SelectionSort(vector<int> &vec) { vec = vec; }
 
-  void selectionSort(vector<int> &v) {
-    int n = v.size();
+  void sort(vector<int> &vec) {
+    int n = vec.size();
 
     for (int i = 0; i < n - 1; i++) {
       int minIndex = i;
 
       for (int j = i + 1; j < n; j++) {
-        if (v[j] < v[minIndex]) {
+        if (vec[j] < vec[minIndex]) {
           minIndex = j;
         }
       }
 
       if (minIndex != i) {
-        swap(v[i], v[minIndex]);
+        swap(vec[i], vec[minIndex]);
       }
     }
   }

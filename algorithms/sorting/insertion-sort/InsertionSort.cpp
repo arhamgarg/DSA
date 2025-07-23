@@ -1,26 +1,25 @@
 #include <vector>
 using namespace std;
 
-class Sorter {
-private:
-  vector<int> v;
+class InsertionSort {
+  vector<int> vec;
 
 public:
-  Sorter(vector<int> &v) : v(v) {}
+  InsertionSort(vector<int> &vec) { vec = vec; }
 
-  void insertionSort(vector<int> &v) {
-    int n = v.size();
+  void sort(vector<int> &vec) {
+    int n = vec.size();
 
     for (int i = 1; i < n; i++) {
-      int key = v[i];
+      int key = vec[i];
       int j = i - 1;
 
-      while (j >= 0 && v[j] > key) {
-        v[j + 1] = v[j];
+      while (j >= 0 && vec[j] > key) {
+        vec[j + 1] = vec[j];
         j--;
       }
 
-      v[j + 1] = key;
+      vec[j + 1] = key;
     }
   }
 };

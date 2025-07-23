@@ -50,6 +50,7 @@ public:
     }
 
     Node *temp = head;
+
     head = head->next;
     temp->next = nullptr;
     delete temp;
@@ -103,6 +104,7 @@ public:
     }
 
     Node *newNode = new Node(value);
+    
     newNode->next = temp->next;
     temp->next = newNode;
 
