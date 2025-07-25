@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 #include <vector>
 using namespace std;
 
@@ -30,32 +31,67 @@ Node *buildTree(vector<int> preorder) {
   return root;
 }
 
-void preorder(Node *root) {
+void preorderTraversal(Node *root) {
   if (root == nullptr) {
     return;
   }
 
   cout << root->data << " ";
-  preorder(root->left);
-  preorder(root->right);
+  preorderTraversal(root->left);
+  preorderTraversal(root->right);
 }
 
-void inorder(Node *root) {
+void inorderTraversal(Node *root) {
   if (root == nullptr) {
     return;
   }
 
-  inorder(root->left);
+  inorderTraversal(root->left);
   cout << root->data << " ";
-  inorder(root->right);
+  inorderTraversal(root->right);
 }
 
-void postorder(Node *root) {
+void postorderTraversal(Node *root) {
   if (root == nullptr) {
     return;
   }
 
-  postorder(root->left);
-  postorder(root->right);
+  postorderTraversal(root->left);
+  postorderTraversal(root->right);
   cout << root->data << " ";
+}
+
+void levelorderTraversal(Node *root) {
+  queue<Node *> q;
+
+  q.push(root);
+  q.push(nullptr);
+
+  while (q.size() > 0) {
+    Node *curr = q.front();
+
+    q.pop();
+
+    if (curr == nullptr) {
+      if (!q.empty()) {
+        cout << "\n";
+        q.push(nullptr);
+        continue;
+      } else {
+        break;
+      }
+    }
+
+    cout << curr->data << " ";
+
+    if (curr->left != nullptr) {
+      q.push(curr->left);
+    }
+
+    if (curr->right != nullptr) {
+      q.push(curr->right);
+    }
+  }
+
+  cout << "\n";
 }
