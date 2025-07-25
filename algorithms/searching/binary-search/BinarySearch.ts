@@ -7,8 +7,7 @@ function binarySearch(array: number[], target: number): number {
     mid = low + Math.floor((high - low) / 2);
 
     if (array[mid] == target) return mid;
-
-    if (array[mid] > target) high = mid - 1;
+    else if (array[mid] > target) high = mid - 1;
     else low = mid + 1;
   }
 

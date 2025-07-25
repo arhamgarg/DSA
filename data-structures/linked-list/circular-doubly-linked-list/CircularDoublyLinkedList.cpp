@@ -5,31 +5,34 @@ class Node {
 public:
   int data;
   Node *next;
+  Node *prev;
 
   Node(int value) {
     data = value;
-    next = nullptr;
+    next = prev = nullptr;
   }
 };
 
-class CircularSinglyLinkedList {
+class CircularDoublyLinkedList {
   Node *head;
   Node *tail;
 
 public:
-  CircularSinglyLinkedList() { head = tail = nullptr; }
+  CircularDoublyLinkedList() { head = tail = nullptr; }
 
   void insertAtHead(int value) {
     Node *newNode = new Node(value);
 
     if (head == nullptr) {
       head = tail = newNode;
-      tail->next = head;
+      head->next = head->prev = head;
+    } else {
+      newNode->next = head;
+      newNode->prev = tail;
+      head->prev = newNode;
+      tail->next = newNode;
+      head = newNode;
     }
-
-    newNode->next = head;
-    head = newNode;
-    tail->next = head;
   }
 
   void insertAtTail(int value) {
@@ -37,12 +40,14 @@ public:
 
     if (head == nullptr) {
       head = tail = newNode;
-      tail->next = head;
+      head->next = head->prev = head;
+    } else {
+      newNode->prev = tail;
+      newNode->next = head;
+      tail->next = newNode;
+      head->prev = newNode;
+      tail = newNode;
     }
-
-    newNode->next = head;
-    tail->next = newNode;
-    tail = newNode;
   }
 
   void deleteAtHead() {
@@ -55,8 +60,9 @@ public:
       Node *temp = head;
 
       head = head->next;
+      head->prev = tail;
       tail->next = head;
-      temp->next = nullptr;
+      temp->next = temp->prev = nullptr;
       delete temp;
     }
   }
@@ -69,15 +75,11 @@ public:
       head = tail = nullptr;
     } else {
       Node *temp = tail;
-      Node *prev = head;
 
-      while (prev->next != tail) {
-        prev = prev->next;
-      }
-
-      tail = prev;
+      tail = tail->prev;
       tail->next = head;
-      temp->next = nullptr;
+      head->prev = tail;
+      temp->next = temp->prev = nullptr;
       delete temp;
     }
   }
@@ -87,13 +89,12 @@ public:
       return;
     }
 
-    cout << head->data << " -> ";
-    Node *temp = head->next;
+    Node *temp = head;
 
-    while (temp != head) {
-      cout << temp->data << " -> ";
+    do {
+      cout << temp->data << " <-> ";
       temp = temp->next;
-    }
+    } while (temp != head);
 
     cout << temp->data << "\n";
   }
