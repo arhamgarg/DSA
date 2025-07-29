@@ -5,7 +5,7 @@ class SelectionSort {
   vector<int> vec;
 
 public:
-  SelectionSort(vector<int> &vec) { vec = vec; }
+  SelectionSort(vector<int> &vec) { this->vec = vec; }
 
   void sort(vector<int> &vec) {
     int n = vec.size();

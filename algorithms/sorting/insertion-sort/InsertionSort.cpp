@@ -5,7 +5,7 @@ class InsertionSort {
   vector<int> vec;
 
 public:
-  InsertionSort(vector<int> &vec) { vec = vec; }
+  InsertionSort(vector<int> &vec) { this->vec = vec; }
 
   void sort(vector<int> &vec) {
     int n = vec.size();
