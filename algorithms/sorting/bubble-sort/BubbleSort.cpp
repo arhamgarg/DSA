@@ -5,7 +5,7 @@ class BubbleSort {
   vector<int> vec;
 
 public:
-  BubbleSort(vector<int> &vec) { vec = vec; }
+  BubbleSort(vector<int> &vec) { this->vec = vec; }
 
   void sort(vector<int> &vec) {
     int n = vec.size();

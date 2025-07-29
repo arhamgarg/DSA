@@ -5,7 +5,7 @@ class MergeSort {
   vector<int> vec;
 
 public:
-  MergeSort(vector<int> &vec) { vec = vec; }
+  MergeSort(vector<int> &vec) { this->vec = vec; }
 
   void merge(vector<int> &vec, int start, int mid, int end) {
     vector<int> temp;

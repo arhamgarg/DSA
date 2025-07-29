@@ -68,11 +68,11 @@ void levelorderTraversal(Node *root) {
   q.push(nullptr);
 
   while (q.size() > 0) {
-    Node *curr = q.front();
+    Node *temp = q.front();
 
     q.pop();
 
-    if (curr == nullptr) {
+    if (temp == nullptr) {
       if (!q.empty()) {
         cout << "\n";
         q.push(nullptr);
@@ -82,14 +82,14 @@ void levelorderTraversal(Node *root) {
       }
     }
 
-    cout << curr->data << " ";
+    cout << temp->data << " ";
 
-    if (curr->left != nullptr) {
-      q.push(curr->left);
+    if (temp->left != nullptr) {
+      q.push(temp->left);
     }
 
-    if (curr->right != nullptr) {
-      q.push(curr->right);
+    if (temp->right != nullptr) {
+      q.push(temp->right);
     }
   }
 

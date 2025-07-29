@@ -5,7 +5,7 @@ class QuickSort {
   vector<int> vec;
 
 public:
-  QuickSort(vector<int> &vec) { vec = vec; }
+  QuickSort(vector<int> &vec) { this->vec = vec; }
 
   int partition(vector<int> &vec, int start, int end) {
     int i = start - 1, pivot = vec[end];
@@ -19,7 +19,7 @@ public:
 
     i++;
     swap(vec[i], vec[end]);
-    return (i);
+    return i;
   }
 
   void quickSort(vector<int> &vec, int start, int end) {
