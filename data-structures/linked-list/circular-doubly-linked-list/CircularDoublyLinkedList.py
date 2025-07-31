@@ -4,6 +4,7 @@ class Node:
         self.next = None
         self.prev = None
 
+
 class CircularDoublyLinkedList:
     def __init__(self):
         self.head = None
@@ -108,9 +109,8 @@ class CircularDoublyLinkedList:
             return
         curr = self.head
         while True:
-            print(curr.val, end=' <-> ')
+            print(curr.val, end=" <-> ")
             curr = curr.next
             if curr == self.head:
                 break
         print("(back to head)")
-

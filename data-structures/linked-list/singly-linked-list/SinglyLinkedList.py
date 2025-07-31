@@ -1,21 +1,21 @@
 class Node:
-    def __init__(self,val):
-        self.val=val
-        self.next=None
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
 
 class LinkedList:
     def __init__(self):
-        self.head=None
+        self.head = None
 
-    def insertFirst(self,val):
-        new_node=Node(val)
+    def insertFirst(self, val):
+        new_node = Node(val)
         if self.head is None:
             self.head = new_node
             return
-        new_node.next=self.head
-        self.head=new_node
+        new_node.next = self.head
+        self.head = new_node
 
-    
     def insertLast(self, val):
         new_node = Node(val)
         if self.head is None:
@@ -26,7 +26,6 @@ class LinkedList:
             curr = curr.next
         curr.next = new_node
 
-
     def deleteFirst(self):
         if self.head:
             self.head = self.head.next
@@ -36,10 +35,10 @@ class LinkedList:
             return True
         else:
             return False
-    
+
     def deleteLast(self):
         if self.head is None:
-            return 
+            return
         if self.head.next is None:
             self.head = None
             return
@@ -49,7 +48,6 @@ class LinkedList:
             prev = curr
             curr = curr.next
         prev.next = None
-
 
     def insertAfter(self, u, v):
         curr = self.head
@@ -63,16 +61,16 @@ class LinkedList:
         print(f"Value {u} not found in list.")
 
     def listSize(self):
-        curr=self.head
-        size=0
+        curr = self.head
+        size = 0
         while curr:
-            curr=curr.next
-            size+=1
+            curr = curr.next
+            size += 1
         return size
-    
+
     def printList(self):
-        curr=self.head
+        curr = self.head
         while curr:
-            print(curr.val,end='->')
-            curr=curr.next
+            print(curr.val, end="->")
+            curr = curr.next
         print("None")
