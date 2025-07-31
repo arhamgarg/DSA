@@ -3,6 +3,7 @@ class Node:
         self.val = val
         self.next = None
 
+
 class CircularSinglyLinkedList:
     def __init__(self):
         self.head = None
@@ -92,11 +93,8 @@ class CircularSinglyLinkedList:
             return
         curr = self.head
         while True:
-            print(curr.val, end='->')
+            print(curr.val, end="->")
             curr = curr.next
             if curr == self.head:
                 break
         print("(back to head)")
-
-
-

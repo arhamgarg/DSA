@@ -22,11 +22,6 @@ public:
   void push_front(int value) {
     Node *newNode = new Node(value);
 
-    if (head == nullptr) {
-      head = tail = newNode;
-      return;
-    }
-
     newNode->next = head;
     head = newNode;
   }
@@ -104,7 +99,7 @@ public:
     }
 
     Node *newNode = new Node(value);
-    
+
     newNode->next = temp->next;
     temp->next = newNode;
 

@@ -1,5 +1,6 @@
 import random
 
+
 def quick_sort_inplace(arr, left, right):
     if left >= right:
         return
@@ -23,8 +24,3 @@ def quick_sort_inplace(arr, left, right):
     # Recursively sort the left and right parts
     quick_sort_inplace(arr, left, i - 1)
     quick_sort_inplace(arr, i + 1, right)
-
-
-# E = [-5, 3, 2, 1, -3, -3, 7, 2, 2]
-# quick_sort_inplace(E, 0, len(E) - 1)
-

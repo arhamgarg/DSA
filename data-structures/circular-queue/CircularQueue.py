@@ -45,10 +45,10 @@ class CircularQueue:
         if self.isEmpty():
             print("Queue is empty.")
             return
-        print("Queue contents:", end=' ')
+        print("Queue contents:", end=" ")
         i = self.front
         while True:
-            print(self.queue[i], end=' ')
+            print(self.queue[i], end=" ")
             if i == self.rear:
                 break
             i = (i + 1) % self.size
