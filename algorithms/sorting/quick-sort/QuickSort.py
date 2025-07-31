@@ -1,18 +1,30 @@
-def quick_sort(arr):
-    def _quick_sort(arr, low, high):
-        if low < high:
-            pivot_index = partition(arr, low, high)
-            _quick_sort(arr, low, pivot_index - 1)
-            _quick_sort(arr, pivot_index + 1, high)
+import random
 
-    def partition(arr, low, high):
-        pivot = arr[high]  # You can also choose middle element as pivot
-        i = low - 1
-        for j in range(low, high):
-            if arr[j] <= pivot:
-                i += 1
-                arr[i], arr[j] = arr[j], arr[i]
-        arr[i + 1], arr[high] = arr[high], arr[i + 1]
-        return i + 1
+def quick_sort_inplace(arr, left, right):
+    if left >= right:
+        return
 
-    _quick_sort(arr, 0, len(arr) - 1)
+    # Random pivot selection
+    pivot_index = random.randint(left, right)
+    pivot = arr[pivot_index]
+
+    # Move pivot to end temporarily
+    arr[pivot_index], arr[right] = arr[right], arr[pivot_index]
+
+    i = left
+    for j in range(left, right):
+        if arr[j] <= pivot:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+
+    # Move pivot to its correct position
+    arr[i], arr[right] = arr[right], arr[i]
+
+    # Recursively sort the left and right parts
+    quick_sort_inplace(arr, left, i - 1)
+    quick_sort_inplace(arr, i + 1, right)
+
+
+# E = [-5, 3, 2, 1, -3, -3, 7, 2, 2]
+# quick_sort_inplace(E, 0, len(E) - 1)
+

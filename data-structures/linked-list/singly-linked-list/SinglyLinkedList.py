@@ -1,38 +1,78 @@
-class SinglyNode:
-    def __init__(self, val, next=None):
-        self.val = val
-        self.next = next
+class Node:
+    def __init__(self,val):
+        self.val=val
+        self.next=None
 
-    def __str__(self):
-        return str(self.val)
+class LinkedList:
+    def __init__(self):
+        self.head=None
+
+    def insertFirst(self,val):
+        new_node=Node(val)
+        if self.head is None:
+            self.head = new_node
+            return
+        new_node.next=self.head
+        self.head=new_node
+
+    
+    def insertLast(self, val):
+        new_node = Node(val)
+        if self.head is None:
+            self.head = new_node
+            return
+        curr = self.head
+        while curr.next:
+            curr = curr.next
+        curr.next = new_node
 
 
-head = SinglyNode(1)
+    def deleteFirst(self):
+        if self.head:
+            self.head = self.head.next
 
-# Traverse the list - O(n)
-curr = head
-
-while curr:
-    print(curr)
-    curr = curr.next
-
-
-# Diplay linked list - O(n)
-def display(head):
-    curr = head
-    elements = []
-    while curr:
-        elements.append(str(curr.val))
-        curr = curr.next
-    print(" -> ".join(elements))
-
-
-# Search for node value - O(n)
-def search(head, val):
-    curr = head
-    while curr:
-        if val == curr.val:
+    def isEmpty(self):
+        if self.head is None:
             return True
-        curr = curr.next
+        else:
+            return False
+    
+    def deleteLast(self):
+        if self.head is None:
+            return 
+        if self.head.next is None:
+            self.head = None
+            return
+        prev = None
+        curr = self.head
+        while curr.next:
+            prev = curr
+            curr = curr.next
+        prev.next = None
 
-    return False
+
+    def insertAfter(self, u, v):
+        curr = self.head
+        while curr:
+            if curr.val == u:
+                new_node = Node(v)
+                new_node.next = curr.next
+                curr.next = new_node
+                return
+            curr = curr.next
+        print(f"Value {u} not found in list.")
+
+    def listSize(self):
+        curr=self.head
+        size=0
+        while curr:
+            curr=curr.next
+            size+=1
+        return size
+    
+    def printList(self):
+        curr=self.head
+        while curr:
+            print(curr.val,end='->')
+            curr=curr.next
+        print("None")
