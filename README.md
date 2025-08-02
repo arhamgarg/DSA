@@ -10,3 +10,4 @@ A collection of essential data structures and algorithms implemented using objec
 | [H Dharshan](https://github.com/Dharshan2208)            | Go (.go) & Java (.java) |
 | [Nithin Venkat Sharma P M](https://github.com/Nithin0306)| Python (.py)            |
 | [P Sanjay](https://github.com/JestiferHarold)            | TypeScript (.ts)        |
+| [S S Naveen](https://github.com/Naveen77qwerty)          | C (.c)                  |
