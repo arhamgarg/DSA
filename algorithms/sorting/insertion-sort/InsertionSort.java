@@ -1,17 +1,17 @@
 public class InsertionSort {
-    public static int[] insertionsort(int[] array) {
+  public static int[] insertionSort(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      int current = arr[i];
+      int j = i - 1;
 
-        for (int i = 0; i < array.length; i++) {
-            int current = array[i];
-            int j = i - 1;
+      while (j >= 0 && arr[j] > current) {
+        arr[j + 1] = arr[j];
+        j--;
+      }
 
-            while (j >= 0 && array[j] > current) {
-                array[j + 1] = array[j];
-                j--;
-            }
-            array[j + 1] = current;
-        }
-
-        return array;
+      arr[j + 1] = current;
     }
+
+    return arr;
+  }
 }
