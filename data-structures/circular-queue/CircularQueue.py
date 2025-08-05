@@ -28,7 +28,6 @@ class CircularQueue:
             return None
         removed = self.queue[self.front]
         if self.front == self.rear:
-            # Only one element was present
             self.front = self.rear = -1
         else:
             self.front = (self.front + 1) % self.size

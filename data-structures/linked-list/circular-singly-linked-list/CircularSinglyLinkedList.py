@@ -11,7 +11,7 @@ class CircularSinglyLinkedList:
     def insertFirst(self, val):
         new_node = Node(val)
         if self.head is None:
-            new_node.next = new_node  # Point to itself
+            new_node.next = new_node
             self.head = new_node
         else:
             curr = self.head

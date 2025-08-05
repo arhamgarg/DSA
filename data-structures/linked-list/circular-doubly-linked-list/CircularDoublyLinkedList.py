@@ -88,7 +88,7 @@ class CircularDoublyLinkedList:
             index += 1
             if curr == self.head:
                 break
-        return -1  # not found
+        return -1
 
     def listSize(self):
         if self.head is None:
