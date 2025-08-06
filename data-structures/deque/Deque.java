@@ -44,7 +44,7 @@ public class Deque {
   // Remove from front
   public void deleteFront() {
     if (isEmpty()) {
-      System.out.println("Deqeu is empty");
+      System.out.println("Deque is empty");
       return;
     }
 
