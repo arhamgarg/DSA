@@ -17,7 +17,6 @@ func (dq *Deque) IsEmpty() bool {
 	return dq.front == nil
 }
 
-// Add to front
 func (dq *Deque) AddFront(data int) {
 	newNode := &Node{data: data}
 	if dq.IsEmpty() {
@@ -30,7 +29,6 @@ func (dq *Deque) AddFront(data int) {
 	}
 }
 
-// Add to rear
 func (dq *Deque) AddRear(data int) {
 	newNode := &Node{data: data}
 	if dq.IsEmpty() {
@@ -43,7 +41,6 @@ func (dq *Deque) AddRear(data int) {
 	}
 }
 
-// Remove from front
 func (dq *Deque) DeleteFront() {
 	if dq.IsEmpty() {
 		fmt.Println("Deque is empty")
@@ -58,7 +55,6 @@ func (dq *Deque) DeleteFront() {
 	}
 }
 
-// Remove from rear
 func (dq *Deque) DeleteRear() {
 	if dq.IsEmpty() {
 		fmt.Println("Deque is empty")
@@ -73,7 +69,6 @@ func (dq *Deque) DeleteRear() {
 	}
 }
 
-// Peek front
 func (dq *Deque) PeekFront() int {
 	if dq.IsEmpty() {
 		panic("Deque is empty")
@@ -81,7 +76,6 @@ func (dq *Deque) PeekFront() int {
 	return dq.front.data
 }
 
-// Peek rear
 func (dq *Deque) PeekRear() int {
 	if dq.IsEmpty() {
 		panic("Deque is empty")

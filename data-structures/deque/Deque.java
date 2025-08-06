@@ -17,7 +17,6 @@ public class Deque {
     front = rear = null;
   }
 
-  // Add element to front
   public void addFront(int data) {
     Node newNode = new Node(data);
     if (isEmpty()) {
@@ -29,7 +28,6 @@ public class Deque {
     }
   }
 
-  // Add element to rear
   public void addRear(int data) {
     Node newNode = new Node(data);
     if (isEmpty()) {
@@ -41,7 +39,6 @@ public class Deque {
     }
   }
 
-  // Remove from front
   public void deleteFront() {
     if (isEmpty()) {
       System.out.println("Deque is empty");
@@ -56,7 +53,6 @@ public class Deque {
     }
   }
 
-  // Remove from rear
   public void deleteLast() {
     if (isEmpty()) {
       System.out.println("Deque is empty");
@@ -71,7 +67,6 @@ public class Deque {
     }
   }
 
-  // Peek front
   public int peekFront() {
     if (isEmpty()) {
       throw new RuntimeException("Deque is empty");
@@ -79,31 +74,31 @@ public class Deque {
     return front.data;
   }
 
-  // Peek rear
   public int peekRear() {
     if (isEmpty()) {
       throw new RuntimeException("Deque is empty");
     }
     return rear.data;
   }
-  public void display() { // display method 
+
+  public void display() {
     if (isEmpty()) {
-        System.out.println("Deque is empty");
-        return;
+      System.out.println("Deque is empty");
+      return;
     }
-    
+
     Node current = front;
     System.out.print("Deque: ");
     while (current != null) {
-        System.out.print(current.data);
-        if (current.next != null) {
-            System.out.print(" <-> ");
-        }
-        current = current.next;
+      System.out.print(current.data);
+      if (current.next != null) {
+        System.out.print(" <-> ");
+      }
+      current = current.next;
     }
     System.out.println();
-}
-  // Check if empty
+  }
+
   public boolean isEmpty() {
     return front == null;
   }

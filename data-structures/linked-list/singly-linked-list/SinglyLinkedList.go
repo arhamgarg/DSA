@@ -2,21 +2,17 @@ package main
 
 import "fmt"
 
-// Node represents a single node in the list
 type Node struct {
 	data int
 	next *Node
-	// * is given so that the code will work on the actual object not a copy
 }
 
 type LinkedList struct {
 	head *Node
 }
 
-// AddFront adds a node to the front of the list
 func (ll *LinkedList) AddFront(data int) {
 	newNode := &Node{data: data, next: ll.head}
-	// & is used to get the memory address of the variable
 
 	if(ll.head == nil){
 		ll.head = newNode
@@ -26,7 +22,6 @@ func (ll *LinkedList) AddFront(data int) {
 	ll.head = newNode
 }
 
-// AddBack adds a node to the end of the list
 func (ll *LinkedList) AddBack(data int) {
 	newNode := &Node{data: data}
 
@@ -42,7 +37,6 @@ func (ll *LinkedList) AddBack(data int) {
 	curr.next = newNode
 }
 
-// DeleteFront removes the first node of the list
 func (ll *LinkedList) DeleteFront() {
 	if ll.head == nil {
 		fmt.Println("List is empty.")
@@ -51,7 +45,6 @@ func (ll *LinkedList) DeleteFront() {
 	ll.head = ll.head.next
 }
 
-// DeleteBack removes the last node of the list
 func (ll *LinkedList) DeleteBack() {
 	if ll.head == nil {
 		fmt.Println("List is empty.")
@@ -69,7 +62,6 @@ func (ll *LinkedList) DeleteBack() {
 	curr.next = nil
 }
 
-// Search checks if a value exists in the list
 func (ll *LinkedList) Search(value int) bool {
 	curr := ll.head
 	for curr != nil {
@@ -81,7 +73,6 @@ func (ll *LinkedList) Search(value int) bool {
 	return false
 }
 
-// Print displays all elements of the list
 func (ll *LinkedList) Print() {
 	curr := ll.head
 	if curr == nil {
@@ -95,7 +86,6 @@ func (ll *LinkedList) Print() {
 	fmt.Println("nil")
 }
 
-// InsertAt inserts a node at the given position
 func (ll *LinkedList) InsertAt(position int, data int) {
 	newNode := &Node{data: data}
 

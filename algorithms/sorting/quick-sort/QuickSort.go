@@ -6,16 +6,14 @@ func quickSort(arr []int, low, high int) {
 	if low < high {
 		pivotIndex := partition(arr, low, high)
 
-		// Recursively sort left and right of the pivot
 		quickSort(arr, low, pivotIndex-1)
 		quickSort(arr, pivotIndex+1, high)
 	}
 }
 
 func partition(arr []int, low, high int) int {
-	// Implemented where pivot element is last element
 	pivot := arr[high]
-	i := low - 1 // index of smaller element
+	i := low - 1
 
 	for j := low; j < high; j++ {
 		if arr[j] < pivot {
@@ -24,7 +22,6 @@ func partition(arr []int, low, high int) int {
 		}
 	}
 
-	// Swap pivot to correct position
 	arr[i+1], arr[high] = arr[high], arr[i+1]
 	return i + 1
 }

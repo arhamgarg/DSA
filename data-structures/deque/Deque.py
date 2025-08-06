@@ -1,8 +1,9 @@
 class Node:
     def __init__(self, data):
         self.data = data
-        self.prev = None  # New: for backward navigation
-        self.next = None  # Already present: for forward navigation
+        self.prev = None
+        self.next = None
+
 
 class Deque:
     def __init__(self):
@@ -19,7 +20,7 @@ class Deque:
         if self.head is not None:
             self.head.prev = new_node
         self.head = new_node
-        if self.tail is None:  # First node
+        if self.tail is None:
             self.tail = new_node
         self._size += 1
         print(f"Inserted at front: {item}")
@@ -30,7 +31,7 @@ class Deque:
         if self.tail is not None:
             self.tail.next = new_node
         self.tail = new_node
-        if self.head is None:  # First node
+        if self.head is None:
             self.head = new_node
         self._size += 1
         print(f"Inserted at rear: {item}")
@@ -44,7 +45,7 @@ class Deque:
         if self.head is not None:
             self.head.prev = None
         else:
-            self.tail = None  # Deque is now empty
+            self.tail = None
         self._size -= 1
         print(f"Deleted from front: {removed}")
         return removed
@@ -58,7 +59,7 @@ class Deque:
         if self.tail is not None:
             self.tail.next = None
         else:
-            self.head = None  # Deque is now empty
+            self.head = None
         self._size -= 1
         print(f"Deleted from rear: {removed}")
         return removed
