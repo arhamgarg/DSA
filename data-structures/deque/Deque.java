@@ -86,7 +86,23 @@ public class Deque {
     }
     return rear.data;
   }
-
+  public void display() { // display method 
+    if (isEmpty()) {
+        System.out.println("Deque is empty");
+        return;
+    }
+    
+    Node current = front;
+    System.out.print("Deque: ");
+    while (current != null) {
+        System.out.print(current.data);
+        if (current.next != null) {
+            System.out.print(" <-> ");
+        }
+        current = current.next;
+    }
+    System.out.println();
+}
   // Check if empty
   public boolean isEmpty() {
     return front == null;
