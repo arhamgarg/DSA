@@ -18,7 +18,6 @@ class DoubleyLinkedList {
     tail = null;
   }
 
-  // Insert at front
   void insertFirst(int data) {
     Node newNode = new Node(data);
 
@@ -31,7 +30,6 @@ class DoubleyLinkedList {
     }
   }
 
-  // Insert at end
   void insertLast(int data) {
     Node newNode = new Node(data);
 
@@ -44,7 +42,6 @@ class DoubleyLinkedList {
     }
   }
 
-  // Delete from front
   void deleteFirst() {
     if (head == null) {
       System.out.println("Lsit is Empty");
@@ -59,7 +56,6 @@ class DoubleyLinkedList {
     }
   }
 
-  // Delete fron end
   void deleteLast() {
     if (tail == null) {
       System.out.println("List is Empty");
@@ -73,7 +69,6 @@ class DoubleyLinkedList {
     }
   }
 
-  // Display from front
   void displayForward() {
     Node current = head;
     System.out.print("Forward: ");
@@ -84,7 +79,6 @@ class DoubleyLinkedList {
     System.out.println();
   }
 
-  // Display from end
   void displayBackward() {
     Node current = tail;
     System.out.print("Backward: ");

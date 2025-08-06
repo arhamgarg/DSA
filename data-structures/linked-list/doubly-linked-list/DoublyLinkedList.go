@@ -13,7 +13,6 @@ type DoublyLinkedList struct {
 	tail *Node
 }
 
-// Insert at front
 func (dll *DoublyLinkedList) InsertFirst(data int) {
 	newNode := &Node{data: data}
 
@@ -27,7 +26,6 @@ func (dll *DoublyLinkedList) InsertFirst(data int) {
 	}
 }
 
-// Insert at end
 func (dll *DoublyLinkedList) InsertLast(data int) {
 	newNode := &Node{data: data}
 
@@ -41,7 +39,6 @@ func (dll *DoublyLinkedList) InsertLast(data int) {
 	}
 }
 
-// Delete from front
 func (dll *DoublyLinkedList) DeleteFirst() {
 	if dll.head == nil {
 		fmt.Println("List is Empty")
@@ -57,7 +54,6 @@ func (dll *DoublyLinkedList) DeleteFirst() {
 	}
 }
 
-// Delete from end
 func (dll *DoublyLinkedList) DeleteLast() {
 	if dll.tail == nil {
 		fmt.Println("List is Empty")

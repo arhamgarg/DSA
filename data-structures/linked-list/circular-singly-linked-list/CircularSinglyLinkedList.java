@@ -11,7 +11,6 @@ public class CircularSingleyLinkedList {
     }
   }
 
-  // Insert at first
   void insertFirst(int data) {
     Node newNode = new Node(data);
 
@@ -25,7 +24,6 @@ public class CircularSingleyLinkedList {
     tail.next = head;
   }
 
-  // Insert at last
   void insertLast(int data) {
     Node newNode = new Node(data);
 
@@ -39,7 +37,6 @@ public class CircularSingleyLinkedList {
     tail.next = head;
   }
 
-  // Delete from front
   public void deleteFirst() {
     if (head == null) {
       System.out.println("List is empty");
@@ -53,7 +50,6 @@ public class CircularSingleyLinkedList {
     tail.next = head;
   }
 
-  // Delete from end
   public void deleteLast() {
     if (head == null) {
       System.out.println("List is empty");
@@ -72,7 +68,6 @@ public class CircularSingleyLinkedList {
     tail.next = head;
   }
 
-  // Display the list
   public void display() {
     if (head == null) {
       System.out.println("List is empty");

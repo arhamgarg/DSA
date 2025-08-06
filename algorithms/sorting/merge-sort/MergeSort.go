@@ -7,12 +7,10 @@ func mergeSort(arr []int) []int {
 		return arr
 	}
 
-	// divide
 	mid := len(arr) / 2
 	left := mergeSort(arr[:mid])
 	right := mergeSort(arr[mid:])
 
-	// conquer
 	return merge(left, right)
 }
 
@@ -20,7 +18,6 @@ func merge(left, right []int) []int {
 	result := []int{}
 	i, j := 0, 0
 
-	// Merge two sorted slices
 	for i < len(left) && j < len(right) {
 		if left[i] <= right[j] {
 			result = append(result, left[i])
@@ -31,7 +28,6 @@ func merge(left, right []int) []int {
 		}
 	}
 
-	// Append remaining elements
 	result = append(result, left[i:]...)
 	result = append(result, right[j:]...)
 

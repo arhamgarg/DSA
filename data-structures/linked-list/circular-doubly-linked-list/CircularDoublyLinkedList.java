@@ -17,7 +17,6 @@ class CircularDoublyLinkedList {
     head = null;
   }
 
-  // Insert at front
   void insertFirst(int data) {
     Node newNode = new Node(data);
 
@@ -34,7 +33,6 @@ class CircularDoublyLinkedList {
     }
   }
 
-  // Insert at end
   void insertLast(int data) {
     Node newNode = new Node(data);
 
@@ -51,7 +49,6 @@ class CircularDoublyLinkedList {
     }
   }
 
-  // Delete from front
   public void deleteFirst() {
     if (head == null) {
       System.out.println("List is empty");
@@ -67,7 +64,6 @@ class CircularDoublyLinkedList {
     }
   }
 
-  // Delete from end
   public void deleteLast() {
     if (tail == null) {
       System.out.println("List is empty");
@@ -83,7 +79,6 @@ class CircularDoublyLinkedList {
     }
   }
 
-  // Display forward
   public void displayForward() {
     if (head == null) {
       System.out.println("List is empty");
@@ -101,7 +96,6 @@ class CircularDoublyLinkedList {
     System.out.println();
   }
 
-  // Display backward
   public void displayBackward() {
     if (tail == null) {
       System.out.println("List is empty");
