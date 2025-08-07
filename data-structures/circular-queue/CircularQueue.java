@@ -1,25 +1,38 @@
+class Node {
+  int data;
+  Node next;
+  public Node(int data) {
+    this.data = data;
+    this.next = null;
+  }
+}
 
 public class CircularQueue {
-  private int[] arr;
-  private int maxSize, currSize;
-  private int f, b;
+  private Node tail;
+  private int size;
+  private int maxSize;
 
-  public CircularQueue(int size) {
-    maxSize = size;
-    arr = new int[maxSize];
-    currSize = 0;
-    f = 0;
-    b = -1;
+  public CircularQueue(int maxSize) {
+    this.maxSize = maxSize;
+    this.tail = null;
+    this.size = 0;
   }
 
-  public void enqueue(int value) {
-    if (currSize == maxSize) {
+  public void enqueue(int data) {
+    if (isFull()) {
       System.out.println("circular queue is full!");
       return;
     }
-    b = (b + 1) % maxSize;
-    arr[b] = value;
-    currSize++;
+    Node node = new Node(data);
+    if (tail == null) {
+      tail = node;
+      tail.next = tail;
+    } else {
+      node.next = tail.next;
+      tail.next = node;
+      tail = node;
+    }
+    size++;
   }
 
   public void dequeue() {
@@ -27,8 +40,12 @@ public class CircularQueue {
       System.out.println("circular queue is empty!");
       return;
     }
-    f = (f + 1) % maxSize;
-    currSize--;
+    if (tail.next == tail) {
+      tail = null;
+    } else {
+      tail.next = tail.next.next;
+    }
+    size--;
   }
 
   public int front() {
@@ -36,27 +53,28 @@ public class CircularQueue {
       System.out.println("circular queue is empty!");
       return -1;
     }
-    return arr[f];
+    return tail.next.data;
   }
-
 
   public int last() {
     if (isEmpty()) {
       System.out.println("circular queue is empty!");
       return -1;
     }
-    return arr[b];
+    return tail.data;
   }
 
   public boolean isFull() {
-    return currSize == maxSize;
+    return size == maxSize;
   }
 
   public boolean isEmpty() {
-    return currSize == 0;
+    return size == 0;
   }
 
   public int size() {
-    return currSize;
+    return size;
   }
 }
+
+
