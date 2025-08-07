@@ -1,15 +1,20 @@
+public class Node {
+  int data;
+  Node next;
+
+  public Node(int data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+
 public class Queue {
-  Node head;
+  private Node head;
   private int size;
 
-  class Node {
-    int data;
-    Node next;
-
-    Node(int data) {
-      this.data = data;
-      this.next = null;
-    }
+  public Stack() {
+    head = null;
+    size = 0;
   }
 
   public void enqueue(int data) {
@@ -21,38 +26,38 @@ public class Queue {
       return;
     }
 
-    Node currNode = head;
-    while (currNode.next != null) {
-      currNode = currNode.next;
+    Node curr = head;
+
+    while (curr.next != null) {
+      curr = curr.next;
     }
 
-    currNode.next = newNode;
+    curr.next = newNode;
     size++;
   }
 
-  public int dequeue() {
+  public void dequeue() {
     if (head == null) {
       System.out.println("Queue is empty");
-      return -1;
     }
-    int value = head.data;
-    size--;
+
     head = head.next;
-    return value;
+    size--;
   }
 
   public int front() {
     if (head == null) {
       System.out.println("Queue is empty");
     }
-    return head.data;
-  }
 
-  public int size() {
-    return size;
+    return head.data;
   }
 
   public boolean isEmpty() {
     return size == 0;
+  }
+
+  public int size() {
+    return size;
   }
 }
