@@ -20,7 +20,7 @@ public class CircularQueue {
 
   public void enqueue(int data) {
     if (isFull()) {
-      System.out.println("circular queue is full!");
+      System.out.println("Circular Queue is full!");
       return;
     }
     Node node = new Node(data);
@@ -37,7 +37,7 @@ public class CircularQueue {
 
   public void dequeue() {
     if (isEmpty()) {
-      System.out.println("circular queue is empty!");
+      System.out.println("Circular Queue is empty!");
       return;
     }
     if (tail.next == tail) {
@@ -50,7 +50,7 @@ public class CircularQueue {
 
   public int front() {
     if (isEmpty()) {
-      System.out.println("circular queue is empty!");
+      System.out.println("Circular Queue is empty!");
       return -1;
     }
     return tail.next.data;
@@ -58,7 +58,7 @@ public class CircularQueue {
 
   public int last() {
     if (isEmpty()) {
-      System.out.println("circular queue is empty!");
+      System.out.println("Circular Queue is empty!");
       return -1;
     }
     return tail.data;
@@ -76,5 +76,3 @@ public class CircularQueue {
     return size;
   }
 }
-
-
