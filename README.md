@@ -13,3 +13,4 @@ A collection of essential data structures and algorithms implemented using objec
 | [S S Naveen](https://github.com/Naveen77qwerty)            | C (.c)                                          |
 | [Chinni Samith Reddy](https://github.com/samithreddychinni)| Java (.java)                                    |
 | [Ritesh Koushik](https://github.com/IAmRiteshKoushik)      | Go (.go)                                        |
+| [Lohit G](https://github.com/codedbyloki)                  | Java (.java)                                    |
