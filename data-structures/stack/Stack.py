@@ -16,14 +16,16 @@ class Stack:
         self._size += 1
 
     def pop(self):
-        if self.is_empty():
+        if self.head is None:
             print("Stack Underflow")
+            return
         self.head = self.head.next
         self._size -= 1
 
     def top(self):
-        if self.is_empty():
+        if self.head is None:
             print("Stack Underflow")
+            return
         print(self.head.data)
 
     def is_empty(self):

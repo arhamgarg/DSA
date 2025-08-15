@@ -27,6 +27,7 @@ public class Stack {
   public void pop() {
     if (head == null) {
       System.out.println("Stack is empty");
+      return;
     }
 
     head = head.next;
@@ -36,6 +37,7 @@ public class Stack {
   public int top() {
     if (head == null) {
       System.out.println("Stack is empty");
+      return;
     }
 
     return head.data;
