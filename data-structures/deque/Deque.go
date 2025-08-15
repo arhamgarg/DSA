@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type Node struct {
 	data int
 	prev *Node
@@ -41,11 +39,11 @@ func (dq *Deque) AddRear(data int) {
 	}
 }
 
-func (dq *Deque) DeleteFront() {
+func (dq *Deque) PopFront() int {
 	if dq.IsEmpty() {
-		fmt.Println("Deque is empty")
-		return
+		panic("Deque is empty")
 	}
+	data := dq.front.data
 	if dq.front == dq.rear {
 		dq.front = nil
 		dq.rear = nil
@@ -53,13 +51,14 @@ func (dq *Deque) DeleteFront() {
 		dq.front = dq.front.next
 		dq.front.prev = nil
 	}
+	return data
 }
 
-func (dq *Deque) DeleteRear() {
+func (dq *Deque) PopRear() int {
 	if dq.IsEmpty() {
-		fmt.Println("Deque is empty")
-		return
+		panic("Deque is empty")
 	}
+	data := dq.rear.data
 	if dq.front == dq.rear {
 		dq.front = nil
 		dq.rear = nil
@@ -67,6 +66,7 @@ func (dq *Deque) DeleteRear() {
 		dq.rear = dq.rear.prev
 		dq.rear.next = nil
 	}
+	return data
 }
 
 func (dq *Deque) PeekFront() int {
