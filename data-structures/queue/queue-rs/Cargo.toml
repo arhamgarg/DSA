@@ -1,0 +1,11 @@
+[package]
+name = "queue-rs"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "queue_rs"
+path = "lib.rs"
+crate-type = ["lib"]
+
+[dependencies]
