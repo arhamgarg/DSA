@@ -25,11 +25,12 @@ struct Node<T> {
 
 pub struct Stack<T> {
     top: Option<Box<Node<T>>>,
+    size: u32,
 }
 
 impl<T> Stack<T> {
     fn new() -> Self {
-        Stack { top: None }
+        Stack { top: None, size: 0 }
     }
 
     fn push(&mut self, item: T) {
@@ -38,11 +39,13 @@ impl<T> Stack<T> {
             next: self.top.take(),
         });
         self.top = Some(new_node);
+        self.size += 1;
     }
 
     fn pop(&mut self) -> Option<T> {
         self.top.take().map(|node| {
             self.top = node.next;
+            self.size -= 1;
             node.value
         })
     }
@@ -53,6 +56,10 @@ impl<T> Stack<T> {
 
     fn is_empty(&self) -> bool {
         self.top.is_none()
+    }
+
+    fn size(&self) -> u32 {
+        self.size
     }
 }
 
@@ -96,5 +103,15 @@ mod tests {
         assert!(!stack.is_empty());
         stack.pop();
         assert!(stack.is_empty());
+    }
+
+    #[test]
+    fn test_size() {
+        let mut stack = Stack::new();
+        assert_eq!(stack.size(), 0);
+        stack.push(1);
+        assert_eq!(stack.size(), 1);
+        stack.pop();
+        assert_eq!(stack.size(), 0);
     }
 }
