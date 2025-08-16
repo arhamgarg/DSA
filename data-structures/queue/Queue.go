@@ -1,7 +1,7 @@
 package main
 
 import (
-    "fmt"
+    "errors"
 )
 
 type QueueNode struct {
@@ -32,23 +32,21 @@ func(q * Queue) Enqueue(data int) {
     q.size++
 }
 
-func(q * Queue) Dequeue() int {
+func(q * Queue) Dequeue() (int,error) {
     if q.head == nil {
-        fmt.Println("Queue is empty")
-        return -1
+		return 0, errors.New("queue is empty")
     }
     val:= q.head.data
     q.head = q.head.next
     q.size--
-        return val
+        return val,nil
 }
 
-func(q * Queue) Front() int {
+func(q * Queue) Front() (int, error) {
     if q.head == nil {
-        fmt.Println("Queue is empty")
-        return -1
+		return 0, errors.New("queue is empty")
     }
-    return q.head.data
+    return q.head.data,nil
 }
 
 func(q * Queue) Size() int {

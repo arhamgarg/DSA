@@ -1,5 +1,9 @@
 package main
 
+import (
+	"errors"
+)
+
 type Node struct {
 	data int
 	prev *Node
@@ -39,9 +43,9 @@ func (dq *Deque) AddRear(data int) {
 	}
 }
 
-func (dq *Deque) PopFront() int {
+func (dq *Deque) PopFront() (int,error) {
 	if dq.IsEmpty() {
-		panic("Deque is empty")
+		return 0, errors.New("deque is empty")
 	}
 	data := dq.front.data
 	if dq.front == dq.rear {
@@ -51,12 +55,12 @@ func (dq *Deque) PopFront() int {
 		dq.front = dq.front.next
 		dq.front.prev = nil
 	}
-	return data
+	return data,nil
 }
 
-func (dq *Deque) PopRear() int {
+func (dq *Deque) PopRear() (int, error) {
 	if dq.IsEmpty() {
-		panic("Deque is empty")
+		return 0, errors.New("deque is empty")
 	}
 	data := dq.rear.data
 	if dq.front == dq.rear {
@@ -66,19 +70,19 @@ func (dq *Deque) PopRear() int {
 		dq.rear = dq.rear.prev
 		dq.rear.next = nil
 	}
-	return data
+	return data,nil
 }
 
-func (dq *Deque) PeekFront() int {
+func (dq *Deque) PeekFront() (int,error) {
 	if dq.IsEmpty() {
-		panic("Deque is empty")
+		return 0, errors.New("deque is empty")
 	}
-	return dq.front.data
+	return dq.front.data,nil
 }
 
-func (dq *Deque) PeekRear() int {
+func (dq *Deque) PeekRear() (int,error) {
 	if dq.IsEmpty() {
-		panic("Deque is empty")
+		return 0, errors.New("deque is empty")
 	}
-	return dq.rear.data
+	return dq.rear.data,nil
 }
