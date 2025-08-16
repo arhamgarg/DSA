@@ -17,7 +17,7 @@ public:
 
 static int index = -1;
 
-Node *buildTree(vector<int> preorder) {
+Node *buildBT(vector<int> preorder) {
   index++;
 
   if (preorder[index] == -1) {
@@ -25,8 +25,8 @@ Node *buildTree(vector<int> preorder) {
   }
 
   Node *root = new Node(preorder[index]);
-  root->left = buildTree(preorder);
-  root->right = buildTree(preorder);
+  root->left = buildBT(preorder);
+  root->right = buildBT(preorder);
 
   return root;
 }
