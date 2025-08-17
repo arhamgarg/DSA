@@ -43,7 +43,7 @@ func (dq *Deque) AddRear(data int) {
 	}
 }
 
-func (dq *Deque) PopFront() (int,error) {
+func (dq *Deque) PopFront() (int, error) {
 	if dq.IsEmpty() {
 		return 0, errors.New("deque is empty")
 	}
@@ -55,7 +55,7 @@ func (dq *Deque) PopFront() (int,error) {
 		dq.front = dq.front.next
 		dq.front.prev = nil
 	}
-	return data,nil
+	return data, nil
 }
 
 func (dq *Deque) PopRear() (int, error) {
@@ -70,20 +70,19 @@ func (dq *Deque) PopRear() (int, error) {
 		dq.rear = dq.rear.prev
 		dq.rear.next = nil
 	}
-	return data,nil
+	return data, nil
 }
 
-func (dq *Deque) PeekFront() (int,error) {
+func (dq *Deque) PeekFront() (int, error) {
 	if dq.IsEmpty() {
 		return 0, errors.New("deque is empty")
 	}
-	return dq.front.data,nil
+	return dq.front.data, nil
 }
 
-func (dq *Deque) PeekRear() (int,error) {
+func (dq *Deque) PeekRear() (int, error) {
 	if dq.IsEmpty() {
 		return 0, errors.New("deque is empty")
 	}
-	return dq.rear.data,nil
+	return dq.rear.data, nil
 }
-
