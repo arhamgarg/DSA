@@ -4,6 +4,7 @@ int BinarySearch(int[] sortedArray, int target) {
 
     while (low <= high) {
         int mid = low + (high - low) / 2;
+
         if (sortedArray[mid] == target) {
             return mid;
         } else if (sortedArray[mid] > target) {
@@ -11,6 +12,7 @@ int BinarySearch(int[] sortedArray, int target) {
         } else {
             low = mid + 1;
         }
+        
     }
 
     return -1
