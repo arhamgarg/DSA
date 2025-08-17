@@ -1,5 +1,5 @@
-public class BinarySeach {
-  int binarySearch(int[] arr, int target) {
+public class Sorting {
+  public static int BinarySearch(int[] arr, int target) {
     int low = 0;
     int high = arr.length - 1;
     int mid;
