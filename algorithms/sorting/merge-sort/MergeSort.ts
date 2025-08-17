@@ -30,7 +30,7 @@ class Sorting {
       j++;
     }
 
-    for (let idx: number = 0; idx < len; len++) {
+    for (let idx: number = 0; idx < len; idx++) {
       array[idx + first] = newArray[idx];
     }
   }
