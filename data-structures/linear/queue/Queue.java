@@ -12,7 +12,7 @@ public class Queue {
   private Node head;
   private int size;
 
-  public Stack() {
+  public Queue() {
     head = null;
     size = 0;
   }
