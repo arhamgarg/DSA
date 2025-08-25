@@ -1,110 +1,78 @@
-public class SinglyLinkedList {
-  Node head;
-  private int size;
+class Node {
+  int data;
+  Node next;
 
-  class Node {
-    int data;
-    Node next;
-
-    Node(int data) {
-      this.data = data;
-      this.next = null;
-    }
+  Node(int data) {
+    this.data = data;
+    this.next = null;
   }
+}
+
+public class SinglyLinkedList {
+  private Node head;
+  private int size;
 
   public SinglyLinkedList() {
     head = null;
+    size = 0;
   }
 
-  public void AddFront(int data) {
+  public void addFront(int data) {
     Node newNode = new Node(data);
-
-    if (head == null) {
-      head = newNode;
-      size++;
-      return;
-    }
-
     newNode.next = head;
     head = newNode;
     size++;
   }
 
-  public void AddLast(int data) {
+  public void addLast(int data) {
     Node newNode = new Node(data);
-
     if (head == null) {
       head = newNode;
-      return;
+    } else {
+      Node curr = head;
+      while (curr.next != null) {
+        curr = curr.next;
+      }
+      curr.next = newNode;
     }
-
-    Node currNode = head;
-    while (currNode.next != null) {
-      currNode = currNode.next;
-    }
-
-    currNode.next = newNode;
     size++;
   }
 
-  public boolean Search(int value) {
-    Node currNode = head;
-
-    while (currNode != null) {
-      if (currNode.data == value) {
+  public boolean search(int value) {
+    Node curr = head;
+    while (curr != null) {
+      if (curr.data == value) {
         return true;
       }
-      currNode = currNode.next;
+      curr = curr.next;
     }
     return false;
   }
 
-  public void PrintList() {
+  public void deleteFirst() {
     if (head == null) {
       System.out.println("List is empty");
       return;
     }
-
-    Node currNode = head;
-
-    while (currNode != null) {
-      System.out.print(currNode.data + "-->");
-      currNode = currNode.next;
-    }
-
-    System.out.println("NULL");
-  }
-
-  public void DeleteFirst() {
-    if (head == null) {
-      System.out.println("List is empty");
-      return;
-    }
-    size--;
     head = head.next;
+    size--;
   }
 
-  public void DeleteLast() {
+  public void deleteLast() {
     if (head == null) {
-      System.out.println("Lsit is empty");
+      System.out.println("List is empty");
       return;
     }
-
     if (head.next == null) {
       head = null;
-      return;
+    } else {
+      Node curr = head;
+      while (curr.next.next != null) {
+        curr = curr.next;
+      }
+      curr.next = null;
     }
-
-    Node secondLast = head;
-    Node lastNode = head.next;
-
-    while (lastNode.next != null) {
-      lastNode = lastNode.next;
-      secondLast = secondLast.next;
-    }
-
     size--;
-    secondLast.next = null;
   }
 
   public int size() {

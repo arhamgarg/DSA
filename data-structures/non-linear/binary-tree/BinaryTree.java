@@ -1,91 +1,85 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 class Node {
   int data;
   Node left;
   Node right;
 
-  public Node(int data) {
-    this.data = data;
-    this.right = null;
-    this.left = null;
+  Node(int value) {
+    data = value;
+    left = right = null;
   }
 }
 
 public class BinaryTree {
-  int idx = -1;
+  static int index = -1;
 
-  Node buildTree(int nodes[]) {
-    idx++;
-    if (nodes[idx] == -1) {
+  public static Node buildTree(int[] preorder) {
+    index++;
+
+    if (index >= preorder.length || preorder[index] == -1) {
       return null;
     }
 
-    Node newNode = new Node(nodes[idx]);
-    newNode.left = buildTree(nodes);
-    newNode.right = buildTree(nodes);
+    Node root = new Node(preorder[index]);
+    root.left = buildTree(preorder);
+    root.right = buildTree(preorder);
 
-    return newNode;
+    return root;
   }
 
-  void preorder(Node root) {
-    if (root == null) {
+  public static void preorderTraversal(Node root) {
+    if (root == null)
       return;
-    }
 
     System.out.print(root.data + " ");
-    preorder(root.left);
-    preorder(root.right);
+    preorderTraversal(root.left);
+    preorderTraversal(root.right);
   }
 
-  void inorder(Node root) {
-    if (root == null) {
+  public static void inorderTraversal(Node root) {
+    if (root == null)
       return;
-    }
 
-    inorder(root.left);
+    inorderTraversal(root.left);
     System.out.print(root.data + " ");
-    inorder(root.right);
+    inorderTraversal(root.right);
   }
 
-  void postorder(Node root) {
-    if (root == null) {
+  public static void postorderTraversal(Node root) {
+    if (root == null)
       return;
-    }
 
-    postorder(root.left);
-    postorder(root.right);
+    postorderTraversal(root.left);
+    postorderTraversal(root.right);
     System.out.print(root.data + " ");
   }
 
-  void levelorder(Node root) {
-    if (root == null) {
+  public static void levelorderTraversal(Node root) {
+    if (root == null)
       return;
-    }
 
     Queue<Node> q = new LinkedList<>();
     q.add(root);
     q.add(null);
 
     while (!q.isEmpty()) {
-      Node currNode = q.remove();
+      Node temp = q.poll();
 
-      if (currNode == null) {
+      if (temp == null) {
         System.out.println();
-
-        if (q.isEmpty()) {
-          break;
-        } else {
+        if (!q.isEmpty()) {
           q.add(null);
         }
       } else {
-        System.out.print(currNode.data + " ");
-        if (currNode.left != null) {
-          q.add(currNode.left);
+        System.out.print(temp.data + " ");
+
+        if (temp.left != null) {
+          q.add(temp.left);
         }
-        if (currNode.right != null) {
-          q.add(currNode.right);
+
+        if (temp.right != null) {
+          q.add(temp.right);
         }
       }
     }
