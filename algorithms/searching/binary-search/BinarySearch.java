@@ -1,4 +1,4 @@
-public class BinarySeach {
+public class BinarySearch {
   int binarySearch(int[] arr, int target) {
     int low = 0;
     int high = arr.length - 1;
@@ -14,7 +14,7 @@ public class BinarySeach {
       else
         low = mid + 1;
     }
-    
+
     return -1;
   }
 }
