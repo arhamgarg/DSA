@@ -4,16 +4,15 @@ class Sorting {
     int i = first;
     int j = mid + 1;
     int len = lst.length;
-    int listIdx= 0;
+    int listIdx = 0;
 
     while (i <= mid && j <= last) {
-
       if (lst[i] < lst[j]) {
         newLst.insert(listIdx, lst[i]);
-        i ++;
+        i++;
       } else {
         newLst.insert(listIdx, lst[j]);
-        j ++;
+        j++;
       }
 
       listIdx++;
@@ -21,17 +20,17 @@ class Sorting {
 
     while (i <= mid) {
       newLst.insert(listIdx, lst[i]);
-      i ++;
+      i++;
       listIdx++;
     }
 
     while (j <= last) {
       newLst.insert(listIdx, lst[j]);
-      j ++;
+      j++;
       listIdx++;
     }
 
-    for (int index = 0; index < len; index ++) {
+    for (int index = 0; index < len; index++) {
       lst[index + first] = newLst[index];
     }
   }

@@ -3,7 +3,7 @@ class Sorting {
     array: number[],
     first: number,
     mid: number,
-    last: number
+    last: number,
   ): void {
     let newArray: Array<number> = new Array();
     let i: number = first;
@@ -38,7 +38,7 @@ class Sorting {
   public static MergeSort(
     array: number[],
     first: number,
-    last: number
+    last: number,
   ): number[] {
     if (first < last) {
       let mid: number = first + (last - first) / 2;

@@ -9,7 +9,7 @@ class Sorting {
 
       while (j >= 0 && unsortedArray[j] > key) {
         unsortedArray[j + 1] = unsortedArray[j];
-        j --;
+        j--;
       }
 
       unsortedArray[j + 1] = key;
