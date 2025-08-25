@@ -3,10 +3,10 @@ class Sorting {
     int n = unsortedList.length;
     int min, temp;
 
-    for (int i = 0; i < n; i ++) {
+    for (int i = 0; i < n; i++) {
       min = i;
 
-      for (int j = i; j < n; j ++) {
+      for (int j = i; j < n; j++) {
         if (unsortedList[j] < unsortedList[min]) {
           min = j;
         }

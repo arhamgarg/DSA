@@ -1,15 +1,16 @@
 class Searching {
-  static BinarySearch(List<int> sortedList, int target) {
+  static binarySearch(List<int> arr, int target) {
     int low = 0;
-    int high = sortedList.length;
+    int high = arr.length;
+    int mid;
 
     while (low <= high) {
       double half = ((high - low) / 2);
-      int mid = low + half.toInt();
-      
-      if (sortedList[mid] == target) {
+      mid = low + half.toInt();
+
+      if (arr[mid] == target) {
         return mid;
-      } else if (sortedList[mid] > target) {
+      } else if (arr[mid] > target) {
         high = mid - 1;
       } else {
         low = mid + 1;

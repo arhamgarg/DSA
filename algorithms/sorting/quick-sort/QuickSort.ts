@@ -22,7 +22,7 @@ class Sorting {
   public static QuickSort(
     unsortedArray: number[],
     low: number,
-    high: number
+    high: number,
   ): number[] {
     if (low < high) {
       let pivotIndex: number = this.partition(unsortedArray, low, high);
