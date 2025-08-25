@@ -70,11 +70,3 @@ class Deque:
 
     def __len__(self):
         return self.size
-
-    def display(self):
-        current = self.front
-        elements = []
-        while current:
-            elements.append(current.data)
-            current = current.next
-        return elements
