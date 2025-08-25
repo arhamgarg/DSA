@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, val):
-        self.val = val
+    def __init__(self, value):
+        self.value = value
         self.next = None
 
 
@@ -8,17 +8,14 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    def insertFirst(self, val):
-        new_node = Node(val)
-        if self.head is None:
-            self.head = new_node
-            return
+    def insert_first(self, value):
+        new_node = Node(value)
         new_node.next = self.head
         self.head = new_node
 
-    def insertLast(self, val):
-        new_node = Node(val)
-        if self.head is None:
+    def insert_last(self, value):
+        new_node = Node(value)
+        if not self.head:
             self.head = new_node
             return
         curr = self.head
@@ -26,47 +23,34 @@ class LinkedList:
             curr = curr.next
         curr.next = new_node
 
-    def deleteFirst(self):
+    def delete_first(self):
         if self.head:
             self.head = self.head.next
 
-    def isEmpty(self):
-        if self.head is None:
-            return True
-        else:
-            return False
-
-    def deleteLast(self):
-        if self.head is None:
+    def delete_last(self):
+        if not self.head:
             return
-        if self.head.next is None:
+        if not self.head.next:
             self.head = None
             return
-        prev = None
         curr = self.head
-        while curr.next:
-            prev = curr
+        while curr.next and curr.next.next:
             curr = curr.next
-        prev.next = None
+        curr.next = None
 
-    def insertAfter(self, u, v):
+    def insert_after(self, target, value):
         curr = self.head
         while curr:
-            if curr.val == u:
-                new_node = Node(v)
+            if curr.value == target:
+                new_node = Node(value)
                 new_node.next = curr.next
                 curr.next = new_node
                 return
             curr = curr.next
-        print(f"Value {u} not found in list.")
+        raise ValueError(f"Value {target} not found in list.")
 
-    def listSize(self):
-        curr = self.head
-        size = 0
-        while curr:
-            curr = curr.next
-            size += 1
-        return size
+    def is_empty(self):
+        return self.head is None
 
     def printList(self):
         curr = self.head
@@ -74,3 +58,11 @@ class LinkedList:
             print(curr.val, end="->")
             curr = curr.next
         print("None")
+
+    def size(self):
+        count = 0
+        curr = self.head
+        while curr:
+            count += 1
+            curr = curr.next
+        return count

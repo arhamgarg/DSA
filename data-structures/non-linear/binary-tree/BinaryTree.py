@@ -1,50 +1,72 @@
-class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-    def __str__(self):
-        return str(self.val)
+from collections import deque
 
 
-class BinaryTree:
-    def __init__(self, root=None):
-        self.root = root
+class Node:
+    def __init__(self, value):
+        self.data = value
+        self.left = None
+        self.right = None
 
-    def pre_order(self, node):
-        if not node:
-            return
-        print(node, end=" ")
-        self.pre_order(node.left)
-        self.pre_order(node.right)
 
-    def in_order(self, node):
-        if not node:
-            return
-        self.in_order(node.left)
-        print(node, end=" ")
-        self.in_order(node.right)
+index = -1
 
-    def post_order(self, node):
-        if not node:
-            return
-        self.post_order(node.left)
-        self.post_order(node.right)
-        print(node, end=" ")
 
-    def level_order(self):
-        if not self.root:
-            return
+def build_tree(preorder):
+    global index
+    index += 1
 
-        from collections import deque
+    if index >= len(preorder) or preorder[index] == -1:
+        return None
 
-        queue = deque([self.root])
+    root = Node(preorder[index])
+    root.left = build_tree(preorder)
+    root.right = build_tree(preorder)
 
-        while queue:
-            node = queue.popleft()
-            print(node, end=" ")
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
+    return root
+
+
+def preorder_traversal(root):
+    if root is None:
+        return
+    print(root.data, end=" ")
+    preorder_traversal(root.left)
+    preorder_traversal(root.right)
+
+
+def inorder_traversal(root):
+    if root is None:
+        return
+    inorder_traversal(root.left)
+    print(root.data, end=" ")
+    inorder_traversal(root.right)
+
+
+def postorder_traversal(root):
+    if root is None:
+        return
+    postorder_traversal(root.left)
+    postorder_traversal(root.right)
+    print(root.data, end=" ")
+
+
+def levelorder_traversal(root):
+    if not root:
+        return
+
+    q = deque()
+    q.append(root)
+    q.append(None)
+
+    while q:
+        temp = q.popleft()
+
+        if temp is None:
+            print()
+            if q:
+                q.append(None)
+        else:
+            print(temp.data, end=" ")
+            if temp.left:
+                q.append(temp.left)
+            if temp.right:
+                q.append(temp.right)

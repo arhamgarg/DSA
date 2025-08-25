@@ -7,82 +7,74 @@ class Node:
 
 class Deque:
     def __init__(self):
-        self.head = None
-        self.tail = None
-        self._size = 0
+        self.front = None
+        self.rear = None
+        self.size = 0
 
-    def isEmpty(self):
-        return self.head is None
+    def is_empty(self):
+        return self.size == 0
 
-    def insertFront(self, item):
-        new_node = Node(item)
-        new_node.next = self.head
-        if self.head is not None:
-            self.head.prev = new_node
-        self.head = new_node
-        if self.tail is None:
-            self.tail = new_node
-        self._size += 1
-        print(f"Inserted at front: {item}")
-
-    def insertRear(self, item):
-        new_node = Node(item)
-        new_node.prev = self.tail
-        if self.tail is not None:
-            self.tail.next = new_node
-        self.tail = new_node
-        if self.head is None:
-            self.head = new_node
-        self._size += 1
-        print(f"Inserted at rear: {item}")
-
-    def deleteFront(self):
-        if self.isEmpty():
-            print("Deque is empty! Cannot delete from front.")
-            return None
-        removed = self.head.data
-        self.head = self.head.next
-        if self.head is not None:
-            self.head.prev = None
+    def insert_front(self, data):
+        new_node = Node(data)
+        if self.is_empty():
+            self.front = self.rear = new_node
         else:
-            self.tail = None
-        self._size -= 1
-        print(f"Deleted from front: {removed}")
-        return removed
+            new_node.next = self.front
+            self.front.prev = new_node
+            self.front = new_node
+        self.size += 1
 
-    def deleteRear(self):
-        if self.isEmpty():
-            print("Deque is empty! Cannot delete from rear.")
-            return None
-        removed = self.tail.data
-        self.tail = self.tail.prev
-        if self.tail is not None:
-            self.tail.next = None
+    def insert_rear(self, data):
+        new_node = Node(data)
+        if self.is_empty():
+            self.front = self.rear = new_node
         else:
-            self.head = None
-        self._size -= 1
-        print(f"Deleted from rear: {removed}")
-        return removed
+            new_node.prev = self.rear
+            self.rear.next = new_node
+            self.rear = new_node
+        self.size += 1
 
-    def getFront(self):
-        if self.isEmpty():
-            print("Deque is empty!")
-            return None
-        return self.head.data
+    def delete_front(self):
+        if self.is_empty():
+            raise IndexError("Deque is empty")
+        value = self.front.data
+        self.front = self.front.next
+        if self.front is None:
+            self.rear = None
+        else:
+            self.front.prev = None
+        self.size -= 1
+        return value
 
-    def getRear(self):
-        if self.isEmpty():
-            print("Deque is empty!")
-            return None
-        return self.tail.data
+    def delete_rear(self):
+        if self.is_empty():
+            raise IndexError("Deque is empty")
+        value = self.rear.data
+        self.rear = self.rear.prev
+        if self.rear is None:
+            self.front = None
+        else:
+            self.rear.next = None
+        self.size -= 1
+        return value
 
-    def size(self):
-        return self._size
+    def get_front(self):
+        if self.is_empty():
+            raise IndexError("Deque is empty")
+        return self.front.data
+
+    def get_rear(self):
+        if self.is_empty():
+            raise IndexError("Deque is empty")
+        return self.rear.data
+
+    def __len__(self):
+        return self.size
 
     def display(self):
-        print("Deque contents:", end=" ")
-        current = self.head
+        current = self.front
+        elements = []
         while current:
-            print(current.data, end=" <-> ")
+            elements.append(current.data)
             current = current.next
-        print("None")
+        return elements
