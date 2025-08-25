@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"errors"
 )
 
 type StackNode struct {
@@ -25,7 +25,7 @@ func (s *Stack) Push(data int) {
 
 func (s *Stack) Pop() (int, error) {
 	if s.head == nil {
-		return 0, fmt.Errorf("stack is empty")
+		return 0, errors.New("stack is empty")
 	}
 	val := s.head.data
 	s.head = s.head.next
@@ -35,7 +35,7 @@ func (s *Stack) Pop() (int, error) {
 
 func (s *Stack) Top() (int, error) {
 	if s.head == nil {
-		return 0, fmt.Errorf("stack is empty")
+		return 0, errors.New("stack is empty")
 	}
 	return s.head.data, nil
 }
