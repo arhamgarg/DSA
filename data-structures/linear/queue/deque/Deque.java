@@ -93,14 +93,4 @@ public class Deque {
   public int size() {
     return size;
   }
-
-  public void display() {
-    Node current = front;
-    System.out.print("Deque: ");
-    while (current != null) {
-      System.out.print(current.data + " ");
-      current = current.next;
-    }
-    System.out.println();
-  }
 }
