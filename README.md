@@ -4,13 +4,14 @@ A collection of essential data structures and algorithms implemented using objec
 
 ## **Contributors**
 
-| **Contributor**                                            | **Contribution**                                |
-| ---------------------------------------------------------- | ----------------------------------------------- |
-| [Arham Garg](https://github.com/arhamgarg)                 | C++ (.cpp) & Code Review                        |
-| [H Dharshan](https://github.com/Dharshan2208)              | Go (.go) & Java (.java)                         |
-| [Nithin Venkat Sharma P M](https://github.com/Nithin0306)  | Python (.py) & C++ (.cpp)                       |
-| [P Sanjay](https://github.com/JestiferHarold)              | TypeScript (.ts)                                |
-| [S S Naveen](https://github.com/Naveen77qwerty)            | C (.c)                                          |
-| [Chinni Samith Reddy](https://github.com/samithreddychinni)| Java (.java)                                    |
-| [Ritesh Koushik](https://github.com/IAmRiteshKoushik)      | Rust (.rs), Python (.py), Java (.java), Go (.go)|
-| [Lohit G](https://github.com/codedbyloki)                  | Java (.java)                                    |
+| **Contributor**                                            | **Contribution**               |
+| ---------------------------------------------------------- | ------------------------------ |
+| [Arham Garg](https://github.com/arhamgarg)                 | C++ (.cpp) & Code Review       |
+| [H Dharshan](https://github.com/Dharshan2208)              | Go (.go) & Java (.java)        |
+| [Nithin Venkat Sharma P M](https://github.com/Nithin0306)  | Python (.py) & C++ (.cpp)      |
+| [P Sanjay](https://github.com/JestiferHarold)              | TypeScript (.ts) & Dart (.dart)|
+| [S S Naveen](https://github.com/Naveen77qwerty)            | C (.c)                         |
+| [Chinni Samith Reddy](https://github.com/samithreddychinni)| Java (.java)                   |
+| [Ritesh Koushik](https://github.com/IAmRiteshKoushik)      | Rust (.rs) & Code Review       |
+| [Lohit G](https://github.com/codedbyloki)                  | Java (.java)                   |
+| [Narravula Mukesh](github.com/mukesh1352)                  | Java (.java)                   |
