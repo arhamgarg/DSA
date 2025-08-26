@@ -28,7 +28,7 @@ Node *insert(Node *root, int value) {
   return root;
 }
 
-Node *buildBST(vector<int> vec) {
+Node *buildBST(vector<int> &vec) {
   Node *root = nullptr;
 
   for (int val : vec) {

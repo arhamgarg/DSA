@@ -17,7 +17,7 @@ public:
 
 static int index = -1;
 
-Node *buildBT(vector<int> preorder) {
+Node *buildBT(vector<int> &preorder) {
   index++;
 
   if (preorder[index] == -1) {
