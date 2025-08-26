@@ -3,7 +3,7 @@ using namespace std;
 
 class Searching {
 public:
-  static int binarySearch(vector<int> vec, int target) {
+  static int binarySearch(vector<int> &vec, int target) {
     int start = 0, end = vec.size() - 1, mid;
 
     while (start <= end) {
