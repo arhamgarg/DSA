@@ -1,4 +1,4 @@
-public class CircularSingleyLinkedList {
+public class CircularSinglyLinkedList {
   Node head, tail;
 
   class Node {
