@@ -78,4 +78,76 @@ public class SinglyLinkedList {
   public int size() {
     return size;
   }
+
+  public void InsertAtIndex(int index, int data) {
+    if (index < 0 || index > size) {
+      System.out.println("Index should be between 0 and " + size);
+      return;
+    }
+
+    if (index == 0) {
+      AddFront(data);
+      return;
+    }
+
+    Node newNode = new Node(data);
+    Node currNode = head;
+
+    for (int i = 0; i < index - 1; i++) {
+      currNode = currNode.next;
+    }
+
+    newNode.next = currNode.next;
+    currNode.next = newNode;
+    size++;
+  }
+
+
+  public void DeleteByValue(int value) {
+    if (head == null) {
+      System.out.println("List is empty");
+      return;
+    }
+
+    if (head.data == value) {
+      head = head.next;
+      size--;
+      return;
+    }
+
+    Node currNode = head;
+    while (currNode.next != null && currNode.next.data != value) {
+      currNode = currNode.next;
+    }
+
+    if (currNode.next == null) {
+      System.out.println("Value " + value + " is not found in the list");
+      return;
+    }
+
+    currNode.next = currNode.next.next;
+    size--;
+  }
+
+
+  public void DeleteAtIndex(int index) {
+    if (index < 0 || index >= size) {
+      System.out.println("Index should be between 0 and " + (size - 1));
+      return;
+    }
+
+    if (index == 0) {
+      DeleteFirst();
+      return;
+    }
+
+    Node currNode = head;
+    for (int i = 0; i < index - 1; i++) {
+      currNode = currNode.next;
+    }
+
+    currNode.next = currNode.next.next;
+    size--;
+  }
+
 }
