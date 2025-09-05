@@ -19,6 +19,8 @@ struct SCL initList()
     return list;
 }
 
+//-------------Core-Operations-------------
+
 struct node *createNode(int value)
 {
     struct node *new_Node = (struct node *)malloc(sizeof(struct node));
@@ -26,6 +28,85 @@ struct node *createNode(int value)
     new_Node->next = NULL;
     return new_Node;
 }
+
+void isEmpty(struct SCL *list)
+{
+    printf("List %s empty\n", list->head ? "isn't" : "is");
+}
+
+void Traverse(struct SCL *list)
+{
+    if (list->head == NULL)
+    {
+        printf("Empty\n");
+        return;
+    }
+    struct node *temp = list->head;
+    do
+    {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while (temp != list->head);
+    printf("(back to head)\n");
+}
+int front(struct SCL *list)
+{
+    if (list->head == NULL)
+    {
+        printf("List empty\n");
+        return -1;
+    }
+    return list->head->data;
+}
+
+int back(struct SCL *list)
+{
+    if (list->tail == NULL)
+    {
+        printf("List empty\n");
+        return -1;
+    }
+    return list->tail->data;
+}
+
+int size(struct SCL *list)
+{
+    if (list->head == NULL)
+        return 0;
+
+    int count = 0;
+    struct node *temp = list->head;
+    do
+    {
+        count++;
+        temp = temp->next;
+    } while (temp != list->head);
+    return count;
+}
+
+void Search(struct SCL *list, int search_data)
+{
+    if (list->head == NULL)
+    {
+        printf("Empty\n");
+        return;
+    }
+    int pos = 0;
+    struct node *temp = list->head;
+    do
+    {
+        if (temp->data == search_data)
+        {
+            printf("Data %d found at position %d\n", temp->data, pos);
+            return;
+        }
+        pos++;
+        temp = temp->next;
+    } while (temp != list->head);
+    printf("Data %d not found\n", search_data);
+}
+
+//-------------Insertions-------------
 
 struct node *insert_First(struct SCL *list, int value)
 {
@@ -93,6 +174,8 @@ struct node *insert_At(struct SCL *list, int position, int value)
 
     return list->head;
 }
+
+//-------------Deletions-------------
 
 struct node *delete_First(struct SCL *list)
 {
@@ -169,83 +252,85 @@ struct node *delete_At(struct SCL *list, int position)
     return list->head;
 }
 
-void display(struct SCL *list)
+//-------------Utilties-------------
+struct node *Update(struct SCL *list, int update_val, int new_data)
 {
     if (list->head == NULL)
     {
-        printf("Empty\n");
-        return;
+        printf("Empty List\n");
+        return NULL;
     }
+
     struct node *temp = list->head;
     do
     {
-        printf("%d -> ", temp->data);
+        if (temp->data == update_val)
+        {
+            temp->data = new_data;
+            printf("Node updated: %d -> %d\n", update_val, new_data);
+            return list->head;
+        }
         temp = temp->next;
     } while (temp != list->head);
-    printf("(back to head)\n");
-}
-int front(struct SCL *list)
-{
-    if (list->head == NULL)
-    {
-        printf("List empty\n");
-        return -1;
-    }
-    return list->head->data;
-}
-
-int back(struct SCL *list)
-{
-    if (list->tail == NULL)
-    {
-        printf("List empty\n");
-        return -1;
-    }
-    return list->tail->data;
-}
-
-int size(struct SCL *list)
-{
-    if (list->head == NULL)
-        return 0;
-
-    int count = 0;
-    struct node *temp = list->head;
-    do
-    {
-        count++;
-        temp = temp->next;
-    } while (temp != list->head);
-    return count;
+    printf("Node with given data: %d not found\n", update_val);
+    return list->head;
 }
 
 int main()
 {
     struct SCL list = initList();
-    //---------------- Test ----------------
+
+    // Insert elements
+    printf("Inserting elements...\n");
     insert_Last(&list, 10);
     insert_Last(&list, 20);
     insert_Last(&list, 30);
-    display(&list); // 10 -> 20 -> 30 -> (back to head)
+    Traverse(&list); // 10 -> 20 -> 30 -> (back to head)
 
     insert_First(&list, 5);
-    display(&list); // 5 -> 10 -> 20 -> 30 -> (back to head)
+    Traverse(&list); // 5 -> 10 -> 20 -> 30 -> (back to head)
 
     insert_At(&list, 2, 15);
-    display(&list); // 5 -> 10 -> 15 -> 20 -> 30 -> (back to head)
+    Traverse(&list); // 5 -> 10 -> 15 -> 20 -> 30 -> (back to head)
 
-    printf("Front: %d\n", front(&list)); // 5
-    printf("Back: %d\n", back(&list));   // 30
-    printf("Size: %d\n", size(&list));   // 5
+    // Core info
+    printf("\nFront: %d\n", front(&list));
+    printf("Back : %d\n", back(&list));
+    printf("Size : %d\n\n", size(&list));
 
+    // Search
+    printf("Searching for 20...\n");
+    Search(&list, 20); // found
+    printf("Searching for 99...\n");
+    Search(&list, 99); // not found
+    printf("\n");
+
+    // Update
+    printf("Updating 15 -> 17...\n");
+    Update(&list, 15, 17);
+    Traverse(&list);
+    printf("\n");
+
+    // Deletions
+    printf("Deleting first...\n");
     delete_First(&list);
-    display(&list); // 10 -> 15 -> 20 -> 30 -> (back to head)
+    Traverse(&list);
 
+    printf("Deleting last...\n");
     delete_Last(&list);
-    display(&list); // 10 -> 15 -> 20 -> (back to head)
+    Traverse(&list);
 
+    printf("Deleting at position 1...\n");
     delete_At(&list, 1);
-    display(&list); // 10 -> 20 -> (back to head)
+    Traverse(&list);
+    printf("\n");
+
+    // Final status
+    isEmpty(&list);
+    printf("Final size: %d\n", size(&list));
+
+    // Cleanup
+    isEmpty(&list);
 
     return 0;
 }
