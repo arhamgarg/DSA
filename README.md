@@ -1,6 +1,6 @@
 <h1 align="center">Data Structures and Algorithms</h1>
 
-A collection of essential data structures and algorithms implemented using object-oriented programming techniques.
+<p align="center">A collection of essential data structures and algorithms implemented using object-oriented programming techniques.</p>
 
 ## **Contributors**
 
@@ -12,6 +12,7 @@ A collection of essential data structures and algorithms implemented using objec
 | [P Sanjay](https://github.com/JestiferHarold)              | TypeScript (.ts) & Dart (.dart)|
 | [S S Naveen](https://github.com/Naveen77qwerty)            | C (.c)                         |
 | [Chinni Samith Reddy](https://github.com/samithreddychinni)| Java (.java)                   |
-| [Ritesh Koushik](https://github.com/IAmRiteshKoushik)      | Rust (.rs) & Code Review       |
+| [Ritesh Koushik](https://github.com/IAmRiteshKoushik)      | Rust (.rs)                     |
 | [Lohit G](https://github.com/codedbyloki)                  | Java (.java)                   |
-| [Narravula Mukesh](github.com/mukesh1352)                  | Java (.java)                   |
+| [Narravula Mukesh](https://github.com/mukesh1352)          | Java (.java)                   |
+| [Bhargava Sri Sai](https://github.com/Bhargi777)           | Java (.java)                   |
