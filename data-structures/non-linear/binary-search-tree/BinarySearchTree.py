@@ -59,17 +59,13 @@ def deleteNode(root, key):
     elif key > root.data:
         root.right = deleteNode(root.right, key)
     else:
-        # Node with one child or no child
         if root.left is None:
             return root.right
         elif root.right is None:
             return root.left
 
-        # Node with two children
         successor = getInorderSuccessor(root.right)
         root.data = successor.data
         root.right = deleteNode(root.right, successor.data)
 
     return root
-
-
