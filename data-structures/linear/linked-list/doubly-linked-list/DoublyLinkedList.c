@@ -2,19 +2,19 @@
 #include <stdlib.h>
 
 // ---------------- Node Definition ----------------
-struct node
+struct Node
 {
     int data;
-    struct node *next;
-    struct node *prev;
+    struct Node *next;
+    struct Node *prev;
 };
 
 // ---------------- List Definition ----------------
 struct DLL
 {
-    struct node *head;
-    struct node *tail;
-    int count;
+    struct Node *head;
+    struct Node *tail;
+    int size;
 };
 
 // ---------------- Initialization ----------------
@@ -25,55 +25,55 @@ struct DLL initList()
 }
 
 // ---------------- Node Creation ----------------
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *new_Node = (struct node *)malloc(sizeof(struct node));
-    new_Node->data = value;
-    new_Node->next = NULL;
-    new_Node->prev = NULL;
-    return new_Node;
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
 }
 
 // ---------------- Insert Operations ----------------
-struct node *insertFirst(struct DLL *list, int value)
+struct Node *insertFirst(struct DLL *list, int value)
 {
-    struct node *new_Node = createNode(value);
+    struct Node *newNode = createNode(value);
 
     if (list->head == NULL)
     {
-        list->head = list->tail = new_Node;
+        list->head = list->tail = newNode;
     }
     else
     {
-        new_Node->next = list->head;
-        list->head->prev = new_Node;
-        list->head = new_Node;
+        newNode->next = list->head;
+        list->head->prev = newNode;
+        list->head = newNode;
     }
-    list->count++;
-    return new_Node;
+    list->size++;
+    return newNode;
 }
 
-struct node *insertLast(struct DLL *list, int value)
+struct Node *insertLast(struct DLL *list, int value)
 {
-    struct node *new_Node = createNode(value);
+    struct Node *newNode = createNode(value);
 
     if (list->tail == NULL)
     {
-        list->head = list->tail = new_Node;
+        list->head = list->tail = newNode;
     }
     else
     {
-        new_Node->prev = list->tail;
-        list->tail->next = new_Node;
-        list->tail = new_Node;
+        newNode->prev = list->tail;
+        list->tail->next = newNode;
+        list->tail = newNode;
     }
-    list->count++;
-    return new_Node;
+    list->size++;
+    return newNode;
 }
 
-struct node *insertAt(struct DLL *list, int position, int value)
+struct Node *insertAt(struct DLL *list, int position, int value)
 {
-    if (position < 0 || position > list->count)
+    if (position < 0 || position > list->size)
     {
         printf("Invalid position\n");
         return NULL;
@@ -81,32 +81,32 @@ struct node *insertAt(struct DLL *list, int position, int value)
 
     if (position == 0)
         return insertFirst(list, value);
-    if (position == list->count)
+    if (position == list->size)
         return insertLast(list, value);
 
-    struct node *temp = list->head;
+    struct Node *temp = list->head;
     for (int i = 0; i < position - 1; i++)
     {
         temp = temp->next;
     }
 
-    struct node *new_Node = createNode(value);
-    new_Node->next = temp->next;
-    new_Node->prev = temp;
-    temp->next->prev = new_Node;
-    temp->next = new_Node;
+    struct Node *newNode = createNode(value);
+    newNode->next = temp->next;
+    newNode->prev = temp;
+    temp->next->prev = newNode;
+    temp->next = newNode;
 
-    list->count++;
-    return new_Node;
+    list->size++;
+    return newNode;
 }
 
 // ---------------- Delete Operations ----------------
-struct node *deleteFirst(struct DLL *list)
+struct Node *deleteFirst(struct DLL *list)
 {
     if (list->head == NULL)
         return NULL;
 
-    struct node *temp = list->head;
+    struct Node *temp = list->head;
     if (list->head == list->tail)
     {
         list->head = list->tail = NULL;
@@ -118,16 +118,16 @@ struct node *deleteFirst(struct DLL *list)
     }
     printf("Deleted value: %d\n", temp->data);
     free(temp);
-    list->count--;
+    list->size--;
     return list->head;
 }
 
-struct node *deleteLast(struct DLL *list)
+struct Node *deleteLast(struct DLL *list)
 {
     if (list->tail == NULL)
         return NULL;
 
-    struct node *temp = list->tail;
+    struct Node *temp = list->tail;
     if (list->head == list->tail)
     {
         list->head = list->tail = NULL;
@@ -139,13 +139,13 @@ struct node *deleteLast(struct DLL *list)
     }
     printf("Deleted value: %d\n", temp->data);
     free(temp);
-    list->count--;
+    list->size--;
     return list->tail;
 }
 
-struct node *deleteAt(struct DLL *list, int position)
+struct Node *deleteAt(struct DLL *list, int position)
 {
-    if (position < 0 || position >= list->count)
+    if (position < 0 || position >= list->size)
     {
         printf("Invalid position\n");
         return NULL;
@@ -153,10 +153,10 @@ struct node *deleteAt(struct DLL *list, int position)
 
     if (position == 0)
         return deleteFirst(list);
-    if (position == list->count - 1)
+    if (position == list->size - 1)
         return deleteLast(list);
 
-    struct node *temp = list->head;
+    struct Node *temp = list->head;
     for (int i = 0; i < position; i++)
     {
         temp = temp->next;
@@ -167,22 +167,22 @@ struct node *deleteAt(struct DLL *list, int position)
 
     printf("Deleted value: %d\n", temp->data);
     free(temp);
-    list->count--;
+    list->size--;
     return list->head;
 }
 
-struct node *deleteKey(struct DLL *list, int delete_data)
+struct Node *deleteKey(struct DLL *list, int deletedata)
 {
     if (list->head == NULL)
         return NULL;
 
-    if (list->head->data == delete_data)
+    if (list->head->data == deletedata)
     {
         return deleteFirst(list);
     }
 
-    struct node *temp = list->head;
-    while (temp != NULL && temp->data != delete_data)
+    struct Node *temp = list->head;
+    while (temp != NULL && temp->data != deletedata)
     {
         temp = temp->next;
     }
@@ -203,14 +203,14 @@ struct node *deleteKey(struct DLL *list, int delete_data)
 
     printf("Deleted value: %d\n", temp->data);
     free(temp);
-    list->count--;
+    list->size--;
     return list->head;
 }
 
 // ---------------- Search ----------------
-struct node *search(struct DLL *list, int value)
+struct Node *search(struct DLL *list, int value)
 {
-    struct node *temp = list->head;
+    struct Node *temp = list->head;
     while (temp != NULL)
     {
         if (temp->data == value)
@@ -223,12 +223,12 @@ struct node *search(struct DLL *list, int value)
 }
 
 // ---------------- Update ----------------
-struct node *update(struct DLL *list, int old_value, int new_value)
+struct Node *update(struct DLL *list, int oldValue, int newValue)
 {
-    struct node *temp = search(list, old_value);
+    struct Node *temp = search(list, oldValue);
     if (temp != NULL)
     {
-        temp->data = new_value;
+        temp->data = newValue;
         return temp;
     }
     printf("Value not found\n");
@@ -236,10 +236,10 @@ struct node *update(struct DLL *list, int old_value, int new_value)
 }
 
 // ---------------- Reverse ----------------
-struct node *Reverse(struct DLL *list)
+struct Node *Reverse(struct DLL *list)
 {
-    struct node *curr = list->head;
-    struct node *temp = NULL;
+    struct Node *curr = list->head;
+    struct Node *temp = NULL;
 
     while (curr != NULL)
     {
@@ -263,21 +263,21 @@ struct node *Reverse(struct DLL *list)
 }
 
 // ---------------- Copy ----------------
-struct node *Copy(struct DLL *list, struct DLL *copy_list)
+struct Node *Copy(struct DLL *list, struct DLL *copyList)
 {
-    struct node *temp = list->head;
+    struct Node *temp = list->head;
     while (temp != NULL)
     {
-        insertLast(copy_list, temp->data);
+        insertLast(copyList, temp->data);
         temp = temp->next;
     }
-    return copy_list->head;
+    return copyList->head;
 }
 
 // ---------------- Utilities ----------------
 void traverseForward(struct DLL *list)
 {
-    struct node *temp = list->head;
+    struct Node *temp = list->head;
     while (temp != NULL)
     {
         printf("%d <-> ", temp->data);
@@ -288,7 +288,7 @@ void traverseForward(struct DLL *list)
 
 void traverseBackward(struct DLL *list)
 {
-    struct node *temp = list->tail;
+    struct Node *temp = list->tail;
     while (temp != NULL)
     {
         printf("%d <-> ", temp->data);
@@ -298,7 +298,7 @@ void traverseBackward(struct DLL *list)
 }
 
 void isEmpty(struct DLL *list)
-{ 
+{
     if (list->head == NULL)
         printf("List is empty\n");
     else
@@ -307,59 +307,5 @@ void isEmpty(struct DLL *list)
 
 int size(struct DLL *list)
 {
-    return list->count;
-}
-
-// ---------------- Main ----------------
-int main()
-{
-    struct DLL list = initList();
-
-    // Inserts
-    insertFirst(&list, 10);
-    insertFirst(&list, 20);
-    insertLast(&list, 30);
-    insertAt(&list, 1, 15);
-
-    printf("Forward traversal: ");
-    traverseForward(&list);
-    printf("Backward traversal: ");
-    traverseBackward(&list);
-
-    // Deletes
-    deleteFirst(&list);
-    deleteLast(&list);
-    deleteAt(&list, 1);
-    deleteKey(&list, 10);
-
-    printf("After deletions (forward): ");
-    traverseForward(&list);
-
-    // Search & Update
-    insertLast(&list, 40);
-    insertLast(&list, 50);
-    struct node *found = search(&list, 40);
-    if (found)
-        printf("Found: %d\n", found->data);
-    update(&list, 50, 60);
-
-    printf("After update (forward): ");
-    traverseForward(&list);
-
-    // Reverse
-    Reverse(&list);
-    printf("After reverse (forward): ");
-    traverseForward(&list);
-
-    // Copy
-    struct DLL copyList = initList();
-    Copy(&list, &copyList);
-    printf("Copied list (forward): ");
-    traverseForward(&copyList);
-
-    // Utilities
-    isEmpty(&list);
-    printf("Size of list: %d\n", size(&list));
-
-    return 0;
+    return list->size;
 }
