@@ -1,25 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
+struct node
 {
     int data;
-    struct Node *next;
+    struct node *next;
 };
-// we can also have tail variable  which can reduce almost all the functions to O(n)
-// and they will work similar to head variables
 
-//--------------Core operations--------------
-
-struct Node *createNode(int value)
+struct node *createNode(int value)
 {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->data = value;
     newNode->next = NULL;
     return newNode;
 }
 
-int size(struct Node *head)
+int size(struct node *head)
 {
     int count = 0;
     while (head != NULL)
@@ -30,7 +26,7 @@ int size(struct Node *head)
     return count;
 }
 
-void Traverse(struct Node *head)
+void traverse(struct node *head)
 {
     while (head != NULL)
     {
@@ -40,39 +36,39 @@ void Traverse(struct Node *head)
     printf("NULL\n");
 }
 
-struct Node *Update(struct Node *head, int updateValue, int newData)
+struct node *update(struct node *head, int updateValue, int newData)
 {
-    struct Node *temp = head;
-    while (temp != NULL && temp->data != updateValue)
-        temp = temp->next;
+    struct node *tempNode = head;
+    while (tempNode != NULL && tempNode->data != updateValue)
+        tempNode = tempNode->next;
 
-    if (temp == NULL)
+    if (tempNode == NULL)
     {
-        printf("Node with given data: %d not found\n", updateValue);
+        printf("node with given data: %d not found\n", updateValue);
         return head;
     }
-    temp->data = newData;
+    tempNode->data = newData;
     return head;
 }
 
-void Search(struct Node *head, int searchData)
+void search(struct node *head, int searchData)
 {
-    struct Node *temp = head;
+    struct node *tempNode = head;
     int pos = 0;
-    while (temp != NULL)
+    while (tempNode != NULL)
     {
-        if (temp->data == searchData)
+        if (tempNode->data == searchData)
         {
-            printf("Data %d found at position %d\n", temp->data, pos);
-            return; // stop at first match
+            printf("Data %d found at position %d\n", tempNode->data, pos);
+            return;
         }
-        temp = temp->next;
+        tempNode = tempNode->next;
         pos++;
     }
     printf("Data %d not found\n", searchData);
 }
 
-int getAtIndex(struct Node *head, int index)
+int getAtIndex(struct node *head, int index)
 {
     int indexCounter = 0;
     while (head != NULL)
@@ -86,77 +82,74 @@ int getAtIndex(struct Node *head, int index)
     return -1;
 }
 
-void isEmpty(struct Node *head)
+void isEmpty(struct node *head)
 {
     printf("List %s empty\n", head ? "isn't" : "is");
 }
-//--------------Insertion--------------
 
-struct Node *insertFirst(struct Node *head, int value)
+struct node *insertFirst(struct node *head, int value)
 {
-    struct Node *newNode = createNode(value);
+    struct node *newNode = createNode(value);
     newNode->next = head;
     return newNode;
 }
 
-struct Node *insertLast(struct Node *head, int value)
+struct node *insertLast(struct node *head, int value)
 {
-    struct Node *newNode = createNode(value);
+    struct node *newNode = createNode(value);
     if (head == NULL)
         return newNode;
-    struct Node *temp = head;
-    while (temp->next != NULL)
-        temp = temp->next;
-    temp->next = newNode;
+    struct node *tempNode = head;
+    while (tempNode->next != NULL)
+        tempNode = tempNode->next;
+    tempNode->next = newNode;
     return head;
 }
 
-struct Node *insertAt(struct Node *head, int position, int value)
+struct node *insertAt(struct node *head, int position, int value)
 {
     if (position == 0)
         return insertFirst(head, value);
 
-    struct Node *temp = head;
-    for (int i = 0; i < position - 1 && temp != NULL; i++)
-        temp = temp->next;
+    struct node *tempNode = head;
+    for (int i = 0; i < position - 1 && tempNode != NULL; i++)
+        tempNode = tempNode->next;
 
-    if (temp == NULL)
+    if (tempNode == NULL)
     {
         printf("Position out of range\n");
         return head;
     }
 
-    struct Node *newNode = createNode(value);
-    newNode->next = temp->next;
-    temp->next = newNode;
+    struct node *newNode = createNode(value);
+    newNode->next = tempNode->next;
+    tempNode->next = newNode;
     return head;
 }
 
-struct Node *insertAfter(struct Node *head, int nodeData, int data)
+struct node *insertAfter(struct node *head, int nodeData, int data)
 {
-    struct Node *newNode = createNode(data);
+    struct node *newNode = createNode(data);
     if (head == NULL)
     {
         return newNode;
     }
-    struct Node *temp = head;
-    while (temp != NULL && temp->data != nodeData)
+    struct node *tempNode = head;
+    while (tempNode != NULL && tempNode->data != nodeData)
     {
-        temp = temp->next;
+        tempNode = tempNode->next;
     }
-    if (temp == NULL)
+    if (tempNode == NULL)
     {
-        printf("Node with given data: %d nor found", nodeData);
+        printf("node with given data: %d nor found", nodeData);
         return head;
     }
-    newNode->next = temp->next;
-    temp->next = newNode;
+    newNode->next = tempNode->next;
+    tempNode->next = newNode;
     return head;
 }
 
-//--------------Deletions--------------
-
-struct Node *deleteFirst(struct Node *head)
+struct node *deleteFirst(struct node *head)
 {
     if (head == NULL)
         return NULL;
@@ -166,14 +159,14 @@ struct Node *deleteFirst(struct Node *head)
         free(head);
         return NULL;
     }
-    struct Node *temp = head;
+    struct node *tempNode = head;
     head = head->next;
-    printf("Deleted value: %d\n", temp->data);
-    free(temp);
+    printf("Deleted value: %d\n", tempNode->data);
+    free(tempNode);
     return head;
 }
 
-struct Node *deleteLast(struct Node *head)
+struct node *deleteLast(struct node *head)
 {
     if (head == NULL)
         return NULL;
@@ -183,54 +176,54 @@ struct Node *deleteLast(struct Node *head)
         free(head);
         return NULL;
     }
-    struct Node *temp = head;
-    while (temp->next->next != NULL)
-        temp = temp->next;
-    printf("Deleted value: %d\n", temp->next->data);
-    free(temp->next);
-    temp->next = NULL;
+    struct node *tempNode = head;
+    while (tempNode->next->next != NULL)
+        tempNode = tempNode->next;
+    printf("Deleted value: %d\n", tempNode->next->data);
+    free(tempNode->next);
+    tempNode->next = NULL;
     return head;
 }
 
-struct Node *deleteAt(struct Node *head, int position)
+struct node *deleteAt(struct node *head, int position)
 {
     if (head == NULL)
         return NULL;
     if (position == 0)
         return deleteFirst(head);
 
-    struct Node *temp = head;
-    for (int i = 0; i < position - 1 && temp->next != NULL; i++)
-        temp = temp->next;
+    struct node *tempNode = head;
+    for (int i = 0; i < position - 1 && tempNode->next != NULL; i++)
+        tempNode = tempNode->next;
 
-    if (temp->next == NULL)
+    if (tempNode->next == NULL)
     {
         printf("Position out of range\n");
         return head;
     }
 
-    struct Node *toDelete = temp->next;
-    temp->next = temp->next->next;
+    struct node *toDelete = tempNode->next;
+    tempNode->next = tempNode->next->next;
     printf("Deleted value: %d\n", toDelete->data);
     free(toDelete);
     return head;
 }
 
-struct Node *deleteKey(struct Node *head, int deleteData)
+struct node *deleteKey(struct node *head, int deleteData)
 {
     if (head == NULL)
         return NULL;
     if (head->data == deleteData)
     {
-        struct Node *temp = head;
+        struct node *tempNode = head;
         head = head->next;
-        printf("Deleted value: %d\n", temp->data);
-        free(temp);
+        printf("Deleted value: %d\n", tempNode->data);
+        free(tempNode);
         return head;
     }
 
-    struct Node *prev = head;
-    struct Node *toDelete = head->next;
+    struct node *prev = head;
+    struct node *toDelete = head->next;
 
     while (toDelete != NULL && toDelete->data != deleteData)
     {
@@ -239,7 +232,7 @@ struct Node *deleteKey(struct Node *head, int deleteData)
     }
     if (toDelete == NULL)
     {
-        printf("Node with given data: %d not found\n", deleteData);
+        printf("node with given data: %d not found\n", deleteData);
         return head;
     }
     prev->next = toDelete->next;
@@ -248,15 +241,12 @@ struct Node *deleteKey(struct Node *head, int deleteData)
     return head;
 }
 
-//--------------Utilities--------------
-
-struct Node *Reverse(struct Node *head)
+struct node *reverse(struct node *head)
 {
     if (head == NULL)
         return NULL;
-    struct Node *prevNode = NULL;
-    struct Node *currentNode = head;
-    struct Node *nextNode = NULL;
+    struct node *prevNode = NULL;
+    struct node *currentNode = head;
 
     while (currentNode != NULL)
     {
@@ -269,7 +259,7 @@ struct Node *Reverse(struct Node *head)
     return head;
 }
 
-int front(struct Node *head)
+int front(struct node *head)
 {
     if (head == NULL)
     {
@@ -279,7 +269,7 @@ int front(struct Node *head)
     return head->data;
 }
 
-int last(struct Node *head)
+int last(struct node *head)
 {
     if (head == NULL)
     {
@@ -291,26 +281,26 @@ int last(struct Node *head)
     return head->data;
 }
 
-struct Node *Copy(struct Node *head, struct Node *headCopy)
+struct node *copy(struct node *head, struct node *headCopy)
 {
-    struct Node *temp = head;
-    while (temp != NULL)
+    struct node *tempNode = head;
+    while (tempNode != NULL)
     {
-        headCopy = insertLast(headCopy, temp->data);
-        temp = temp->next;
+        headCopy = insertLast(headCopy, tempNode->data);
+        tempNode = tempNode->next;
     }
     return headCopy;
 }
 
-void findMiddle(struct Node *head)
+void findMiddle(struct node *head)
 {
     if (head == NULL)
     {
         printf("List is empty\n");
         return;
     }
-    struct Node *fast = head;
-    struct Node *slow = head;
+    struct node *fast = head;
+    struct node *slow = head;
     while (fast != NULL && fast->next != NULL)
     {
         slow = slow->next;

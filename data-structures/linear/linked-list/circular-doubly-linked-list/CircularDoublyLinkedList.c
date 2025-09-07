@@ -1,72 +1,71 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
+struct node
 {
     int data;
-    struct Node *next;
-    struct Node *prev;
+    struct node *next;
+    struct node *prev;
 };
 
-struct DCL
+struct dcl
 {
-    struct Node *head;
-    struct Node *tail;
+    struct node *head;
+    struct node *tail;
 };
 
-struct DCL initList()
+struct dcl initList()
 {
-    struct DCL list = {NULL, NULL};
+    struct dcl list = {NULL, NULL};
     return list;
 }
-//-------------Core-operations-------------
 
-struct Node *createNode(int value)
+struct node *createNode(int value)
 {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
     newNode->data = value;
     newNode->next = newNode->prev = NULL;
     return newNode;
 }
 
-void TraverseForward(struct DCL *list)
+void traverseForward(struct dcl *list)
 {
     if (list->head == NULL)
     {
         printf("Empty\n");
         return;
     }
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     do
     {
-        printf("%d <-> ", temp->data);
-        temp = temp->next;
-    } while (temp != list->head);
+        printf("%d <-> ", tempNode->data);
+        tempNode = tempNode->next;
+    } while (tempNode != list->head);
     printf("(back to head)\n");
 }
 
-void TraverseBackward(struct DCL *list)
+void traverseBackward(struct dcl *list)
 {
     if (list->head == NULL)
     {
         printf("Empty\n");
         return;
     }
-    struct Node *temp = list->tail;
+    struct node *tempNode = list->tail;
     do
     {
-        printf("%d <-> ", temp->data);
-        temp = temp->prev;
-    } while (temp != list->tail);
+        printf("%d <-> ", tempNode->data);
+        tempNode = tempNode->prev;
+    } while (tempNode != list->tail);
     printf("(back to tail)\n");
 }
 
-void isEmpty(struct DCL *list)
+void isEmpty(struct dcl *list)
 {
     printf("List %s empty\n", list->head ? "isn't" : "is");
 }
 
-void Search(struct DCL *list, int searchData)
+void search(struct dcl *list, int searchData)
 {
     if (list->head == NULL)
     {
@@ -74,21 +73,21 @@ void Search(struct DCL *list, int searchData)
         return;
     }
     int pos = 0;
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     do
     {
-        if (temp->data == searchData)
+        if (tempNode->data == searchData)
         {
-            printf("Data %d found at position %d\n", temp->data, pos);
+            printf("Data %d found at position %d\n", tempNode->data, pos);
             return;
         }
         pos++;
-        temp = temp->next;
-    } while (temp != list->head);
+        tempNode = tempNode->next;
+    } while (tempNode != list->head);
     printf("Data %d not found\n", searchData);
 }
-// 😎📔
-int front(struct DCL *list)
+
+int front(struct dcl *list)
 {
     if (list->head == NULL)
     {
@@ -98,7 +97,7 @@ int front(struct DCL *list)
     return list->head->data;
 }
 
-int back(struct DCL *list)
+int back(struct dcl *list)
 {
     if (list->tail == NULL)
     {
@@ -108,26 +107,24 @@ int back(struct DCL *list)
     return list->tail->data;
 }
 
-int size(struct DCL *list)
+int size(struct dcl *list)
 {
     if (list->head == NULL)
         return 0;
 
     int count = 0;
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     do
     {
         count++;
-        temp = temp->next;
-    } while (temp != list->head);
+        tempNode = tempNode->next;
+    } while (tempNode != list->head);
     return count;
 }
 
-//-------------Insertions-------------
-
-struct Node *insertFirst(struct DCL *list, int value)
+struct node *insertFirst(struct dcl *list, int value)
 {
-    struct Node *newNode = createNode(value);
+    struct node *newNode = createNode(value);
     if (list->head == NULL)
     {
         list->head = list->tail = newNode;
@@ -144,9 +141,9 @@ struct Node *insertFirst(struct DCL *list, int value)
     return list->head;
 }
 
-struct Node *insertLast(struct DCL *list, int value)
+struct node *insertLast(struct dcl *list, int value)
 {
-    struct Node *newNode = createNode(value);
+    struct node *newNode = createNode(value);
     if (list->head == NULL)
     {
         list->head = list->tail = newNode;
@@ -163,18 +160,18 @@ struct Node *insertLast(struct DCL *list, int value)
     return list->head;
 }
 
-struct Node *insertAt(struct DCL *list, int position, int value)
+struct node *insertAt(struct dcl *list, int position, int value)
 {
     if (position == 0)
     {
         return insertFirst(list, value);
     }
 
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     int count = 0;
-    while (count < position - 1 && temp->next != list->head)
+    while (count < position - 1 && tempNode->next != list->head)
     {
-        temp = temp->next;
+        tempNode = tempNode->next;
         count++;
     }
 
@@ -184,138 +181,134 @@ struct Node *insertAt(struct DCL *list, int position, int value)
         return list->head;
     }
 
-    struct Node *newNode = createNode(value);
-    newNode->next = temp->next;
-    newNode->prev = temp;
-    temp->next->prev = newNode;
-    temp->next = newNode;
+    struct node *newNode = createNode(value);
+    newNode->next = tempNode->next;
+    newNode->prev = tempNode;
+    tempNode->next->prev = newNode;
+    tempNode->next = newNode;
 
-    if (temp == list->tail)
-    { // inserted at the end
+    if (tempNode == list->tail)
+    {
         list->tail = newNode;
     }
 
     return list->head;
 }
 
-//-------------Deletions-------------
-
-struct Node *deleteFirst(struct DCL *list)
+struct node *deleteFirst(struct dcl *list)
 {
     if (list->head == NULL)
         return NULL;
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     if (list->head == list->tail)
     {
-        printf("Deleted value : %d\n", temp->data);
-        free(temp);
+        printf("Deleted value : %d\n", tempNode->data);
+        free(tempNode);
         list->head = list->tail = NULL;
         return NULL;
     }
-    printf("Deleted value : %d\n", temp->data);
+    printf("Deleted value : %d\n", tempNode->data);
     list->head = list->head->next;
     list->tail->next = list->head;
     list->head->prev = list->tail;
 
-    free(temp);
+    free(tempNode);
     return list->head;
 }
 
-struct Node *deleteLast(struct DCL *list)
+struct node *deleteLast(struct dcl *list)
 {
     if (list->head == NULL)
         return NULL;
-    struct Node *temp = list->tail;
+    struct node *tempNode = list->tail;
     if (list->head == list->tail)
     {
-        printf("Deleted value : %d\n", temp->data);
-        free(temp);
+        printf("Deleted value : %d\n", tempNode->data);
+        free(tempNode);
         list->head = list->tail = NULL;
         return NULL;
     }
 
-    printf("Deleted value : %d\n", temp->data);
+    printf("Deleted value : %d\n", tempNode->data);
     list->tail = list->tail->prev;
     list->tail->next = list->head;
     list->head->prev = list->tail;
-    free(temp);
+    free(tempNode);
     return list->head;
 }
 
-struct Node *deleteAt(struct DCL *list, int position)
+struct node *deleteAt(struct dcl *list, int position)
 {
     if (list->head == NULL)
         return NULL;
     if (position == 0)
         return deleteFirst(list);
 
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     int count = 0;
-    while (count < position - 1 && temp->next != list->head)
+    while (count < position - 1 && tempNode->next != list->head)
     {
-        temp = temp->next;
+        tempNode = tempNode->next;
         count++;
     }
 
-    if (count != position - 1 || temp->next == list->head)
+    if (count != position - 1 || tempNode->next == list->head)
     {
         printf("Position out of range\n");
         return list->head;
     }
 
-    struct Node *toDelete = temp->next;
+    struct node *toDelete = tempNode->next;
     printf("Deleted: %d\n", toDelete->data);
 
-    temp->next = toDelete->next;
-    toDelete->next->prev = temp;
+    tempNode->next = toDelete->next;
+    toDelete->next->prev = tempNode;
 
     if (toDelete == list->tail)
-        list->tail = temp;
+        list->tail = tempNode;
 
     free(toDelete);
     return list->head;
 }
 
-struct Node *deleteKey(struct DCL *list, int deleteData)
+struct node *deleteKey(struct dcl *list, int deleteData)
 {
     if (list->head == NULL)
         return NULL;
 
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     do
     {
-        if (temp->data == deleteData)
-        { // handling edge cases here ....
-            if (temp == list->head && temp == list->tail)
+        if (tempNode->data == deleteData)
+        {
+            if (tempNode == list->head && tempNode == list->tail)
             {
-                printf("Deleted value: %d\n", temp->data); // single Node condition
-                free(temp);
+                printf("Deleted value: %d\n", tempNode->data);
+                free(tempNode);
                 list->head = list->tail = NULL;
                 return NULL;
             }
-            else if (temp == list->head)
-                return deleteFirst(list); // at the start
-            else if (temp == list->tail)
-                return deleteLast(list); // at last
+            else if (tempNode == list->head)
+                return deleteFirst(list);
+            else if (tempNode == list->tail)
+                return deleteLast(list);
             else
             {
-                temp->prev->next = temp->next;
-                temp->next->prev = temp->prev;
-                printf("Deleted value: %d\n", temp->data);
-                free(temp);
+                tempNode->prev->next = tempNode->next;
+                tempNode->next->prev = tempNode->prev;
+                printf("Deleted value: %d\n", tempNode->data);
+                free(tempNode);
                 return list->head;
             }
         }
-        temp = temp->next;
-    } while (temp != list->head);
+        tempNode = tempNode->next;
+    } while (tempNode != list->head);
 
-    printf("Node with given data: %d not found\n", deleteData);
+    printf("node with given data: %d not found\n", deleteData);
     return list->head;
 }
 
-//-------------Utilties-------------
-
-struct Node *Update(struct DCL *list, int updateVal, int newData)
+struct node *update(struct dcl *list, int updateVal, int newData)
 {
     if (list->head == NULL)
     {
@@ -323,40 +316,40 @@ struct Node *Update(struct DCL *list, int updateVal, int newData)
         return NULL;
     }
 
-    struct Node *temp = list->head;
+    struct node *tempNode = list->head;
     do
     {
-        if (temp->data == updateVal)
+        if (tempNode->data == updateVal)
         {
-            temp->data = newData;
-            printf("Node updated: %d -> %d\n", updateVal, newData);
+            tempNode->data = newData;
+            printf("node updated: %d -> %d\n", updateVal, newData);
             return list->head;
         }
-        temp = temp->next;
-    } while (temp != list->head);
-    printf("Node with given data: %d not found\n", updateVal);
+        tempNode = tempNode->next;
+    } while (tempNode != list->head);
+    printf("node with given data: %d not found\n", updateVal);
     return list->head;
 }
-// mis-conceptions: swapping the head and tail doesn't mean reversed in DDL cuz of next and prev connections
-struct Node *Reverse(struct DCL *list)
+
+struct node *reverse(struct dcl *list)
 {
     if (list->head == NULL)
     {
         printf("Empty List\n");
         return NULL;
     }
-    struct Node *current = list->head;
-    struct Node *temp = NULL;
+    struct node *current = list->head;
+    struct node *tempNode = NULL;
     do
     {
-        temp = current->prev;
+        tempNode = current->prev;
         current->prev = current->next;
-        current->next = temp;
+        current->next = tempNode;
         current = current->prev;
     } while (current != list->head);
-    temp = list->head;
+    tempNode = list->head;
     list->head = list->tail;
-    list->tail = temp;
+    list->tail = tempNode;
 
     return list->head;
 }
