@@ -1,17 +1,16 @@
 class Node {
-private:
-  int value;
-  Node *nextNode;
-
 public:
+  int val;
+  Node *next;
+
   Node(int val, Node *next = nullptr) {
-    value = val;
-    nextNode = next;
+    this->val = val;
+    this->next = next;
   }
 
-  int getValue() const { return value; }
+  int getValue() { return val; }
 
-  Node *getNextNode() const { return nextNode; }
+  Node *getNext() { return next; }
 
-  void setNextNode(Node *next) { nextNode = next; }
+  void setNext(Node *next) { this->next = next; }
 };
