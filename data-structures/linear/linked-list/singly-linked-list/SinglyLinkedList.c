@@ -91,7 +91,8 @@ struct node *insertFirst(struct node *head, int value)
 {
     struct node *newNode = createNode(value);
     newNode->next = head;
-    return newNode;
+    head = newNode;
+    return head;
 }
 
 struct node *insertLast(struct node *head, int value)
