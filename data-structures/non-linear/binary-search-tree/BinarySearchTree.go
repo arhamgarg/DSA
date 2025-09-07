@@ -68,17 +68,14 @@ func deleteNode(root *Node, key int) *Node {
 	} else if root.data < key {
 		root.right = deleteNode(root.right, key)
 	} else {
-		// Case 1: Zero child
 		if root.left == nil && root.right == nil {
 			return nil
 		}
-		// Case 2: One child
 		if root.left == nil {
 			return root.right
 		} else if root.right == nil {
 			return root.left
 		}
-		// Case 3: Both children
 		IS := inorderSuccessor(root.right)
 		root.data = IS.data
 		root.right = deleteNode(root.right, IS.data)

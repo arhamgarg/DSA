@@ -14,7 +14,7 @@ type LinkedList struct {
 func (ll *LinkedList) AddFront(data int) {
 	newNode := &Node{data: data, next: ll.head}
 
-	if(ll.head == nil){
+	if ll.head == nil {
 		ll.head = newNode
 		return
 	}

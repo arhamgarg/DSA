@@ -12,7 +12,6 @@ class Node {
 }
 
 public class BinarySearchTree {
-
     public static Node insert(Node root, int data) {
         if (root == null) {
             root = new Node(data);
@@ -78,20 +77,16 @@ public class BinarySearchTree {
         } else if (root.data < key) {
             root.right = delete(root.right, key);
         } else {
-
-            // Case 1 : No child
             if (root.left == null && root.right == null) {
                 return null;
             }
 
-            // Case 2 : 1 child
             if (root.left == null) {
                 return root.right;
             } else if (root.right == null) {
                 return root.left;
             }
 
-            // Case 3 : Both children
             Node IS = inorderSuccessor(root.right);
             root.data = IS.data;
             root.right = delete(root.right, IS.data);
@@ -102,7 +97,7 @@ public class BinarySearchTree {
 
     public static void printPath(ArrayList<Integer> path) {
         for (int i = 0; i < path.size(); i++) {
-            System.out.print(path.get(i)+"->");
+            System.out.print(path.get(i) + "->");
         }
 
         System.out.println();
