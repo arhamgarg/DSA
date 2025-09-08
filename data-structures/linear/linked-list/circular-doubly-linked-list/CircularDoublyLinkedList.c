@@ -12,11 +12,12 @@ struct dcl
 {
     struct node *head;
     struct node *tail;
+    int size;
 };
 
 struct dcl initList()
 {
-    struct dcl list = {NULL, NULL};
+    struct dcl list = {NULL, NULL, 0};
     return list;
 }
 
@@ -109,17 +110,7 @@ int back(struct dcl *list)
 
 int size(struct dcl *list)
 {
-    if (list->head == NULL)
-        return 0;
-
-    int count = 0;
-    struct node *tempNode = list->head;
-    do
-    {
-        count++;
-        tempNode = tempNode->next;
-    } while (tempNode != list->head);
-    return count;
+   return list->size;
 }
 
 struct node *insertFirst(struct dcl *list, int value)
@@ -138,6 +129,7 @@ struct node *insertFirst(struct dcl *list, int value)
         list->head->prev = newNode;
         list->head = newNode;
     }
+    list->size++;
     return list->head;
 }
 
@@ -157,6 +149,7 @@ struct node *insertLast(struct dcl *list, int value)
         list->head->prev = newNode;
         list->tail = newNode;
     }
+    list->size++;
     return list->head;
 }
 
@@ -175,9 +168,9 @@ struct node *insertAt(struct dcl *list, int position, int value)
         count++;
     }
 
-    if (count != position - 1)
+    if (position < 0 || position > list->size)
     {
-        printf("Position out of range\n");
+        printf("Invalid position\n");
         return list->head;
     }
 
@@ -191,7 +184,7 @@ struct node *insertAt(struct dcl *list, int position, int value)
     {
         list->tail = newNode;
     }
-
+    list->size++;
     return list->head;
 }
 
@@ -213,6 +206,7 @@ struct node *deleteFirst(struct dcl *list)
     list->head->prev = list->tail;
 
     free(tempNode);
+    list->size--;
     return list->head;
 }
 
@@ -234,6 +228,7 @@ struct node *deleteLast(struct dcl *list)
     list->tail->next = list->head;
     list->head->prev = list->tail;
     free(tempNode);
+    list->size--;
     return list->head;
 }
 
@@ -252,9 +247,9 @@ struct node *deleteAt(struct dcl *list, int position)
         count++;
     }
 
-    if (count != position - 1 || tempNode->next == list->head)
+    if (position < 0 || position >= list->size)
     {
-        printf("Position out of range\n");
+        printf("Invalid position\n");
         return list->head;
     }
 
@@ -268,6 +263,7 @@ struct node *deleteAt(struct dcl *list, int position)
         list->tail = tempNode;
 
     free(toDelete);
+    list->size--;
     return list->head;
 }
 
@@ -298,6 +294,7 @@ struct node *deleteKey(struct dcl *list, int deleteData)
                 tempNode->next->prev = tempNode->prev;
                 printf("Deleted value: %d\n", tempNode->data);
                 free(tempNode);
+                list->size--;
                 return list->head;
             }
         }
