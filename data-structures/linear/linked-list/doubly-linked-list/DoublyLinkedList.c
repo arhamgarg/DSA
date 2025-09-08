@@ -45,7 +45,7 @@ struct node *insertFirst(struct dll *list, int value)
         list->head = newNode;
     }
     list->size++;
-    return newNode;
+    return list->head;
 }
 
 struct node *insertLast(struct dll *list, int value)
@@ -63,7 +63,29 @@ struct node *insertLast(struct dll *list, int value)
         list->tail = newNode;
     }
     list->size++;
-    return newNode;
+    return list->head;
+}
+
+struct node *insertAfter(struct dll *list, int afterValue, int value)
+{
+    struct node *target = search(list, afterValue);
+    if (target == NULL)
+    {
+        printf("Value %d not found\n", afterValue);
+        return NULL;
+    }
+
+    if (target == list->tail)
+        return insertLast(list, value);
+
+    struct node *newNode = createNode(value);
+    newNode->next = target->next;
+    newNode->prev = target;
+    target->next->prev = newNode;
+    target->next = newNode;
+
+    list->size++;
+    return list->head;
 }
 
 struct node *insertAt(struct dll *list, int position, int value)
@@ -92,7 +114,7 @@ struct node *insertAt(struct dll *list, int position, int value)
     tempNode->next = newNode;
 
     list->size++;
-    return newNode;
+    return list->head;
 }
 
 struct node *deleteFirst(struct dll *list)
@@ -134,7 +156,7 @@ struct node *deleteLast(struct dll *list)
     printf("Deleted value: %d\n", tempNode->data);
     free(tempNode);
     list->size--;
-    return list->tail;
+    return list->head;
 }
 
 struct node *deleteAt(struct dll *list, int position)
@@ -184,7 +206,7 @@ struct node *deleteKey(struct dll *list, int deleteData)
     if (tempNode == NULL)
     {
         printf("Data not found\n");
-        return NULL;
+        return list->head;
     }
 
     if (tempNode == list->tail)
@@ -242,18 +264,15 @@ struct node *reverse(struct dll *list)
 
     if (tempNode != NULL)
     {
+        list->tail = list->head;
         list->head = tempNode->prev;
     }
-
-    tempNode = list->head;
-    list->head = list->tail;
-    list->tail = tempNode;
-
     return list->head;
 }
 
 struct node *copy(struct dll *list, struct dll *copyList)
 {
+    *copyList = initList();
     struct node *tempNode = list->head;
     while (tempNode != NULL)
     {
@@ -293,7 +312,7 @@ void isEmpty(struct dll *list)
         printf("List isn't empty\n");
 }
 
-int size(struct dll *list)
+int getSize(struct dll *list)
 {
     return list->size;
 }
