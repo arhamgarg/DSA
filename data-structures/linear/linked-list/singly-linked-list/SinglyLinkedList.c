@@ -142,7 +142,7 @@ struct node *insertAfter(struct node *head, int nodeData, int data)
     }
     if (tempNode == NULL)
     {
-        printf("node with given data: %d nor found", nodeData);
+        printf("node with given data: %d not found\n", nodeData);
         return head;
     }
     newNode->next = tempNode->next;
@@ -154,12 +154,7 @@ struct node *deleteFirst(struct node *head)
 {
     if (head == NULL)
         return NULL;
-    if (head->next == NULL)
-    {
-        printf("Deleted value: %d\n", head->data);
-        free(head);
-        return NULL;
-    }
+    
     struct node *tempNode = head;
     head = head->next;
     printf("Deleted value: %d\n", tempNode->data);
@@ -248,6 +243,7 @@ struct node *reverse(struct node *head)
         return NULL;
     struct node *prevNode = NULL;
     struct node *currentNode = head;
+    struct node *nextNode = NULL;
 
     while (currentNode != NULL)
     {
@@ -284,6 +280,9 @@ int last(struct node *head)
 
 struct node *copy(struct node *head, struct node *headCopy)
 {
+    if (headCopy != NULL){
+        printf("Warning: destination list not empty. Copy may append to existing list.\n");
+    }
     struct node *tempNode = head;
     while (tempNode != NULL)
     {
