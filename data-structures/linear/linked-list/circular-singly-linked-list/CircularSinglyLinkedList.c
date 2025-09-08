@@ -11,11 +11,12 @@ struct scl
 {
     struct node *head;
     struct node *tail;
+    int size;
 };
 
 struct scl initList()
 {
-    struct scl list = {NULL, NULL};
+    struct scl list = {NULL, NULL, 0};
     return list;
 }
 
@@ -69,25 +70,15 @@ int back(struct scl *list)
 
 int size(struct scl *list)
 {
-    if (list->head == NULL)
-        return 0;
-
-    int count = 0;
-    struct node *tempNode = list->head;
-    do
-    {
-        count++;
-        tempNode = tempNode->next;
-    } while (tempNode != list->head);
-    return count;
+    return list->size;
 }
 
-void search(struct scl *list, int searchData)
+struct node *search(struct scl *list, int searchData)
 {
     if (list->head == NULL)
     {
         printf("Empty\n");
-        return;
+        return NULL;
     }
     int pos = 0;
     struct node *tempNode = list->head;
@@ -96,12 +87,13 @@ void search(struct scl *list, int searchData)
         if (tempNode->data == searchData)
         {
             printf("Data %d found at position %d\n", tempNode->data, pos);
-            return;
+            return tempNode;
         }
         pos++;
         tempNode = tempNode->next;
     } while (tempNode != list->head);
     printf("Data %d not found\n", searchData);
+    return NULL;
 }
 
 struct node *insertFirst(struct scl *list, int value)
@@ -118,6 +110,7 @@ struct node *insertFirst(struct scl *list, int value)
         list->tail->next = newnode;
         list->head = newnode;
     }
+    list->size++;
     return list->head;
 }
 
@@ -135,39 +128,31 @@ struct node *insertLast(struct scl *list, int value)
         newnode->next = list->head;
         list->tail = newnode;
     }
+    list->size++;
     return list->head;
 }
 
 struct node *insertAt(struct scl *list, int position, int value)
 {
+    if (position < 0 || position > list->size) {
+        printf("Invalid position\n");
+        return list->head;
+    }
     if (position == 0)
     {
         return insertFirst(list, value);
     }
-
+    if (position == list->size) {
+        return insertLast(list, value);
+    }
     struct node *tempNode = list->head;
-    int count = 0;
-    while (count < position - 1 && tempNode->next != list->head)
-    {
+    for (int i = 0; i < position - 1; i++) {
         tempNode = tempNode->next;
-        count++;
     }
-
-    if (count != position - 1)
-    {
-        printf("Position out of range\n");
-        return list->head;
-    }
-
-    struct node *newnode = createNode(value);
-    newnode->next = tempNode->next;
-    tempNode->next = newnode;
-
-    if (tempNode == list->tail)
-    {
-        list->tail = newnode;
-    }
-
+    struct node *newNode = createNode(value);
+    newNode->next = tempNode->next;
+    tempNode->next = newNode;
+    list->size++;
     return list->head;
 }
 
@@ -180,6 +165,7 @@ struct node *deleteFirst(struct scl *list)
         printf("Deleted value : %d\n", list->head->data);
         free(list->head);
         list->head = list->tail = NULL;
+        list->size--;
         return NULL;
     }
     struct node *tempNode = list->head;
@@ -187,6 +173,7 @@ struct node *deleteFirst(struct scl *list)
     list->tail->next = list->head;
     printf("Deleted value : %d\n", tempNode->data);
     free(tempNode);
+    list->size--;
     return list->head;
 }
 
@@ -208,6 +195,7 @@ struct node *deleteLast(struct scl *list)
     free(list->tail);
     list->tail = tempNode;
     list->tail->next = list->head;
+    list->size--;
     return list->head;
 }
 
@@ -215,6 +203,11 @@ struct node *deleteAt(struct scl *list, int position)
 {
     if (list->head == NULL)
         return NULL;
+    if (position < 0 || position >= list->size)
+    {
+        printf("Invalid position\n");
+        return list->head;
+    }
     if (position == 0)
         return deleteFirst(list);
 
@@ -225,13 +218,7 @@ struct node *deleteAt(struct scl *list, int position)
         tempNode = tempNode->next;
         count++;
     }
-
-    if (count != position - 1 || tempNode->next == list->head)
-    {
-        printf("Position out of range\n");
-        return list->head;
-    }
-
+    
     struct node *toDelete = tempNode->next;
     tempNode->next = toDelete->next;
 
@@ -242,7 +229,7 @@ struct node *deleteAt(struct scl *list, int position)
 
     printf("Deleted value : %d\n", toDelete->data);
     free(toDelete);
-
+    list->size--;
     return list->head;
 }
 
