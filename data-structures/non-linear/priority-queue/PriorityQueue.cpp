@@ -20,11 +20,11 @@ public:
     }
   }
 
-  int topKey() { return isMinQueue ? minHeap.getMin() : maxHeap.getMax(); }
-
   int removeTop() {
     return isMinQueue ? minHeap.extractMin() : maxHeap.extractMax();
   }
+
+  int topKey() { return isMinQueue ? minHeap.getMin() : maxHeap.getMax(); }
 
   void buildHeap(vector<int> &arr) {
     if (isMinQueue) {
