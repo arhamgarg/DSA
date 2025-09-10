@@ -80,3 +80,11 @@ function levelOrderTraversal(root: TreeNode | null): void {
     }
   }
 }
+
+export {
+  buildTree,
+  preOrderTraversal,
+  inOrderTraversal,
+  postOrderTraversal,
+  levelOrderTraversal,
+};
