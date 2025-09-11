@@ -1,46 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
+    struct Node *next;
 };
 
-struct scl
+struct SinglyCircularLinkedList
 {
-    struct node *head;
-    struct node *tail;
+    struct Node *head;
+    struct Node *tail;
     int size;
 };
 
-struct scl initList()
+struct SinglyCircularLinkedList initList()
 {
-    struct scl list = {NULL, NULL, 0};
+    struct SinglyCircularLinkedList list = {NULL, NULL, 0};
     return list;
 }
 
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
-    newnode->data = value;
-    newnode->next = NULL;
-    return newnode;
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
 }
 
-void isEmpty(struct scl *list)
+void isEmpty(struct SinglyCircularLinkedList *list)
 {
     printf("List %s empty\n", list->head ? "isn't" : "is");
 }
 
-void traverse(struct scl *list)
+void traverse(struct SinglyCircularLinkedList *list)
 {
     if (list->head == NULL)
     {
         printf("Empty\n");
         return;
     }
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     do
     {
         printf("%d -> ", tempNode->data);
@@ -48,7 +48,7 @@ void traverse(struct scl *list)
     } while (tempNode != list->head);
     printf("(back to head)\n");
 }
-int front(struct scl *list)
+int front(struct SinglyCircularLinkedList *list)
 {
     if (list->head == NULL)
     {
@@ -58,7 +58,7 @@ int front(struct scl *list)
     return list->head->data;
 }
 
-int back(struct scl *list)
+int back(struct SinglyCircularLinkedList *list)
 {
     if (list->tail == NULL)
     {
@@ -68,12 +68,12 @@ int back(struct scl *list)
     return list->tail->data;
 }
 
-int size(struct scl *list)
+int size(struct SinglyCircularLinkedList *list)
 {
     return list->size;
 }
 
-struct node *search(struct scl *list, int searchData)
+struct Node *search(struct SinglyCircularLinkedList *list, int searchData)
 {
     if (list->head == NULL)
     {
@@ -81,7 +81,7 @@ struct node *search(struct scl *list, int searchData)
         return NULL;
     }
     int pos = 0;
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     do
     {
         if (tempNode->data == searchData)
@@ -96,43 +96,43 @@ struct node *search(struct scl *list, int searchData)
     return NULL;
 }
 
-struct node *insertFirst(struct scl *list, int value)
+struct Node *insertFirst(struct SinglyCircularLinkedList *list, int value)
 {
-    struct node *newnode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (list->head == NULL)
     {
-        list->head = list->tail = newnode;
-        newnode->next = newnode;
+        list->head = list->tail = newNode;
+        newNode->next = newNode;
     }
     else
     {
-        newnode->next = list->head;
-        list->tail->next = newnode;
-        list->head = newnode;
+        newNode->next = list->head;
+        list->tail->next = newNode;
+        list->head = newNode;
     }
     list->size++;
     return list->head;
 }
 
-struct node *insertLast(struct scl *list, int value)
+struct Node *insertLast(struct SinglyCircularLinkedList *list, int value)
 {
-    struct node *newnode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (list->head == NULL)
     {
-        list->head = list->tail = newnode;
-        newnode->next = newnode;
+        list->head = list->tail = newNode;
+        newNode->next = newNode;
     }
     else
     {
-        list->tail->next = newnode;
-        newnode->next = list->head;
-        list->tail = newnode;
+        list->tail->next = newNode;
+        newNode->next = list->head;
+        list->tail = newNode;
     }
     list->size++;
     return list->head;
 }
 
-struct node *insertAt(struct scl *list, int position, int value)
+struct Node *insertAt(struct SinglyCircularLinkedList *list, int position, int value)
 {
     if (position < 0 || position > list->size) {
         printf("Invalid position\n");
@@ -145,18 +145,18 @@ struct node *insertAt(struct scl *list, int position, int value)
     if (position == list->size) {
         return insertLast(list, value);
     }
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     for (int i = 0; i < position - 1; i++) {
         tempNode = tempNode->next;
     }
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     newNode->next = tempNode->next;
     tempNode->next = newNode;
     list->size++;
     return list->head;
 }
 
-struct node *deleteFirst(struct scl *list)
+struct Node *deleteFirst(struct SinglyCircularLinkedList *list)
 {
     if (list->head == NULL)
         return NULL;
@@ -168,7 +168,7 @@ struct node *deleteFirst(struct scl *list)
         list->size--;
         return NULL;
     }
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     list->head = list->head->next;
     list->tail->next = list->head;
     printf("Deleted value : %d\n", tempNode->data);
@@ -177,7 +177,7 @@ struct node *deleteFirst(struct scl *list)
     return list->head;
 }
 
-struct node *deleteLast(struct scl *list)
+struct Node *deleteLast(struct SinglyCircularLinkedList *list)
 {
     if (list->head == NULL)
         return NULL;
@@ -188,7 +188,7 @@ struct node *deleteLast(struct scl *list)
         list->head = list->tail = NULL;
         return NULL;
     }
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     while (tempNode->next != list->tail)
         tempNode = tempNode->next;
     printf("Deleted value : %d\n", list->tail->data);
@@ -199,7 +199,7 @@ struct node *deleteLast(struct scl *list)
     return list->head;
 }
 
-struct node *deleteAt(struct scl *list, int position)
+struct Node *deleteAt(struct SinglyCircularLinkedList *list, int position)
 {
     if (list->head == NULL)
         return NULL;
@@ -211,15 +211,15 @@ struct node *deleteAt(struct scl *list, int position)
     if (position == 0)
         return deleteFirst(list);
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     int count = 0;
     while (count < position - 1 && tempNode->next != list->head)
     {
         tempNode = tempNode->next;
         count++;
     }
-    
-    struct node *toDelete = tempNode->next;
+
+    struct Node *toDelete = tempNode->next;
     tempNode->next = toDelete->next;
 
     if (toDelete == list->tail)
@@ -233,7 +233,7 @@ struct node *deleteAt(struct scl *list, int position)
     return list->head;
 }
 
-struct node *update(struct scl *list, int updateVal, int newData)
+struct Node *update(struct SinglyCircularLinkedList *list, int updateVal, int newData)
 {
     if (list->head == NULL)
     {
@@ -241,17 +241,17 @@ struct node *update(struct scl *list, int updateVal, int newData)
         return NULL;
     }
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     do
     {
         if (tempNode->data == updateVal)
         {
             tempNode->data = newData;
-            printf("node updated: %d -> %d\n", updateVal, newData);
+            printf("Node updated: %d -> %d\n", updateVal, newData);
             return list->head;
         }
         tempNode = tempNode->next;
     } while (tempNode != list->head);
-    printf("node with given data: %d not found\n", updateVal);
+    printf("Node with given data: %d not found\n", updateVal);
     return list->head;
 }

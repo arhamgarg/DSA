@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
+    struct Node *next;
 };
 
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
     return newNode;
 }
 
-int size(struct node *head)
+int getSize(struct Node *head)
 {
     int count = 0;
     while (head != NULL)
@@ -26,7 +26,7 @@ int size(struct node *head)
     return count;
 }
 
-void traverse(struct node *head)
+void traverse(struct Node *head)
 {
     while (head != NULL)
     {
@@ -36,24 +36,24 @@ void traverse(struct node *head)
     printf("NULL\n");
 }
 
-struct node *update(struct node *head, int updateValue, int newData)
+struct Node *update(struct Node *head, int updateValue, int newData)
 {
-    struct node *tempNode = head;
+    struct Node *tempNode = head;
     while (tempNode != NULL && tempNode->data != updateValue)
         tempNode = tempNode->next;
 
     if (tempNode == NULL)
     {
-        printf("node with given data: %d not found\n", updateValue);
+        printf("Node with given data: %d not found\n", updateValue);
         return head;
     }
     tempNode->data = newData;
     return head;
 }
 
-void search(struct node *head, int searchData)
+void search(struct Node *head, int searchData)
 {
-    struct node *tempNode = head;
+    struct Node *tempNode = head;
     int pos = 0;
     while (tempNode != NULL)
     {
@@ -68,7 +68,7 @@ void search(struct node *head, int searchData)
     printf("Data %d not found\n", searchData);
 }
 
-int getAtIndex(struct node *head, int index)
+int getAtIndex(struct Node *head, int index)
 {
     int indexCounter = 0;
     while (head != NULL)
@@ -82,37 +82,37 @@ int getAtIndex(struct node *head, int index)
     return -1;
 }
 
-void isEmpty(struct node *head)
+void isEmpty(struct Node *head)
 {
     printf("List %s empty\n", head ? "isn't" : "is");
 }
 
-struct node *insertFirst(struct node *head, int value)
+struct Node *insertFirst(struct Node *head, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     newNode->next = head;
     head = newNode;
     return head;
 }
 
-struct node *insertLast(struct node *head, int value)
+struct Node *insertLast(struct Node *head, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (head == NULL)
         return newNode;
-    struct node *tempNode = head;
+    struct Node *tempNode = head;
     while (tempNode->next != NULL)
         tempNode = tempNode->next;
     tempNode->next = newNode;
     return head;
 }
 
-struct node *insertAt(struct node *head, int position, int value)
+struct Node *insertAt(struct Node *head, int position, int value)
 {
     if (position == 0)
         return insertFirst(head, value);
 
-    struct node *tempNode = head;
+    struct Node *tempNode = head;
     for (int i = 0; i < position - 1 && tempNode != NULL; i++)
         tempNode = tempNode->next;
 
@@ -122,27 +122,27 @@ struct node *insertAt(struct node *head, int position, int value)
         return head;
     }
 
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     newNode->next = tempNode->next;
     tempNode->next = newNode;
     return head;
 }
 
-struct node *insertAfter(struct node *head, int nodeData, int data)
+struct Node *insertAfter(struct Node *head, int NodeData, int data)
 {
-    struct node *newNode = createNode(data);
+    struct Node *newNode = createNode(data);
     if (head == NULL)
     {
         return newNode;
     }
-    struct node *tempNode = head;
-    while (tempNode != NULL && tempNode->data != nodeData)
+    struct Node *tempNode = head;
+    while (tempNode != NULL && tempNode->data != NodeData)
     {
         tempNode = tempNode->next;
     }
     if (tempNode == NULL)
     {
-        printf("node with given data: %d not found\n", nodeData);
+        printf("Node with given data: %d not found\n", NodeData);
         return head;
     }
     newNode->next = tempNode->next;
@@ -150,19 +150,19 @@ struct node *insertAfter(struct node *head, int nodeData, int data)
     return head;
 }
 
-struct node *deleteFirst(struct node *head)
+struct Node *deleteFirst(struct Node *head)
 {
     if (head == NULL)
         return NULL;
-    
-    struct node *tempNode = head;
+
+    struct Node *tempNode = head;
     head = head->next;
     printf("Deleted value: %d\n", tempNode->data);
     free(tempNode);
     return head;
 }
 
-struct node *deleteLast(struct node *head)
+struct Node *deleteLast(struct Node *head)
 {
     if (head == NULL)
         return NULL;
@@ -172,7 +172,7 @@ struct node *deleteLast(struct node *head)
         free(head);
         return NULL;
     }
-    struct node *tempNode = head;
+    struct Node *tempNode = head;
     while (tempNode->next->next != NULL)
         tempNode = tempNode->next;
     printf("Deleted value: %d\n", tempNode->next->data);
@@ -181,14 +181,14 @@ struct node *deleteLast(struct node *head)
     return head;
 }
 
-struct node *deleteAt(struct node *head, int position)
+struct Node *deleteAt(struct Node *head, int position)
 {
     if (head == NULL)
         return NULL;
     if (position == 0)
         return deleteFirst(head);
 
-    struct node *tempNode = head;
+    struct Node *tempNode = head;
     for (int i = 0; i < position - 1 && tempNode->next != NULL; i++)
         tempNode = tempNode->next;
 
@@ -198,28 +198,28 @@ struct node *deleteAt(struct node *head, int position)
         return head;
     }
 
-    struct node *toDelete = tempNode->next;
+    struct Node *toDelete = tempNode->next;
     tempNode->next = tempNode->next->next;
     printf("Deleted value: %d\n", toDelete->data);
     free(toDelete);
     return head;
 }
 
-struct node *deleteKey(struct node *head, int deleteData)
+struct Node *deleteKey(struct Node *head, int deleteData)
 {
     if (head == NULL)
         return NULL;
     if (head->data == deleteData)
     {
-        struct node *tempNode = head;
+        struct Node *tempNode = head;
         head = head->next;
         printf("Deleted value: %d\n", tempNode->data);
         free(tempNode);
         return head;
     }
 
-    struct node *prev = head;
-    struct node *toDelete = head->next;
+    struct Node *prev = head;
+    struct Node *toDelete = head->next;
 
     while (toDelete != NULL && toDelete->data != deleteData)
     {
@@ -228,7 +228,7 @@ struct node *deleteKey(struct node *head, int deleteData)
     }
     if (toDelete == NULL)
     {
-        printf("node with given data: %d not found\n", deleteData);
+        printf("Node with given data: %d not found\n", deleteData);
         return head;
     }
     prev->next = toDelete->next;
@@ -237,13 +237,13 @@ struct node *deleteKey(struct node *head, int deleteData)
     return head;
 }
 
-struct node *reverse(struct node *head)
+struct Node *reverse(struct Node *head)
 {
     if (head == NULL)
         return NULL;
-    struct node *prevNode = NULL;
-    struct node *currentNode = head;
-    struct node *nextNode = NULL;
+    struct Node *prevNode = NULL;
+    struct Node *currentNode = head;
+    struct Node *nextNode = NULL;
 
     while (currentNode != NULL)
     {
@@ -256,7 +256,7 @@ struct node *reverse(struct node *head)
     return head;
 }
 
-int front(struct node *head)
+int front(struct Node *head)
 {
     if (head == NULL)
     {
@@ -266,7 +266,7 @@ int front(struct node *head)
     return head->data;
 }
 
-int last(struct node *head)
+int last(struct Node *head)
 {
     if (head == NULL)
     {
@@ -278,12 +278,12 @@ int last(struct node *head)
     return head->data;
 }
 
-struct node *copy(struct node *head, struct node *headCopy)
+struct Node *copy(struct Node *head, struct Node *headCopy)
 {
     if (headCopy != NULL){
         printf("Warning: destination list not empty. Copy may append to existing list.\n");
     }
-    struct node *tempNode = head;
+    struct Node *tempNode = head;
     while (tempNode != NULL)
     {
         headCopy = insertLast(headCopy, tempNode->data);
@@ -292,15 +292,15 @@ struct node *copy(struct node *head, struct node *headCopy)
     return headCopy;
 }
 
-void findMiddle(struct node *head)
+void findMiddle(struct Node *head)
 {
     if (head == NULL)
     {
         printf("List is empty\n");
         return;
     }
-    struct node *fast = head;
-    struct node *slow = head;
+    struct Node *fast = head;
+    struct Node *slow = head;
     while (fast != NULL && fast->next != NULL)
     {
         slow = slow->next;

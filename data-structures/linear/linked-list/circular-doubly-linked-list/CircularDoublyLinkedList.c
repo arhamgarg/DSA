@@ -1,42 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
-    struct node *prev;
+    struct Node *next;
+    struct Node *prev;
 };
 
-struct dcl
+struct DoublyCircularLinkedList
 {
-    struct node *head;
-    struct node *tail;
+    struct Node *head;
+    struct Node *tail;
     int size;
 };
 
-struct dcl initList()
+struct DoublyCircularLinkedList initList()
 {
-    struct dcl list = {NULL, NULL, 0};
+    struct DoublyCircularLinkedList list = {NULL, NULL, 0};
     return list;
 }
 
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = newNode->prev = NULL;
     return newNode;
 }
 
-void traverseForward(struct dcl *list)
+void traverseForward(struct DoublyCircularLinkedList *list)
 {
     if (list->head == NULL)
     {
         printf("Empty\n");
         return;
     }
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     do
     {
         printf("%d <-> ", tempNode->data);
@@ -45,14 +45,14 @@ void traverseForward(struct dcl *list)
     printf("(back to head)\n");
 }
 
-void traverseBackward(struct dcl *list)
+void traverseBackward(struct DoublyCircularLinkedList *list)
 {
     if (list->head == NULL)
     {
         printf("Empty\n");
         return;
     }
-    struct node *tempNode = list->tail;
+    struct Node *tempNode = list->tail;
     do
     {
         printf("%d <-> ", tempNode->data);
@@ -61,12 +61,12 @@ void traverseBackward(struct dcl *list)
     printf("(back to tail)\n");
 }
 
-void isEmpty(struct dcl *list)
+void isEmpty(struct DoublyCircularLinkedList *list)
 {
     printf("List %s empty\n", list->head ? "isn't" : "is");
 }
 
-void search(struct dcl *list, int searchData)
+void search(struct DoublyCircularLinkedList *list, int searchData)
 {
     if (list->head == NULL)
     {
@@ -74,7 +74,7 @@ void search(struct dcl *list, int searchData)
         return;
     }
     int pos = 0;
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     do
     {
         if (tempNode->data == searchData)
@@ -88,7 +88,7 @@ void search(struct dcl *list, int searchData)
     printf("Data %d not found\n", searchData);
 }
 
-int front(struct dcl *list)
+int front(struct DoublyCircularLinkedList *list)
 {
     if (list->head == NULL)
     {
@@ -98,7 +98,7 @@ int front(struct dcl *list)
     return list->head->data;
 }
 
-int back(struct dcl *list)
+int back(struct DoublyCircularLinkedList *list)
 {
     if (list->tail == NULL)
     {
@@ -108,14 +108,14 @@ int back(struct dcl *list)
     return list->tail->data;
 }
 
-int size(struct dcl *list)
+int size(struct DoublyCircularLinkedList *list)
 {
    return list->size;
 }
 
-struct node *insertFirst(struct dcl *list, int value)
+struct Node *insertFirst(struct DoublyCircularLinkedList *list, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (list->head == NULL)
     {
         list->head = list->tail = newNode;
@@ -133,9 +133,9 @@ struct node *insertFirst(struct dcl *list, int value)
     return list->head;
 }
 
-struct node *insertLast(struct dcl *list, int value)
+struct Node *insertLast(struct DoublyCircularLinkedList *list, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (list->head == NULL)
     {
         list->head = list->tail = newNode;
@@ -153,14 +153,14 @@ struct node *insertLast(struct dcl *list, int value)
     return list->head;
 }
 
-struct node *insertAt(struct dcl *list, int position, int value)
+struct Node *insertAt(struct DoublyCircularLinkedList *list, int position, int value)
 {
     if (position == 0)
     {
         return insertFirst(list, value);
     }
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     int count = 0;
     while (count < position - 1 && tempNode->next != list->head)
     {
@@ -174,7 +174,7 @@ struct node *insertAt(struct dcl *list, int position, int value)
         return list->head;
     }
 
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     newNode->next = tempNode->next;
     newNode->prev = tempNode;
     tempNode->next->prev = newNode;
@@ -188,11 +188,11 @@ struct node *insertAt(struct dcl *list, int position, int value)
     return list->head;
 }
 
-struct node *deleteFirst(struct dcl *list)
+struct Node *deleteFirst(struct DoublyCircularLinkedList *list)
 {
     if (list->head == NULL)
         return NULL;
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     if (list->head == list->tail)
     {
         printf("Deleted value : %d\n", tempNode->data);
@@ -210,11 +210,11 @@ struct node *deleteFirst(struct dcl *list)
     return list->head;
 }
 
-struct node *deleteLast(struct dcl *list)
+struct Node *deleteLast(struct DoublyCircularLinkedList *list)
 {
     if (list->head == NULL)
         return NULL;
-    struct node *tempNode = list->tail;
+    struct Node *tempNode = list->tail;
     if (list->head == list->tail)
     {
         printf("Deleted value : %d\n", tempNode->data);
@@ -232,14 +232,14 @@ struct node *deleteLast(struct dcl *list)
     return list->head;
 }
 
-struct node *deleteAt(struct dcl *list, int position)
+struct Node *deleteAt(struct DoublyCircularLinkedList *list, int position)
 {
     if (list->head == NULL)
         return NULL;
     if (position == 0)
         return deleteFirst(list);
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     int count = 0;
     while (count < position - 1 && tempNode->next != list->head)
     {
@@ -253,7 +253,7 @@ struct node *deleteAt(struct dcl *list, int position)
         return list->head;
     }
 
-    struct node *toDelete = tempNode->next;
+    struct Node *toDelete = tempNode->next;
     printf("Deleted: %d\n", toDelete->data);
 
     tempNode->next = toDelete->next;
@@ -267,12 +267,12 @@ struct node *deleteAt(struct dcl *list, int position)
     return list->head;
 }
 
-struct node *deleteKey(struct dcl *list, int deleteData)
+struct Node *deleteKey(struct DoublyCircularLinkedList *list, int deleteData)
 {
     if (list->head == NULL)
         return NULL;
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     do
     {
         if (tempNode->data == deleteData)
@@ -301,11 +301,11 @@ struct node *deleteKey(struct dcl *list, int deleteData)
         tempNode = tempNode->next;
     } while (tempNode != list->head);
 
-    printf("node with given data: %d not found\n", deleteData);
+    printf("Node with given data: %d not found\n", deleteData);
     return list->head;
 }
 
-struct node *update(struct dcl *list, int updateVal, int newData)
+struct Node *update(struct DoublyCircularLinkedList *list, int updateVal, int newData)
 {
     if (list->head == NULL)
     {
@@ -313,30 +313,30 @@ struct node *update(struct dcl *list, int updateVal, int newData)
         return NULL;
     }
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     do
     {
         if (tempNode->data == updateVal)
         {
             tempNode->data = newData;
-            printf("node updated: %d -> %d\n", updateVal, newData);
+            printf("Node updated: %d -> %d\n", updateVal, newData);
             return list->head;
         }
         tempNode = tempNode->next;
     } while (tempNode != list->head);
-    printf("node with given data: %d not found\n", updateVal);
+    printf("Node with given data: %d not found\n", updateVal);
     return list->head;
 }
 
-struct node *reverse(struct dcl *list)
+struct Node *reverse(struct DoublyCircularLinkedList *list)
 {
     if (list->head == NULL)
     {
         printf("Empty List\n");
         return NULL;
     }
-    struct node *current = list->head;
-    struct node *tempNode = NULL;
+    struct Node *current = list->head;
+    struct Node *tempNode = NULL;
     do
     {
         tempNode = current->prev;

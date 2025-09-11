@@ -1,38 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
-    struct node *prev;
+    struct Node *next;
+    struct Node *prev;
 };
 
-struct dll
+struct DoublyLinkedList
 {
-    struct node *head;
-    struct node *tail;
+    struct Node *head;
+    struct Node *tail;
     int size;
 };
 
-struct dll initList()
+struct DoublyLinkedList initList()
 {
-    struct dll list = {NULL, NULL, 0};
+    struct DoublyLinkedList list = {NULL, NULL, 0};
     return list;
 }
 
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
     newNode->prev = NULL;
     return newNode;
 }
 
-struct node *insertFirst(struct dll *list, int value)
+struct Node *insertFirst(struct DoublyLinkedList *list, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
 
     if (list->head == NULL)
     {
@@ -48,9 +48,9 @@ struct node *insertFirst(struct dll *list, int value)
     return list->head;
 }
 
-struct node *insertLast(struct dll *list, int value)
+struct Node *insertLast(struct DoublyLinkedList *list, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
 
     if (list->tail == NULL)
     {
@@ -66,9 +66,9 @@ struct node *insertLast(struct dll *list, int value)
     return list->head;
 }
 
-struct node *insertAfter(struct dll *list, int afterValue, int value)
+struct Node *insertAfter(struct DoublyLinkedList *list, int afterValue, int value)
 {
-    struct node *target = search(list, afterValue);
+    struct Node *target = search(list, afterValue);
     if (target == NULL)
     {
         printf("Value %d not found\n", afterValue);
@@ -78,7 +78,7 @@ struct node *insertAfter(struct dll *list, int afterValue, int value)
     if (target == list->tail)
         return insertLast(list, value);
 
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     newNode->next = target->next;
     newNode->prev = target;
     target->next->prev = newNode;
@@ -88,7 +88,7 @@ struct node *insertAfter(struct dll *list, int afterValue, int value)
     return list->head;
 }
 
-struct node *insertAt(struct dll *list, int position, int value)
+struct Node *insertAt(struct DoublyLinkedList *list, int position, int value)
 {
     if (position < 0 || position > list->size)
     {
@@ -101,13 +101,13 @@ struct node *insertAt(struct dll *list, int position, int value)
     if (position == list->size)
         return insertLast(list, value);
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     for (int i = 0; i < position - 1; i++)
     {
         tempNode = tempNode->next;
     }
 
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     newNode->next = tempNode->next;
     newNode->prev = tempNode;
     tempNode->next->prev = newNode;
@@ -117,12 +117,12 @@ struct node *insertAt(struct dll *list, int position, int value)
     return list->head;
 }
 
-struct node *deleteFirst(struct dll *list)
+struct Node *deleteFirst(struct DoublyLinkedList *list)
 {
     if (list->head == NULL)
         return NULL;
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     if (list->head == list->tail)
     {
         list->head = list->tail = NULL;
@@ -138,12 +138,12 @@ struct node *deleteFirst(struct dll *list)
     return list->head;
 }
 
-struct node *deleteLast(struct dll *list)
+struct Node *deleteLast(struct DoublyLinkedList *list)
 {
     if (list->tail == NULL)
         return NULL;
 
-    struct node *tempNode = list->tail;
+    struct Node *tempNode = list->tail;
     if (list->head == list->tail)
     {
         list->head = list->tail = NULL;
@@ -159,7 +159,7 @@ struct node *deleteLast(struct dll *list)
     return list->head;
 }
 
-struct node *deleteAt(struct dll *list, int position)
+struct Node *deleteAt(struct DoublyLinkedList *list, int position)
 {
     if (position < 0 || position >= list->size)
     {
@@ -172,7 +172,7 @@ struct node *deleteAt(struct dll *list, int position)
     if (position == list->size - 1)
         return deleteLast(list);
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     for (int i = 0; i < position; i++)
     {
         tempNode = tempNode->next;
@@ -187,7 +187,7 @@ struct node *deleteAt(struct dll *list, int position)
     return list->head;
 }
 
-struct node *deleteKey(struct dll *list, int deleteData)
+struct Node *deleteKey(struct DoublyLinkedList *list, int deleteData)
 {
     if (list->head == NULL)
         return NULL;
@@ -197,7 +197,7 @@ struct node *deleteKey(struct dll *list, int deleteData)
         return deleteFirst(list);
     }
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     while (tempNode != NULL && tempNode->data != deleteData)
     {
         tempNode = tempNode->next;
@@ -223,9 +223,9 @@ struct node *deleteKey(struct dll *list, int deleteData)
     return list->head;
 }
 
-struct node *search(struct dll *list, int value)
+struct Node *search(struct DoublyLinkedList *list, int value)
 {
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     while (tempNode != NULL)
     {
         if (tempNode->data == value)
@@ -237,9 +237,9 @@ struct node *search(struct dll *list, int value)
     return NULL;
 }
 
-struct node *update(struct dll *list, int oldValue, int newValue)
+struct Node *update(struct DoublyLinkedList *list, int oldValue, int newValue)
 {
-    struct node *tempNode = search(list, oldValue);
+    struct Node *tempNode = search(list, oldValue);
     if (tempNode != NULL)
     {
         tempNode->data = newValue;
@@ -249,10 +249,10 @@ struct node *update(struct dll *list, int oldValue, int newValue)
     return NULL;
 }
 
-struct node *reverse(struct dll *list)
+struct Node *reverse(struct DoublyLinkedList *list)
 {
-    struct node *curr = list->head;
-    struct node *tempNode = NULL;
+    struct Node *curr = list->head;
+    struct Node *tempNode = NULL;
 
     while (curr != NULL)
     {
@@ -270,10 +270,10 @@ struct node *reverse(struct dll *list)
     return list->head;
 }
 
-struct node *copy(struct dll *list, struct dll *copyList)
+struct Node *copy(struct DoublyLinkedList *list, struct DoublyLinkedList *copyList)
 {
     *copyList = initList();
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     while (tempNode != NULL)
     {
         insertLast(copyList, tempNode->data);
@@ -282,9 +282,9 @@ struct node *copy(struct dll *list, struct dll *copyList)
     return copyList->head;
 }
 
-void traverseForward(struct dll *list)
+void traverseForward(struct DoublyLinkedList *list)
 {
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     while (tempNode != NULL)
     {
         printf("%d <-> ", tempNode->data);
@@ -293,9 +293,9 @@ void traverseForward(struct dll *list)
     printf("NULL\n");
 }
 
-void traverseBackward(struct dll *list)
+void traverseBackward(struct DoublyLinkedList *list)
 {
-    struct node *tempNode = list->tail;
+    struct Node *tempNode = list->tail;
     while (tempNode != NULL)
     {
         printf("%d <-> ", tempNode->data);
@@ -304,7 +304,7 @@ void traverseBackward(struct dll *list)
     printf("NULL\n");
 }
 
-void isEmpty(struct dll *list)
+void isEmpty(struct DoublyLinkedList *list)
 {
     if (list->head == NULL)
         printf("List is empty\n");
@@ -312,7 +312,7 @@ void isEmpty(struct dll *list)
         printf("List isn't empty\n");
 }
 
-int getSize(struct dll *list)
+int getSize(struct DoublyLinkedList *list)
 {
     return list->size;
 }
