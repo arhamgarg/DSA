@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 typedef struct Node {
     int value;
     struct Node *nextNode;

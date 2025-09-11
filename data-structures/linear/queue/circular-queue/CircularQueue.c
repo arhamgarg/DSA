@@ -1,113 +1,114 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
+    struct Node *next;
 };
 
-struct SCL
+struct CircularQueue
 {
-    struct node *head;
-    struct node *tail;
+    struct Node *head;
+    struct Node *tail;
     int size;
 };
 
-struct SCL initList()
+struct CircularQueue initQueue()
 {
-    struct SCL list = {NULL, NULL, 0};
-    return list;
+    struct CircularQueue queue = {NULL, NULL, 0};
+    return queue;
 }
 
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
     return newNode;
 }
 
-struct node *enqueue(struct SCL *list, int value)
+struct Node *enqueue(struct CircularQueue *queue, int value)
 {
-    struct node *newNode = createNode(value);
-    if (list->head == NULL)
+    struct Node *newNode = createNode(value);
+    if (queue->head == NULL)
     {
-        list->head = list->tail = newNode;
+        queue->head = queue->tail = newNode;
         newNode->next = newNode;
     }
     else
     {
-        list->tail->next = newNode;
-        newNode->next = list->head;
-        list->tail = newNode;
+        queue->tail->next = newNode;
+        newNode->next = queue->head;
+        queue->tail = newNode;
     }
-    list->size++;
-    return list->head;
+    queue->size++;
+    return queue->head;
 }
 
-struct node *dequeue(struct SCL *list)
+struct Node *dequeue(struct CircularQueue *queue)
 {
-    if (list->head == NULL)
+    if (queue->head == NULL)
         return NULL;
-    if (list->head == list->tail)
+    if (queue->head == queue->tail)
     {
-        printf("Deleted value : %d\n", list->head->data);
-        free(list->head);
-        list->head = list->tail = NULL;
-        list->size--;
+        printf("Deleted value : %d\n", queue->head->data);
+        free(queue->head);
+        queue->head = queue->tail = NULL;
+        queue->size--;
         return NULL;
     }
-    struct node *temp = list->head;
-    list->head = list->head->next;
-    list->tail->next = list->head;
-    printf("Deleted value : %d\n", temp->data);
-    free(temp);
-    list->size--;
-    return list->head;
+    struct Node *tempNode = queue->head;
+    queue->head = queue->head->next;
+    queue->tail->next = queue->head;
+    printf("Deleted value : %d\n", tempNode->data);
+    free(tempNode);
+    queue->size--;
+    return queue->head;
 }
 
-void display(struct SCL *list)
+void display(struct CircularQueue *queue)
 {
-    if (list->head == NULL)
+    if (queue->head == NULL)
     {
         printf("Empty\n");
         return;
     }
-    struct node *temp = list->head;
+    struct Node *tempNode = queue->head;
     do
     {
-        printf("%d -> ", temp->data);
-        temp = temp->next;
-    } while (temp != list->head);
+        printf("%d -> ", tempNode->data);
+        tempNode = tempNode->next;
+    } while (tempNode != queue->head);
     printf("(back to head)\n");
 }
-int front(struct SCL *list)
+int front(struct CircularQueue *queue)
 {
-    if (list->head == NULL)
+    if (queue->head == NULL)
     {
-        printf("List empty\n");
+        printf("queue empty\n");
         return -1;
     }
-    return list->head->data;
+    return queue->head->data;
 }
 
-int back(struct SCL *list)
+int rear(struct CircularQueue *queue)
 {
-    if (list->tail == NULL)
+    if (queue->tail == NULL)
     {
-        printf("List empty\n");
+        printf("queue empty\n");
         return -1;
     }
-    return list->tail->data;
+    return queue->tail->data;
 }
 
-int size(struct SCL *list)
+int getSize(struct CircularQueue *queue)
 {
-    return list->size;
+    return queue->size;
 }
 
-bool isEmpty(struct SCL *list)
+bool isEmpty(struct CircularQueue *queue)
 {
-    return (list->head == NULL);
+    return (queue->head == NULL);
 }

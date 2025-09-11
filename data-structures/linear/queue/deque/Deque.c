@@ -1,37 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
-    struct node *prev;
+    struct Node *next;
+    struct Node *prev;
 };
 
-struct deque
+struct Deque
 {
-    struct node *front;
-    struct node *rear;
+    struct Node *front;
+    struct Node *rear;
     int size;
 };
 
-struct deque initList()
+struct Deque initQueue()
 {
-    struct deque dq = {NULL, NULL, 0};
+    struct Deque dq = {NULL, NULL, 0};
     return dq;
 }
 
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = newNode->prev = NULL;
     return newNode;
 }
 
-struct node *insertFront(struct deque *dq, int value)
+struct Node *insertFront(struct Deque *dq, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (dq->front == NULL)
         dq->front = dq->rear = newNode;
     else
@@ -44,9 +45,9 @@ struct node *insertFront(struct deque *dq, int value)
     return newNode;
 }
 
-struct node *insertRear(struct deque *dq, int value)
+struct Node *insertRear(struct Deque *dq, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (dq->front == NULL)
         dq->front = dq->rear = newNode;
     else
@@ -59,16 +60,16 @@ struct node *insertRear(struct deque *dq, int value)
     return newNode;
 }
 
-struct node *deleteFront(struct deque *dq)
+struct Node *deleteFront(struct Deque *dq)
 {
     if (dq->front == NULL)
     {
-        printf("deque is empty\n");
+        printf("Deque is empty\n");
         return NULL;
     }
 
-    struct node *temp = dq->front;
-    printf("Deleted value: %d\n", temp->data);
+    struct Node *tempNode = dq->front;
+    printf("Deleted value: %d\n", tempNode->data);
 
     dq->front = dq->front->next;
 
@@ -77,21 +78,21 @@ struct node *deleteFront(struct deque *dq)
     else
         dq->rear = NULL;
 
-    free(temp);
+    free(tempNode);
     dq->size--;
     return dq->front;
 }
 
-struct node *deleteRear(struct deque *dq)
+struct Node *deleteRear(struct Deque *dq)
 {
     if (dq->front == NULL)
     {
-        printf("deque is empty\n");
+        printf("Deque is empty\n");
         return NULL;
     }
 
-    struct node *temp = dq->rear;
-    printf("Deleted value: %d\n", temp->data);
+    struct Node *tempNode = dq->rear;
+    printf("Deleted value: %d\n", tempNode->data);
     dq->rear = dq->rear->prev;
 
     if (dq->rear != NULL)
@@ -99,17 +100,17 @@ struct node *deleteRear(struct deque *dq)
     else
         dq->front = NULL;
 
-    free(temp);
+    free(tempNode);
     dq->size--;
     return dq->rear;
 }
 
-int getSize(struct deque *dq)
+int getSize(struct Deque *dq)
 {
     return dq->size;
 }
 
-int getFront(struct deque *dq)
+int getFront(struct Deque *dq)
 {
     if (dq->front == NULL)
     {
@@ -119,7 +120,7 @@ int getFront(struct deque *dq)
     return dq->front->data;
 }
 
-int getRear(struct deque *dq)
+int getRear(struct Deque *dq)
 {
     if (dq->rear == NULL)
     {
@@ -129,29 +130,29 @@ int getRear(struct deque *dq)
     return dq->rear->data;
 }
 
-void traverseForward(struct deque *dq)
+void traverseForward(struct Deque *dq)
 {
-    struct node *temp = dq->front;
-    while (temp != NULL)
+    struct Node *tempNode = dq->front;
+    while (tempNode != NULL)
     {
-        printf("%d <-> ", temp->data);
-        temp = temp->next;
+        printf("%d <-> ", tempNode->data);
+        tempNode = tempNode->next;
     }
     printf("NULL\n");
 }
 
-void traverseBackward(struct deque *dq)
+void traverseBackward(struct Deque *dq)
 {
-    struct node *temp = dq->rear;
-    while (temp != NULL)
+    struct Node *tempNode = dq->rear;
+    while (tempNode != NULL)
     {
-        printf("%d <-> ", temp->data);
-        temp = temp->prev;
+        printf("%d <-> ", tempNode->data);
+        tempNode = tempNode->prev;
     }
     printf("NULL\n");
 }
 
-bool isEmpty(struct deque *dq)
+bool isEmpty(struct Deque *dq)
 {
     return (dq->front == NULL);
 }

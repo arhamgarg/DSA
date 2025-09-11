@@ -2,77 +2,77 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
+    struct Node *next;
 };
 
-struct stack
+struct Stack
 {
-    struct node *head;
+    struct Node *head;
     int size;
 };
 
-struct stack initList()
+struct Stack initStack()
 {
-    struct stack list = {NULL, 0};
-    return list;
+    struct Stack stack = {NULL, 0};
+    return stack;
 }
 
-struct node *createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
     return newNode;
 }
 
-struct node *push(struct stack *list, int value)
+struct Node *push(struct Stack *stack, int value)
 {
-    struct node *newNode = createNode(value);
-    newNode->next = list->head;
-    list->head = newNode;
-    list->size++;
-    return list->head;
+    struct Node *newNode = createNode(value);
+    newNode->next = stack->head;
+    stack->head = newNode;
+    stack->size++;
+    return stack->head;
 }
 
-struct node *pop(struct stack *list)
+struct Node *pop(struct Stack *stack)
 {
-    if (list->head == NULL)
+    if (stack->head == NULL)
         return NULL;
 
-    struct node *tempNode = list->head;
-    list->head = list->head->next;
+    struct Node *tempNode = stack->head;
+    stack->head = stack->head->next;
     printf("Deleted value: %d\n", tempNode->data);
-    list->size--;
+    stack->size--;
     free(tempNode);
-    return list->head;
+    return stack->head;
 }
 
-bool isEmpty(struct stack *list)
+bool isEmpty(struct Stack *stack)
 {
-    return list->head == NULL;
+    return stack->head == NULL;
 }
 
-int size(struct stack *list)
+int getSize(struct Stack *stack)
 {
-    return list->size;
+    return stack->size;
 }
 
-int top(struct stack *list)
+int top(struct Stack *stack)
 {
-    if (list->head == NULL)
+    if (stack->head == NULL)
     {
-        printf("List empty\n");
+        printf("stack empty\n");
         return -1;
     }
-    return list->head->data;
+    return stack->head->data;
 }
 
-void display(struct stack *list)
+void display(struct Stack *stack)
 {
-    struct node *temp = list->head;
+    struct Node *temp = stack->head;
     while (temp != NULL)
     {
         printf("%d -> ", temp->data);

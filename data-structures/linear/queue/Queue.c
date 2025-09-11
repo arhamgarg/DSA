@@ -1,43 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-struct node
+struct Node
 {
     int data;
-    struct node *next;
+    struct Node *next;
 };
 
-struct queue
+struct Queue
 {
-    struct node *head;
+    struct Node *head;
     int size;
 };
 
-struct queue initList()
+struct Queue initList()
 {
-    struct queue list = {NULL, 0};
+    struct Queue list = {NULL, 0};
     return list;
 }
 
-struct node *
-createNode(int value)
+struct Node *createNode(int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
     return newNode;
 }
 
-struct node *enqueue(struct queue *list, int value)
+struct Node *enqueue(struct Queue *list, int value)
 {
-    struct node *newNode = createNode(value);
+    struct Node *newNode = createNode(value);
     if (list->head == NULL)
     {
         list->head = newNode;
         list->size++;
         return list->head;
     }
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     while (tempNode->next != NULL)
         tempNode = tempNode->next;
     tempNode->next = newNode;
@@ -45,12 +45,12 @@ struct node *enqueue(struct queue *list, int value)
     return list->head;
 }
 
-struct node *dequeue(struct queue *list)
+struct Node *dequeue(struct Queue *list)
 {
     if (list->head == NULL)
         return NULL;
 
-    struct node *tempNode = list->head;
+    struct Node *tempNode = list->head;
     list->head = list->head->next;
     printf("Deleted value: %d\n", tempNode->data);
     free(tempNode);
@@ -58,12 +58,12 @@ struct node *dequeue(struct queue *list)
     return list->head;
 }
 
-int size(struct queue *list)
+int getSize(struct Queue *list)
 {
     return list->size;
 }
 
-int front(struct queue *list)
+int front(struct Queue *list)
 {
     if (list->head == NULL)
     {
@@ -73,9 +73,9 @@ int front(struct queue *list)
     return list->head->data;
 }
 
-void display(struct queue *list)
+void display(struct Queue *list)
 {
-    struct node *temp = list->head;
+    struct Node *temp = list->head;
     while (temp != NULL)
     {
         printf("%d -> ", temp->data);
@@ -84,7 +84,7 @@ void display(struct queue *list)
     printf("NULL\n");
 }
 
-bool isEmpty(struct queue *list)
+bool isEmpty(struct Queue *list)
 {
     return list->head == NULL;
 }
