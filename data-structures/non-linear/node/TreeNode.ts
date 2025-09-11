@@ -25,6 +25,10 @@ class TreeNode {
     return this.left;
   }
 
+  setValue(value: number): void {
+    this.value = value;
+  }
+
   setRight(node: TreeNode | null): void {
     this.right = node;
   }
