@@ -1,4 +1,4 @@
-import { TreeNode } from "../node/TreeNode";
+import { TreeNode } from "../../node/TreeNode";
 
 let index: number = -1;
 
@@ -83,8 +83,8 @@ function levelOrderTraversal(root: TreeNode | null): void {
 
 export {
   buildTree,
-  preOrderTraversal,
   inOrderTraversal,
-  postOrderTraversal,
   levelOrderTraversal,
+  postOrderTraversal,
+  preOrderTraversal,
 };
