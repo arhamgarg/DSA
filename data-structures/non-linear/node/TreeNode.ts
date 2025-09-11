@@ -6,7 +6,7 @@ class TreeNode {
   constructor(
     value: number,
     right: TreeNode | null = null,
-    left: TreeNode | null = null,
+    left: TreeNode | null = null
   ) {
     this.value = value;
     this.right = right;
@@ -23,6 +23,10 @@ class TreeNode {
 
   getLeft(): TreeNode | null {
     return this.left;
+  }
+
+  setValue(value: number): void {
+    this.value = value;
   }
 
   setRight(node: TreeNode | null): void {
