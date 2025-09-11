@@ -1,23 +1,32 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, value):
         self.data = value
         self.left = None
         self.right = None
 
+
 def pre_order(root):
-    stack=[root]
+    if not root:
+        return
+
+    stack = [root]
     while stack:
-        root=stack.pop()
-        if root.right:
-            stack.append(root.right)
-        if root.left:
-            stack.append(root.left)
-        print(root.data, end=" ")
+        node = stack.pop()
+        print(node.data, end=" ")
+
+        if node.right:
+            stack.append(node.right)
+        if node.left:
+            stack.append(node.left)
+
 
 def in_order(root):
     stack = []
     current = root
-    
+
     while stack or current:
         if current:
             stack.append(current)
@@ -26,6 +35,7 @@ def in_order(root):
             current = stack.pop()
             print(current.data, end=" ")
             current = current.right
+
 
 def post_order(root):
     stack = []
@@ -44,17 +54,18 @@ def post_order(root):
                 print(peek.data, end=" ")
                 last_visited = stack.pop()
 
+
 def level_order(root):
     if not root:
         return
-    
-    queue = [root]  
-    
+
+    queue = deque([root])
+
     while queue:
-        current = queue.pop(0)   
-        print(current.data, end=" ")
-        
-        if current.left:
-            queue.append(current.left)
-        if current.right:
-            queue.append(current.right)
+        node = queue.popleft()
+        print(node.data, end=" ")
+
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
