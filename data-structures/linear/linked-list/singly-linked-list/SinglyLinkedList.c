@@ -223,14 +223,6 @@ struct Node *reverse(struct Node *head) {
   return head;
 }
 
-int front(struct Node *head) {
-  if (head == NULL) {
-    printf("List empty\n");
-    return -1;
-  }
-  return head->data;
-}
-
 int last(struct Node *head) {
   if (head == NULL) {
     printf("List empty\n");
