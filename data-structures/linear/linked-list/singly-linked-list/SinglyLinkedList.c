@@ -254,7 +254,7 @@ struct Node *copy(struct Node *head, struct Node *headCopy) {
   return headCopy;
 }
 
-void findMiddle(struct Node *head) {
+struct Node *findMiddle(struct Node *head) {
   if (head == NULL) {
     printf("List is empty\n");
     return;
@@ -265,5 +265,5 @@ void findMiddle(struct Node *head) {
     slow = slow->next;
     fast = fast->next->next;
   }
-  printf("The middle value is: %d\n", slow->data);
+  return slow;
 }
