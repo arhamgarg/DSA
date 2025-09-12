@@ -11,20 +11,20 @@ class Stack {
     this.size = 0;
   }
 
-  getHead(): Node | null {
+  public getHead(): Node | null {
     return this.head;
   }
 
-  getSize(): number {
+  public getSize(): number {
     return this.size;
   }
 
-  push(node: Node): void {
+  public push(node: Node): void {
     node.setNextNode(this.head);
     this.head = node;
   }
 
-  pop(): Node {
+  public pop(): Node {
     if (this.head == null) {
       throw Error("Stack UnderFlow Exception");
     }
@@ -34,7 +34,7 @@ class Stack {
     return poppedNode;
   }
 
-  top(): Node {
+  public top(): Node {
     if (this.head == null) {
       throw Error("Stack UnderFlow Exception");
     }
@@ -42,7 +42,7 @@ class Stack {
     return this.head;
   }
 
-  display(): void {
+  public display(): void {
     let n: Node | null = this.head;
     for (; n?.getNextNode() != null; n = n.getNextNode())
       //@ts-ignore
