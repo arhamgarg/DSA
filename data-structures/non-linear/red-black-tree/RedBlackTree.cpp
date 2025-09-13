@@ -157,11 +157,11 @@ public:
     fixInsert(newNode);
   }
 
-  void inorder(Node *node) {
+  void inorderTraversal(Node *node) {
     if (node != NIL) {
-      inorder(node->left);
+      inorderTraversal(node->left);
       cout << node->data << " ";
-      inorder(node->right);
+      inorderTraversal(node->right);
     }
   }
 
