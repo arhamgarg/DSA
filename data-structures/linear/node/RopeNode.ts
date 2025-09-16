@@ -6,7 +6,7 @@ class RopeNode {
   constructor(
     value: number,
     nextNode: RopeNode | null = null,
-    previousNode: RopeNode | null = null,
+    previousNode: RopeNode | null = null
   ) {
     this.value = value;
     this.nextNode = nextNode;
