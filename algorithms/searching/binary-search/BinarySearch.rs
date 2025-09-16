@@ -1,4 +1,4 @@
-fn binary_search(arr: &[i32], target: i32) -> i32 {
+fn binarySearch(arr: &[i32], target: i32) -> i32 {
     if arr.len() == 0 {
         return -1;
     }
