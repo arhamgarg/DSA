@@ -1,4 +1,4 @@
-import { Node } from "../../node/ts/Node";
+import { Node } from "../node/Node";
 //@ts-ignore
 import { process } from "node:process";
 
