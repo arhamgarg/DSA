@@ -9,18 +9,18 @@ class Queue {
     this.front = front;
   }
 
-  getFront(): Node | null {
+  public getFront(): Node | null {
     return this.front;
   }
 
-  enqueue(node: Node): void {
+  public enqueue(node: Node): void {
     let n: Node | null = this.front;
     for (; n?.getNextNode() != null; n = n.getNextNode());
     node.setNextNode(null);
     n?.setNextNode(node);
   }
 
-  dequeue(): Node | null {
+  public dequeue(): Node | null {
     if (this.front == null) {
       return null;
     }
@@ -30,17 +30,17 @@ class Queue {
     return n;
   }
 
-  size(): number {
+  public size(): number {
     let i: number = 0;
     for (let n: Node | null = this.front; n != null; n = n.getNextNode(), i++);
     return i;
   }
 
-  isEmpty(): boolean {
+  public isEmpty(): boolean {
     return this.front == null;
   }
 
-  display(): void {
+  public display(): void {
     let n: Node | null = this.front;
     for (; n?.getNextNode() != null; n = n.getNextNode())
       //@ts-ignore
