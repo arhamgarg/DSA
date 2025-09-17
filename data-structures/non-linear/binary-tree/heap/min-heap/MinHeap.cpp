@@ -43,7 +43,7 @@ public:
 
   int getMin() {
     if (empty()) {
-      cout << "Heap is empty!" << endl;
+      cout << "Heap is empty!\n";
       return -1;
     }
 
@@ -52,7 +52,7 @@ public:
 
   int extractMin() {
     if (empty()) {
-      cout << "Heap is empty!" << endl;
+      cout << "Heap is empty!\n";
       return -1;
     }
 
@@ -81,7 +81,7 @@ public:
       cout << x << " ";
     }
 
-    cout << endl;
+    cout << "\n";
   }
 
   bool empty() { return heap.empty(); }
