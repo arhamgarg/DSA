@@ -31,6 +31,5 @@ class Graph {
 
   public addNewEdge(source: GraphNode, destination: GraphNode): void {
     source.addNewNeighouringNode(destination);
-    destination.addNewNeighouringNode(source);
   }
 }
