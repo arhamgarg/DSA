@@ -1,14 +1,14 @@
-class GraphNode {
-  private neighbouringNodes: Array<GraphNode>;
+class GraphVertex {
+  private neighbouringVertices: Array<GraphVertex>;
   private value: number;
 
   constructor(value: number) {
-    this.neighbouringNodes = new Array();
+    this.neighbouringVertices = new Array();
     this.value = value;
   }
 
-  public addNewNeighouringNode(node: GraphNode): void {
-    this.neighbouringNodes.push(node);
+  public addNewNeighouringVertex(Vertex: GraphVertex): void {
+    this.neighbouringVertices.push(Vertex);
   }
 
   public getValue(): number {
@@ -17,19 +17,19 @@ class GraphNode {
 }
 
 class Graph {
-  private nodes: Array<GraphNode>;
+  private Vertices: Array<GraphVertex>;
 
   constructor() {
-    this.nodes = new Array();
+    this.Vertices = new Array();
   }
 
-  public addNewNode(value: number): GraphNode {
-    const newGraphNode: GraphNode = new GraphNode(value);
-    this.nodes.push(newGraphNode);
-    return newGraphNode;
+  public addNewVertex(value: number): GraphVertex {
+    const newGraphVertex: GraphVertex = new GraphVertex(value);
+    this.Vertices.push(newGraphVertex);
+    return newGraphVertex;
   }
 
-  public addNewEdge(source: GraphNode, destination: GraphNode): void {
-    source.addNewNeighouringNode(destination);
+  public addNewEdge(source: GraphVertex, destination: GraphVertex): void {
+    source.addNewNeighouringVertex(destination);
   }
 }
