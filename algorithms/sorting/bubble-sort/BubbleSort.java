@@ -1,12 +1,14 @@
 public class BubbleSort {
   public static void bubbleSort(int[] nums) {
-    boolean swapped;
-    int last = nums.length;
+    if (nums == null || nums.length < 2)
+      return;
 
-    do {
+    boolean swapped = true;
+    int end = nums.length;
+
+    while (swapped) {
       swapped = false;
-
-      for (int i = 0; i < last - 1; i++) {
+      for (int i = 0; i < end - 1; i++) {
         if (nums[i] > nums[i + 1]) {
           int temp = nums[i];
           nums[i] = nums[i + 1];
@@ -14,6 +16,7 @@ public class BubbleSort {
           swapped = true;
         }
       }
-    } while (swapped);
+      end--;
+    }
   }
 }
