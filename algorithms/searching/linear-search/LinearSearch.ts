@@ -1,11 +1,11 @@
-function linearSearch(arr: number[], n: number, target: number): number {
-  for (let i: number = 0; i < n; i++) {
-    if (arr[i] == target) {
-      return i;
+class Searching {
+  public static linearSearch(arr: number[], n: number, target: number): number {
+    for (let i: number = 0; i < n; i++) {
+      if (arr[i] == target) {
+        return i;
+      }
     }
+
+    return -1;
   }
-
-  return -1;
 }
-
-export { linearSearch };
