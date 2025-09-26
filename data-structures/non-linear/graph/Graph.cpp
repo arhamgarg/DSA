@@ -42,4 +42,28 @@ public:
 
     cout << "\n";
   }
+
+  void dfsHelper(int u, vector<bool> &visited) {
+    cout << u << " ";
+    visited[u] = true;
+
+    for (int v : l[u]) {
+      if (!visited[v]) {
+        dfsHelper(v, visited);
+      }
+    }
+  }
+
+  void dfs() {
+    int src = 0;
+    vector<bool> visited(V, false);
+
+    for (int v = 0; v < V; v++) {
+      if (!visited[v]) {
+        dfsHelper(src, visited);
+      }
+    }
+
+    cout << "\n";
+  }
 };
