@@ -58,8 +58,8 @@ public:
     int src = 0;
     vector<bool> visited(V, false);
 
-    for (int v = 0; v < V; v++) {
-      if (!visited[v]) {
+    for (int i = 0; i < V; i++) {
+      if (!visited[i]) {
         dfsHelper(src, visited);
       }
     }
