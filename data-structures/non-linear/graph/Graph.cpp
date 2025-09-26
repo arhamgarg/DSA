@@ -6,17 +6,17 @@ using namespace std;
 
 class Graph {
   int V;
-  list<int> *l;
+  list<int> *adj;
 
 public:
   Graph(int V) {
     this->V = V;
-    l = new list<int>[V];
+    adj = new list<int>[V];
   }
 
   void addEdge(int u, int v) {
-    l[u].push_back(v);
-    l[v].push_back(u);
+    adj[u].push_back(v);
+    adj[v].push_back(u);
   }
 
   void bfs() {
@@ -32,7 +32,7 @@ public:
       q.pop();
       cout << u << " ";
 
-      for (int v : l[u]) {
+      for (int v : adj[u]) {
         if (!visited[v]) {
           visited[v] = true;
           q.push(v);
@@ -47,7 +47,7 @@ public:
     cout << u << " ";
     visited[u] = true;
 
-    for (int v : l[u]) {
+    for (int v : adj[u]) {
       if (!visited[v]) {
         dfsHelper(v, visited);
       }
