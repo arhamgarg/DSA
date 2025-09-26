@@ -55,12 +55,11 @@ public:
   }
 
   void dfs() {
-    int src = 0;
     vector<bool> visited(V, false);
 
     for (int i = 0; i < V; i++) {
       if (!visited[i]) {
-        dfsHelper(src, visited);
+        dfsHelper(i, visited);
       }
     }
 
