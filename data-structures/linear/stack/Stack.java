@@ -37,7 +37,7 @@ public class Stack {
   public int top() {
     if (head == null) {
       System.out.println("Stack is empty");
-      return;
+      return -1;
     }
 
     return head.data;
