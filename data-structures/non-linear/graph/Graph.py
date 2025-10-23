@@ -1,13 +1,17 @@
-# ---------- MinHeap for internal use ----------
 class MinHeap:
     def __init__(self, arr=None):
         self.heap = []
         if arr:
             self.build_heap(arr)
 
-    def _left(self, i): return 2 * i + 1
-    def _right(self, i): return 2 * i + 2
-    def _parent(self, i): return (i - 1) // 2
+    def _left(self, i):
+        return 2 * i + 1
+
+    def _right(self, i):
+        return 2 * i + 2
+
+    def _parent(self, i):
+        return (i - 1) // 2
 
     def _heapify(self, i):
         n = len(self.heap)
@@ -23,7 +27,7 @@ class MinHeap:
 
     def build_heap(self, arr):
         self.heap = arr[:]
-        for i in range(len(self.heap)//2 - 1, -1, -1):
+        for i in range(len(self.heap) // 2 - 1, -1, -1):
             self._heapify(i)
 
     def extract_min(self):
@@ -38,22 +42,26 @@ class MinHeap:
 
     def insert(self, key):
         self.heap.append(key)
-        i = len(self.heap)-1
+        i = len(self.heap) - 1
         while i > 0 and self.heap[self._parent(i)] > self.heap[i]:
-            self.heap[i], self.heap[self._parent(i)] = self.heap[self._parent(i)], self.heap[i]
+            self.heap[i], self.heap[self._parent(i)] = (
+                self.heap[self._parent(i)],
+                self.heap[i],
+            )
             i = self._parent(i)
 
     def size(self):
         return len(self.heap)
 
-# ---------- Graph Using Adjacency List ----------
-class Graph_AList:
+
+class Graph:
     class Node:
         def __init__(self, e):
-            self.Alist = []  # neighbors (neighbor_value, weight)
+            self.AList = []  # neighbors (neighbor_value, weight)
             self.value = e
-        def addtoAlist(self, neighbor, w):
-            self.Alist.append((neighbor, w))
+
+        def addtoAList(self, neighbor, w):
+            self.AList.append((neighbor, w))
 
     class Edge:
         def __init__(self, v1, v2, w):
@@ -75,19 +83,17 @@ class Graph_AList:
         if v1 not in self.nodes or v2 not in self.nodes:
             print("Vertex not found")
             return
-        # Check duplicate edge
-        for n, weight in self.nodes[v1].Alist:
+        for n, weight in self.nodes[v1].AList:
             if n == v2:
                 print(f"Edge {v1}-{v2} already exists")
                 return
-        self.nodes[v1].addtoAlist(v2, w)
-        self.nodes[v2].addtoAlist(v1, w)
+        self.nodes[v1].addtoAList(v2, w)
+        self.nodes[v2].addtoAList(v1, w)
         self.edges.append((w, v1, v2))
 
     def getNode(self, e):
         return self.nodes.get(e, None)
 
-    # ---------- DFS ----------
     def DFS(self, v, visited=None):
         if v is None:
             return
@@ -95,11 +101,10 @@ class Graph_AList:
             visited = set()
         visited.add(v.value)
         print(v.value, end=" ")
-        for neighbor, _ in v.Alist:
+        for neighbor, _ in v.AList:
             if neighbor not in visited:
                 self.DFS(self.nodes[neighbor], visited)
 
-    # ---------- BFS ----------
     def BFS(self, v):
         if v is None:
             return
@@ -109,20 +114,19 @@ class Graph_AList:
         while q:
             node = q.pop(0)
             print(node.value, end=" ")
-            for neighbor, _ in node.Alist:
+            for neighbor, _ in node.AList:
                 if neighbor not in visited:
                     visited.add(neighbor)
                     q.append(self.nodes[neighbor])
 
-    # ---------- Prim's ----------
-    def MST_prims(self, start):
+    def MST_Prim(self, start):
         if start not in self.nodes:
             print("Invalid start vertex")
             return
         visited = set([start])
         heap = MinHeap()
         mst, total_weight = [], 0
-        for neighbor, w in self.nodes[start].Alist:
+        for neighbor, w in self.nodes[start].AList:
             heap.insert((w, start, neighbor))
         while heap.size() > 0 and len(visited) < len(self.vertices):
             w, u, v = heap.extract_min()
@@ -130,7 +134,7 @@ class Graph_AList:
                 visited.add(v)
                 mst.append((u, v, w))
                 total_weight += w
-                for n, wt in self.nodes[v].Alist:
+                for n, wt in self.nodes[v].AList:
                     if n not in visited:
                         heap.insert((wt, v, n))
         print("\nMST (Prim's):")
@@ -138,8 +142,7 @@ class Graph_AList:
             print(f"{u} -- {v}  weight = {w}")
         print("Total Weight:", total_weight, "\n")
 
-    # ---------- Kruskal's ----------
-    def MST_Krushkal(self):
+    def MST_Kruskal(self):
         parent = {v: v for v in self.vertices}
         rank = {v: 0 for v in self.vertices}
         mst = []
@@ -175,7 +178,6 @@ class Graph_AList:
             print(f"{u} -- {v}  weight = {w}")
         print("Total Weight:", total_weight, "\n")
 
-    # ---------- Boruvka's ----------
     def MST_Boruvka(self):
         parent = {v: v for v in self.vertices}
         rank = {v: 0 for v in self.vertices}
@@ -220,12 +222,11 @@ class Graph_AList:
             print(f"{u} -- {v}  weight = {w}")
         print("Total Weight:", total_weight, "\n")
 
-    # ---------- Dijkstra ----------
     def ShortestPath(self, start):
         if start not in self.nodes:
             print("Invalid start vertex")
             return
-        distances = {v: float('inf') for v in self.vertices}
+        distances = {v: float("inf") for v in self.vertices}
         parent = {v: None for v in self.vertices}
         distances[start] = 0
         visited = set()
@@ -235,7 +236,7 @@ class Graph_AList:
             if u in visited:
                 continue
             visited.add(u)
-            for neighbor, w in self.nodes[u].Alist:
+            for neighbor, w in self.nodes[u].AList:
                 new_dist = dist + w
                 if new_dist < distances[neighbor]:
                     distances[neighbor] = new_dist
@@ -243,7 +244,7 @@ class Graph_AList:
                     heap.insert((new_dist, neighbor))
         print(f"\nShortest paths from {start}:")
         for v in self.vertices:
-            if distances[v] == float('inf'):
+            if distances[v] == float("inf"):
                 print(f"{start} → {v}: No path")
             else:
                 path = []
@@ -251,18 +252,19 @@ class Graph_AList:
                 while node is not None:
                     path.insert(0, node)
                     node = parent[node]
-                print(f"{start} → {v}: Distance = {distances[v]}, Path = {' -> '.join(path)}")
+                print(
+                    f"{start} → {v}: Distance = {distances[v]}, Path = {' -> '.join(path)}"
+                )
 
     def printGraph(self):
         print("\nGraph Adjacency List:")
         for key, node in self.nodes.items():
-            print(f"{key}: {node.Alist}")
+            print(f"{key}: {node.AList}")
         print("")
 
 
-# ---------- Main ----------
 def main():
-    graph = Graph_AList()
+    graph = Graph()
     inputs = int(input())
     while inputs > 0:
         command = input()
@@ -289,5 +291,5 @@ def main():
         inputs -= 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
