@@ -1,24 +1,12 @@
-#include <algorithm>
+#include <iostream>
 #include <list>
+#include <stack>
 #include <vector>
 using namespace std;
 
 class Graph {
   int V;
   list<int> *adj;
-  vector<int> ans;
-
-  void dfs(int u, vector<bool> &visited) {
-    visited[u] = true;
-
-    for (int v : adj[u]) {
-      if (!visited[v]) {
-        dfs(v, visited);
-      }
-    }
-
-    ans.push_back(u);
-  }
 
 public:
   Graph(int V) {
@@ -28,17 +16,33 @@ public:
 
   void addEdge(int u, int v) { adj[u].push_back(v); }
 
-  vector<int> topologicalSort() {
-    vector<bool> visited(V, false);
+  void dfs(int u, vector<bool> &visited, stack<int> &s) {
+    visited[u] = true;
 
-    for (int i = 0; i < V; i++) {
-      if (!visited[i]) {
-        dfs(i, visited);
+    for (int v : adj[u]) {
+      if (!visited[v]) {
+        dfs(v, visited, s);
       }
     }
 
-    reverse(ans.begin(), ans.end());
+    s.push(u);
+  }
 
-    return ans;
+  void topologicalSort() {
+    vector<bool> visited(V, false);
+    stack<int> s;
+
+    for (int i = 0; i < V; i++) {
+      if (!visited[i]) {
+        dfs(i, visited, s);
+      }
+    }
+
+    while (!s.empty()) {
+      cout << s.top() << " ";
+      s.pop();
+    }
+
+    cout << "\n";
   }
 };
