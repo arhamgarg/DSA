@@ -281,9 +281,9 @@ def main():
             graph.BFS(graph.getNode(operation[1]))
             print("")
         elif operation[0] == "PRIM":
-            graph.MST_prims(operation[1])
+            graph.MST_Prim(operation[1])
         elif operation[0] == "KRUSKAL":
-            graph.MST_Krushkal()
+            graph.MST_Kruskal()
         elif operation[0] == "BORUVKA":
             graph.MST_Boruvka()
         elif operation[0] == "DIJK":
