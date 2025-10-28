@@ -1,58 +1,4 @@
-class MinHeap:
-    def __init__(self, arr=None):
-        self.heap = []
-        if arr:
-            self.build_heap(arr)
-
-    def _left(self, i):
-        return 2 * i + 1
-
-    def _right(self, i):
-        return 2 * i + 2
-
-    def _parent(self, i):
-        return (i - 1) // 2
-
-    def _heapify(self, i):
-        n = len(self.heap)
-        smallest = i
-        l, r = self._left(i), self._right(i)
-        if l < n and self.heap[l] < self.heap[smallest]:
-            smallest = l
-        if r < n and self.heap[r] < self.heap[smallest]:
-            smallest = r
-        if smallest != i:
-            self.heap[i], self.heap[smallest] = self.heap[smallest], self.heap[i]
-            self._heapify(smallest)
-
-    def build_heap(self, arr):
-        self.heap = arr[:]
-        for i in range(len(self.heap) // 2 - 1, -1, -1):
-            self._heapify(i)
-
-    def extract_min(self):
-        if not self.heap:
-            return None
-        if len(self.heap) == 1:
-            return self.heap.pop()
-        root = self.heap[0]
-        self.heap[0] = self.heap.pop()
-        self._heapify(0)
-        return root
-
-    def insert(self, key):
-        self.heap.append(key)
-        i = len(self.heap) - 1
-        while i > 0 and self.heap[self._parent(i)] > self.heap[i]:
-            self.heap[i], self.heap[self._parent(i)] = (
-                self.heap[self._parent(i)],
-                self.heap[i],
-            )
-            i = self._parent(i)
-
-    def size(self):
-        return len(self.heap)
-
+# Uses MinHeap ADT from data-structures/non-linear/binary-tree/heap/min-heap/MinHeap.py
 
 class Graph:
     class Node:
@@ -89,7 +35,10 @@ class Graph:
                 return
         self.nodes[v1].addtoAList(v2, w)
         self.nodes[v2].addtoAList(v1, w)
-        self.edges.append((w, v1, v2))
+
+        edge = self.Edge(v1, v2, w)
+        self.edges.append(edge)
+
 
     def getNode(self, e):
         return self.nodes.get(e, None)
@@ -143,9 +92,8 @@ class Graph:
         print("Total Weight:", total_weight, "\n")
 
     def MST_Kruskal(self):
-        parent = {v: v for v in self.vertices}
-        rank = {v: 0 for v in self.vertices}
-        mst = []
+        parent = {}
+        rank = {}
 
         def find(v):
             if parent[v] != v:
@@ -153,74 +101,95 @@ class Graph:
             return parent[v]
 
         def union(u, v):
-            ru, rv = find(u), find(v)
-            if ru != rv:
-                if rank[ru] < rank[rv]:
-                    parent[ru] = rv
-                elif rank[ru] > rank[rv]:
-                    parent[rv] = ru
+            root1 = find(u)
+            root2 = find(v)
+            if root1 != root2:
+                if rank[root1] < rank[root2]:
+                    parent[root1] = root2
+                elif rank[root1] > rank[root2]:
+                    parent[root2] = root1
                 else:
-                    parent[rv] = ru
-                    rank[ru] += 1
-                return True
-            return False
+                    parent[root2] = root1
+                    rank[root1] += 1
 
-        heap = MinHeap(self.edges)
+        for node in self.nodes:
+            parent[node] = node
+            rank[node] = 0
+
+        # Build heap from Edge weights
+        heap = MinHeap([(edge.weight, edge.v1, edge.v2) for edge in self.edges])
         sorted_edges = [heap.extract_min() for _ in range(len(self.edges))]
+
+        MST = []
+        total_weight = 0
+
         for w, u, v in sorted_edges:
-            if union(u, v):
-                mst.append((u, v, w))
-                if len(mst) == len(self.vertices) - 1:
-                    break
-        total_weight = sum(w for _, _, w in mst)
-        print("\nMST (Kruskal's):")
-        for u, v, w in mst:
-            print(f"{u} -- {v}  weight = {w}")
-        print("Total Weight:", total_weight, "\n")
+            if find(u) != find(v):
+                union(u, v)
+                MST.append((u, v, w))
+                total_weight += w
+
+        print("\nKruskal's MST:")
+        for u, v, w in MST:
+            print(f"{u} - {v} : {w}")
+        print("Total Weight:", total_weight)
+
 
     def MST_Boruvka(self):
-        parent = {v: v for v in self.vertices}
-        rank = {v: 0 for v in self.vertices}
-        mst, total_weight = [], 0
-        num_components = len(self.vertices)
+        parent = {}
+        rank = {}
 
         def find(v):
-            while parent[v] != v:
-                parent[v] = parent[parent[v]]
-                v = parent[v]
-            return v
+            if parent[v] != v:
+                parent[v] = find(parent[v])
+            return parent[v]
 
         def union(u, v):
-            ru, rv = find(u), find(v)
-            if ru != rv:
-                if rank[ru] < rank[rv]:
-                    parent[ru] = rv
-                elif rank[ru] > rank[rv]:
-                    parent[rv] = ru
+            root1 = find(u)
+            root2 = find(v)
+            if root1 != root2:
+                if rank[root1] < rank[root2]:
+                    parent[root1] = root2
+                elif rank[root1] > rank[root2]:
+                    parent[root2] = root1
                 else:
-                    parent[rv] = ru
-                    rank[ru] += 1
-                return True
-            return False
+                    parent[root2] = root1
+                    rank[root1] += 1
 
-        while num_components > 1:
+        for node in self.nodes:
+            parent[node] = node
+            rank[node] = 0
+
+        numTrees = len(self.nodes)
+        MSTweight = 0
+        MSTedges = []
+
+        while numTrees > 1:
             cheapest = {}
-            for w, u, v in self.edges:
-                set_u, set_v = find(u), find(v)
-                if set_u != set_v:
-                    if set_u not in cheapest or cheapest[set_u][0] > w:
-                        cheapest[set_u] = (w, u, v)
-                    if set_v not in cheapest or cheapest[set_v][0] > w:
-                        cheapest[set_v] = (w, u, v)
-            for w, u, v in cheapest.values():
-                if union(u, v):
-                    mst.append((u, v, w))
-                    total_weight += w
-                    num_components -= 1
-        print("\nMST (Boruvka's):")
-        for u, v, w in mst:
-            print(f"{u} -- {v}  weight = {w}")
-        print("Total Weight:", total_weight, "\n")
+
+            for edge in self.edges:
+                w, u, v = edge.weight, edge.v1, edge.v2
+                set1 = find(u)
+                set2 = find(v)
+                if set1 != set2:
+                    if set1 not in cheapest or cheapest[set1].weight > w:
+                        cheapest[set1] = edge
+                    if set2 not in cheapest or cheapest[set2].weight > w:
+                        cheapest[set2] = edge
+
+            for edge in cheapest.values():
+                w, u, v = edge.weight, edge.v1, edge.v2
+                set1 = find(u)
+                set2 = find(v)
+                if set1 != set2:
+                    union(u, v)
+                    print(f"{u} - {v} : {w}")
+                    MSTweight += w
+                    MSTedges.append((u, v, w))
+                    numTrees -= 1
+
+        print("Total Weight:", MSTweight)
+
 
     def ShortestPath(self, start):
         if start not in self.nodes:
