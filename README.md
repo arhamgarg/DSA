@@ -33,6 +33,7 @@ We’re excited to have you contribute! Whether it’s adding a new data structu
 | [Lohit G](https://github.com/codedbyloki)                  | Java (.java)                          |
 | [Narravula Mukesh](https://github.com/mukesh1352)          | Java (.java), Rust (.rs), Python (.py)|
 | [Bhargava Sri Sai](https://github.com/Bhargi777)           | Java (.java)                          |
+| [Ananya Bottu](https://github.com/AnanyaBottu)             | Java (.java)                          |
 
 ## **License**
 
