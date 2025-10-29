@@ -1,5 +1,6 @@
 # Uses MinHeap ADT from data-structures/non-linear/binary-tree/heap/min-heap/MinHeap.py
 
+
 class Graph:
     class Node:
         def __init__(self, e):
@@ -38,7 +39,6 @@ class Graph:
 
         edge = self.Edge(v1, v2, w)
         self.edges.append(edge)
-
 
     def getNode(self, e):
         return self.nodes.get(e, None)
@@ -116,7 +116,6 @@ class Graph:
             parent[node] = node
             rank[node] = 0
 
-        # Build heap from Edge weights
         heap = MinHeap([(edge.weight, edge.v1, edge.v2) for edge in self.edges])
         sorted_edges = [heap.extract_min() for _ in range(len(self.edges))]
 
@@ -133,63 +132,6 @@ class Graph:
         for u, v, w in MST:
             print(f"{u} - {v} : {w}")
         print("Total Weight:", total_weight)
-
-
-    def MST_Boruvka(self):
-        parent = {}
-        rank = {}
-
-        def find(v):
-            if parent[v] != v:
-                parent[v] = find(parent[v])
-            return parent[v]
-
-        def union(u, v):
-            root1 = find(u)
-            root2 = find(v)
-            if root1 != root2:
-                if rank[root1] < rank[root2]:
-                    parent[root1] = root2
-                elif rank[root1] > rank[root2]:
-                    parent[root2] = root1
-                else:
-                    parent[root2] = root1
-                    rank[root1] += 1
-
-        for node in self.nodes:
-            parent[node] = node
-            rank[node] = 0
-
-        numTrees = len(self.nodes)
-        MSTweight = 0
-        MSTedges = []
-
-        while numTrees > 1:
-            cheapest = {}
-
-            for edge in self.edges:
-                w, u, v = edge.weight, edge.v1, edge.v2
-                set1 = find(u)
-                set2 = find(v)
-                if set1 != set2:
-                    if set1 not in cheapest or cheapest[set1].weight > w:
-                        cheapest[set1] = edge
-                    if set2 not in cheapest or cheapest[set2].weight > w:
-                        cheapest[set2] = edge
-
-            for edge in cheapest.values():
-                w, u, v = edge.weight, edge.v1, edge.v2
-                set1 = find(u)
-                set2 = find(v)
-                if set1 != set2:
-                    union(u, v)
-                    print(f"{u} - {v} : {w}")
-                    MSTweight += w
-                    MSTedges.append((u, v, w))
-                    numTrees -= 1
-
-        print("Total Weight:", MSTweight)
-
 
     def ShortestPath(self, start):
         if start not in self.nodes:
@@ -253,9 +195,7 @@ def main():
             graph.MST_Prim(operation[1])
         elif operation[0] == "KRUSKAL":
             graph.MST_Kruskal()
-        elif operation[0] == "BORUVKA":
-            graph.MST_Boruvka()
-        elif operation[0] == "DIJK":
+        elif operation[0] == "DIJKSTRA":
             graph.ShortestPath(operation[1])
         inputs -= 1
 
