@@ -49,10 +49,48 @@ class Helper {
     }
 }
 
-public class GraphAList {
+class DisjointSet {
+    Map<String, String> parent = new HashMap<>();
+    Map<String, Integer> size = new HashMap<>();
+
+    DisjointSet(Set<String> vertices) {
+        for (String v : vertices) {
+            parent.put(v, v);
+            size.put(v, 1);
+        }
+    }
+
+    String findParent(String node) {
+        if (parent.get(node).equals(node))
+            return node;
+        String ultimateParent = findParent(parent.get(node));
+        parent.put(node, ultimateParent);
+        return ultimateParent;
+    }
+
+    void unionBySize(String u, String v) {
+        String ultU = findParent(u);
+        String ultV = findParent(v);
+        if (ultU.equals(ultV))
+            return;
+
+        int sizeU = size.get(ultU);
+        int sizeV = size.get(ultV);
+
+        if (sizeU < sizeV) {
+            parent.put(ultU, ultV);
+            size.put(ultV, sizeU + sizeV);
+        } else {
+            parent.put(ultV, ultU);
+            size.put(ultU, sizeU + sizeV);
+        }
+    }
+}
+
+public class Graph {
     Map<String, Node> nodes;
 
-    public GraphAList() {
+    public Graph() {
         this.nodes = new HashMap<>();
     }
 
@@ -65,12 +103,16 @@ public class GraphAList {
     public void insertEdge(String s1, String s2, int wt) {
         Node n1 = nodes.get(s1);
         Node n2 = nodes.get(s2);
-        if (n1 != null && n2 != null) {
-            Edge e1 = new Edge(n1, n2, wt);
-            Edge e2 = new Edge(n2, n1, wt);
-            n1.addEdge(e1);
-            n2.addEdge(e2);
+        if (n1 == null || n2 == null) {
+            System.out.println("Error: Node not found for edge " + s1 + " - " + s2);
+            return;
         }
+        for (Edge e : n1.adjList) {
+            if (e.n2 == n2)
+                return;
+        }
+        n1.addEdge(new Edge(n1, n2, wt));
+        n2.addEdge(new Edge(n2, n1, wt));
     }
 
     public Node getNode(String s) {
@@ -125,6 +167,7 @@ public class GraphAList {
 
     public Map<String, Integer> Dijkstra(Node start) {
         Map<String, Integer> dist = new HashMap<>();
+        Set<String> visited = new HashSet<>();
         for (String node : nodes.keySet()) {
             dist.put(node, Integer.MAX_VALUE);
         }
@@ -134,6 +177,10 @@ public class GraphAList {
         while (!pq.isEmpty()) {
             NodeDist d = pq.poll();
             String s = d.node;
+            if (visited.contains(s)) {
+                continue;
+            }
+            visited.add(s);
             int distance = d.distance;
 
             for (Edge e : nodes.get(s).adjList) {
@@ -149,7 +196,7 @@ public class GraphAList {
         return dist;
     }
 
-    int Prims(Node start) {
+    public int Prims(Node start) {
         PriorityQueue<Helper> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.wt));
         HashSet<Node> visited = new HashSet<>();
 
@@ -173,7 +220,8 @@ public class GraphAList {
                 for (Edge e : node.adjList) {
                     Node ver = e.n2;
                     int wt = e.wt;
-                    pq.add(new Helper(wt, ver, node));
+                    if (!visited.contains(e.n2))
+                        pq.add(new Helper(wt, ver, node));
                 }
             }
 
@@ -185,9 +233,49 @@ public class GraphAList {
         return sum;
     }
 
+    public int Kruskal() {
+        List<Edge> edges = new ArrayList<>();
+        Set<String> seen = new HashSet<>();
+
+        for (Node n : nodes.values()) {
+            for (Edge e : n.adjList) {
+                String key1 = n.value + "-" + e.n2.value;
+                String key2 = e.n2.value + "-" + n.value;
+                if (!seen.contains(key1) && !seen.contains(key2)) {
+                    edges.add(e);
+                    seen.add(key1);
+                }
+            }
+        }
+
+        edges.sort(Comparator.comparingInt(a -> a.wt));
+
+        DisjointSet ds = new DisjointSet(nodes.keySet());
+        int sum = 0;
+        ArrayList<String[]> mstEdges = new ArrayList<>();
+
+        for (Edge e : edges) {
+            String u = e.n1.value;
+            String v = e.n2.value;
+            int wt = e.wt;
+
+            if (!ds.findParent(u).equals(ds.findParent(v))) {
+                sum += wt;
+                mstEdges.add(new String[] { u, v });
+                ds.unionBySize(u, v);
+            }
+        }
+
+        System.out.println("Edges in MST:");
+        for (String[] edge : mstEdges)
+            System.out.println(edge[0] + " - " + edge[1]);
+
+        return sum;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        GraphAList graph = new GraphAList();
+        Graph graph = new Graph();
 
         int inputs = Integer.parseInt(sc.nextLine());
 
@@ -222,6 +310,10 @@ public class GraphAList {
 
                 case "DIJK":
                     System.out.println(graph.Dijkstra(graph.getNode(op[1])));
+                    break;
+
+                case "KRUSKAL":
+                    System.out.println("Total MST Weight: " + graph.Kruskal());
                     break;
 
                 default:
