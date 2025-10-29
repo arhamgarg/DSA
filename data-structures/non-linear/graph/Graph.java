@@ -195,7 +195,7 @@ public class Graph {
     return dist;
   }
 
-  public int Prims(Node start) {
+  public int Prim(Node start) {
     PriorityQueue<Helper> pq =
         new PriorityQueue<>(Comparator.comparingInt(a -> a.wt));
     HashSet<Node> visited = new HashSet<>();
@@ -300,7 +300,7 @@ public class Graph {
 
         case "PRIM":
           System.out.println(
-              "Total MST Weight: " + graph.Prims(graph.getNode(op[1])));
+              "Total MST Weight: " + graph.Prim(graph.getNode(op[1])));
           break;
 
         case "PG":
