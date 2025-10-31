@@ -1,8 +1,5 @@
-#include <vector>
-using namespace std;
-
-#include "../heap/max-heap/MaxHeap.cpp"
-#include "../heap/min-heap/MinHeap.cpp"
+#include "../binary-tree/heap/max-heap/MaxHeap.cpp"
+#include "../binary-tree/heap/min-heap/MinHeap.cpp"
 
 class PriorityQueue {
   bool isMinQueue;
