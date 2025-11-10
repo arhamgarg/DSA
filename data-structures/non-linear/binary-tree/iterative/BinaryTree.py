@@ -47,11 +47,11 @@ def post_order(root):
             stack.append(current)
             current = current.left
         else:
-            peek = stack[-1]
-            if peek.right and last_visited != peek.right:
-                current = peek.right
+            top = stack[-1]
+            if top.right and last_visited != top.right:
+                current = top.right
             else:
-                print(peek.data, end=" ")
+                print(top.data, end=" ")
                 last_visited = stack.pop()
 
 

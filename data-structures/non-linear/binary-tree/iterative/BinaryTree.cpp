@@ -69,13 +69,13 @@ void postorderTraversal(Node *root) {
       s.push(node);
       node = node->left;
     } else {
-      Node *peek = s.top();
+      Node *top = s.top();
 
-      if (peek->right && lastVisited != peek->right) {
-        node = peek->right;
+      if (top->right && lastVisited != top->right) {
+        node = top->right;
       } else {
-        cout << peek->data << " ";
-        lastVisited = peek;
+        cout << top->data << " ";
+        lastVisited = top;
         s.pop();
       }
     }
