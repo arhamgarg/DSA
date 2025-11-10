@@ -3,8 +3,8 @@ import { MinHeap } from "../binary-tree/heap/min-heap/MinHeap";
 
 class PriorityQueue {
 	private isMinQueue: boolean;
-	private minHeap: MinHeap = new MinHeap;
-	private maxHeap: MaxHeap = new MaxHeap;
+	private minHeap: MinHeap = new MinHeap();
+	private maxHeap: MaxHeap = new MaxHeap();
 
 	constructor(type: boolean = true) {
 		this.isMinQueue = type;
