@@ -89,11 +89,11 @@ Great code is readable and consistent. Here are some tips to keep in mind:
 | C                    | **clang-format**      | `clang-format -i *.c`         |
 | C++                  | **clang-format**      | `clang-format -i *.cpp`       |
 | Dart                 | **dart format**       | `dart format .`               |
-| Go                   | **gofmt**             | `gofmt -w .`                  |
+| Go                   | **gofmt**             | `gofmt -s -w .`               |
 | Java                 | **google-java-format**| `google-java-format -i *.java`|
 | Python               | **ruff**              | `ruff format .`               |
 | Rust                 | **rustfmt**           | `cargo fmt`                   |
-| TypeScript           | **Prettier**          | `prettier --write .`          |
+| TypeScript           | **biome**             | `biome check --write .`       |
 
 ## **Community Support**
 
