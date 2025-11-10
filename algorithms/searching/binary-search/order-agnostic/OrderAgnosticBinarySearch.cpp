@@ -2,9 +2,10 @@
 using namespace std;
 
 class OrderAgnosticBinarySearch {
- public:
+public:
   static int OrderAgnosticSearch(vector<int> &arr, int target) {
-    if (arr.empty()) return -1;
+    if (arr.empty())
+      return -1;
 
     int low = 0;
     int high = arr.size() - 1;
@@ -13,7 +14,8 @@ class OrderAgnosticBinarySearch {
     while (low <= high) {
       int mid = low + (high - low) / 2;
 
-      if (arr[mid] == target) return mid;
+      if (arr[mid] == target)
+        return mid;
 
       if (ascending) {
         if (target < arr[mid]) {
