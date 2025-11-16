@@ -3,9 +3,9 @@ using namespace std;
 
 class Searching {
 public:
-  static int linearSearch(vector<int> &vec, int target) {
-    for (int i = 0; i < vec.size(); i++) {
-      if (vec[i] == target) {
+  static int linearSearch(vector<int> &arr, int target) {
+    for (int i = 0; i < arr.size(); i++) {
+      if (arr[i] == target) {
         return i;
       }
     }

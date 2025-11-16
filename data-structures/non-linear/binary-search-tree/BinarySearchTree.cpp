@@ -28,10 +28,10 @@ Node *insert(Node *root, int value) {
   return root;
 }
 
-Node *buildBST(vector<int> &vec) {
+Node *buildBST(vector<int> &arr) {
   Node *root = nullptr;
 
-  for (int val : vec) {
+  for (int val : arr) {
     root = insert(root, val);
   }
 
