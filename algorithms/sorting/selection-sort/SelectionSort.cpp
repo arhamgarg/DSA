@@ -2,25 +2,25 @@
 using namespace std;
 
 class SelectionSort {
-  vector<int> vec;
+  vector<int> arr;
 
 public:
-  SelectionSort(vector<int> &vec) { this->vec = vec; }
+  SelectionSort(vector<int> &arr) { this->arr = arr; }
 
-  void sort(vector<int> &vec) {
-    int n = vec.size();
+  void sort(vector<int> &arr) {
+    int n = arr.size();
 
     for (int i = 0; i < n - 1; i++) {
       int minIndex = i;
 
       for (int j = i + 1; j < n; j++) {
-        if (vec[j] < vec[minIndex]) {
+        if (arr[j] < arr[minIndex]) {
           minIndex = j;
         }
       }
 
       if (minIndex != i) {
-        swap(vec[i], vec[minIndex]);
+        swap(arr[i], arr[minIndex]);
       }
     }
   }
