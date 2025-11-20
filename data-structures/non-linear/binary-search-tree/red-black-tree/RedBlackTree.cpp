@@ -116,8 +116,8 @@ public:
     root = NIL;
   }
 
-  void insert(int data) {
-    Node *newNode = new Node(data);
+  void insert(int value) {
+    Node *newNode = new Node(value);
 
     newNode->left = NIL;
     newNode->right = NIL;
@@ -157,23 +157,25 @@ public:
     fixInsert(newNode);
   }
 
-  void inorderTraversal(Node *node) {
-    if (node != NIL) {
-      inorderTraversal(node->left);
-      cout << node->data << " ";
-      inorderTraversal(node->right);
+  void inorderTraversal(Node *root) {
+    if (root == NIL) {
+      return;
     }
+
+    inorderTraversal(root->left);
+    cout << root->data << " ";
+    inorderTraversal(root->right);
   }
 
-  Node *search(Node *node, int data) {
-    if (node == NIL || data == node->data) {
-      return node;
+  Node *search(Node *root, int value) {
+    if (root == NIL || value == root->data) {
+      return root;
     }
 
-    if (data < node->data) {
-      return search(node->left, data);
+    if (value < root->data) {
+      return search(root->left, value);
     }
 
-    return search(node->right, data);
+    return search(root->right, value);
   }
 };
