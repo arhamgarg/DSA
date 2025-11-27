@@ -4,9 +4,6 @@ using namespace std;
 class OrderAgnosticBinarySearch {
 public:
   static int OrderAgnosticSearch(vector<int> &arr, int target) {
-    if (arr.empty())
-      return -1;
-
     int low = 0;
     int high = arr.size() - 1;
     bool ascending = arr[low] < arr[high];
@@ -14,8 +11,9 @@ public:
     while (low <= high) {
       int mid = low + (high - low) / 2;
 
-      if (arr[mid] == target)
+      if (arr[mid] == target) {
         return mid;
+      }
 
       if (ascending) {
         if (target < arr[mid]) {
@@ -31,6 +29,7 @@ public:
         }
       }
     }
+
     return -1;
   }
 };
