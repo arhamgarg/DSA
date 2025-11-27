@@ -87,7 +87,7 @@ public:
     unordered_set<string> visited;
 
     DFSUtil(start, visited);
-    cout << endl;
+    cout << "\n";
   }
 
   void BFS(string &start) {
@@ -111,7 +111,7 @@ public:
       }
     }
 
-    cout << endl;
+    cout << "\n";
   }
 
   void Prim(string &start) {
@@ -157,7 +157,7 @@ public:
     cout << "\nMST (Prim's):\n";
 
     for (auto &[w, u, v] : mst) {
-      cout << u << " -- " << v << "  weight = " << w << "\n";
+      cout << u << " -- " << v << " weight = " << w << "\n";
     }
 
     cout << "Total Weight: " << totalWeight << "\n\n";
@@ -194,7 +194,7 @@ public:
     cout << "\nMST (Kruskal's):\n";
 
     for (auto &[w, u, v] : mst) {
-      cout << u << " -- " << v << "  weight = " << w << "\n";
+      cout << u << " -- " << v << " weight = " << w << "\n";
     }
 
     cout << "Total Weight: " << totalWeight << "\n\n";
@@ -282,7 +282,7 @@ public:
       cout << "\n";
     }
 
-    cout << endl;
+    cout << "\n";
   }
 };
 
@@ -306,8 +306,9 @@ int main() {
         }
 
         temp.clear();
-      } else
+      } else {
         temp += c;
+      }
     }
 
     if (!temp.empty()) {
