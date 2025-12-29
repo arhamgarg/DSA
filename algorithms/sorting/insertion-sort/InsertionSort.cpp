@@ -7,7 +7,7 @@ class InsertionSort {
 public:
   InsertionSort(vector<int> &arr) { this->arr = arr; }
 
-  void sort(vector<int> &arr) {
+  void insertionSort(vector<int> &arr) {
     int n = arr.size();
 
     for (int i = 1; i < n; i++) {

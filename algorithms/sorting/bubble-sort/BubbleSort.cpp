@@ -7,7 +7,7 @@ class BubbleSort {
 public:
   BubbleSort(vector<int> &arr) { this->arr = arr; }
 
-  void sort(vector<int> &arr) {
+  void bubbleSort(vector<int> &arr) {
     int n = arr.size();
 
     for (int i = 0; i < n - 1; i++) {
