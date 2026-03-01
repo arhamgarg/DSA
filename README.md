@@ -40,6 +40,6 @@ This repository is licensed under the `GNU Affero General Public License v3.0 (A
 
 ## **Stay Connected**
 
--   💻 **Explore** the repository to learn and experiment.
--   🌟 **Star** the project to show your support.
--   🍴 **Fork** the repository to add your own contributions.
+- **Explore** the repository to learn and experiment.
+- **Star** the project to show your support.
+- **Fork** the repository to add your own contributions.
