@@ -1,5 +1,5 @@
-#include "../binary-tree/heap/max-heap/MaxHeap.cpp"
-#include "../binary-tree/heap/min-heap/MinHeap.cpp"
+#include "../trees/binary-tree/heap/max-heap/MaxHeap.cpp"
+#include "../trees/binary-tree/heap/min-heap/MinHeap.cpp"
 
 class PriorityQueue {
   bool isMinQueue;

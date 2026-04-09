@@ -1,5 +1,5 @@
-import { MaxHeap } from "../binary-tree/heap/max-heap/MaxHeap";
-import { MinHeap } from "../binary-tree/heap/min-heap/MinHeap";
+import { MaxHeap } from "../trees/binary-tree/heap/max-heap/MaxHeap";
+import { MinHeap } from "../trees/binary-tree/heap/min-heap/MinHeap";
 
 class PriorityQueue {
 	private isMinQueue: boolean;
