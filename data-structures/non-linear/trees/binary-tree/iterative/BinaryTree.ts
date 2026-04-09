@@ -1,4 +1,4 @@
-import type { TreeNode } from "../../node/TreeNode";
+import type { TreeNode } from "../../../node/TreeNode";
 
 function preOrderTraversal(root: TreeNode | null): void {
 	if (root == null) return;
