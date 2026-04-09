@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class MaxHeap {
+class Heap {
     ArrayList<Integer> heap;
 
-    public MaxHeap() {
+    public Heap() {
         heap = new ArrayList<>();
     }
 
@@ -20,30 +20,28 @@ public class MaxHeap {
     }
 
     void upHeap(int i) {
-        while (i > 0 && heap.get(i) > heap.get(parent(i))) {
-            int temp = heap.get(i);
-            heap.set(i, heap.get(parent(i)));
-            heap.set(parent(i), temp);
+        while (i > 0 && heap.get(i) < heap.get(parent(i))) {
+            swap(i, parent(i));
             i = parent(i);
         }
     }
 
     void downHeap(int i) {
-        int largest = i;
+        int smallest = i;
         int l = leftChild(i);
         int r = rightChild(i);
 
-        if (l < heap.size() && heap.get(l) > heap.get(largest)) {
-            largest = l;
+        if (l < heap.size() && heap.get(l) < heap.get(smallest)) {
+            smallest = l;
         }
-        if (r < heap.size() && heap.get(r) > heap.get(largest)) {
-            largest = r;
+
+        if (r < heap.size() && heap.get(r) < heap.get(smallest)) {
+            smallest = r;
         }
-        if (largest != i) {
-            int temp = heap.get(i);
-            heap.set(i, heap.get(largest));
-            heap.set(largest, temp);
-            downHeap(largest);
+
+        if (smallest != i) {
+            swap(i, smallest);
+            downHeap(smallest);
         }
     }
 
@@ -52,7 +50,7 @@ public class MaxHeap {
         upHeap(heap.size() - 1);
     }
 
-    int getMax() {
+    int getMin() {
         if (empty()) {
             System.out.println("Heap is empty!");
             return -1;
@@ -60,17 +58,18 @@ public class MaxHeap {
         return heap.get(0);
     }
 
-    int extractMax() {
+    int extractMin() {
         if (empty()) {
             System.out.println("Heap is empty!");
             return -1;
         }
 
         int root = heap.get(0);
-        int last = heap.remove(heap.size() - 1);
+
+        heap.set(0, heap.get(heap.size() - 1));
+        heap.remove(heap.size() - 1);
 
         if (!empty()) {
-            heap.set(0, last);
             downHeap(0);
         }
 
@@ -97,5 +96,11 @@ public class MaxHeap {
 
     int size() {
         return heap.size();
+    }
+
+    void swap(int i, int j) {
+        int temp = heap.get(i);
+        heap.set(i, heap.get(j));
+        heap.set(j, temp);
     }
 }

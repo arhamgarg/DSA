@@ -1,77 +1,46 @@
-import { MaxHeap } from "../trees/binary-tree/heap/max-heap/MaxHeap";
-import { MinHeap } from "../trees/binary-tree/heap/min-heap/MinHeap";
+import { Heap } from "../trees/binary-tree/heap/Heap";
 
 class PriorityQueue {
-	private isMinQueue: boolean;
-	private minHeap: MinHeap = new MinHeap();
-	private maxHeap: MaxHeap = new MaxHeap();
+	private heap: Heap;
 
-	constructor(type: boolean = true) {
-		this.isMinQueue = type;
-	}
-
-	//Naming issues
-	public isMinimumQueue(): boolean {
-		return this.isMinQueue;
+	constructor() {
+		this.heap = new Heap();
 	}
 
 	public insertItem(key: number): void {
-		if (this.isMinQueue) {
-			this.minHeap.insert(key);
-			return;
-		}
-
-		this.maxHeap.insert(key);
+		this.heap.insert(key);
 	}
 
 	public removeTop(): number {
-		if (this.isMinQueue) {
-			return this.minHeap.extractMin();
+		if (this.heap.isEmpty()) {
+			throw new Error("PriorityQueue is empty");
 		}
 
-		return this.maxHeap.extractMax();
+		return this.heap.extractMin();
 	}
 
 	public topKey(): number {
-		if (this.isMinQueue) {
-			return this.minHeap.getMin();
+		if (this.heap.isEmpty()) {
+			throw new Error("PriorityQueue is empty");
 		}
 
-		return this.maxHeap.getMax();
+		return this.heap.getMin();
 	}
 
-	public buildHeap(heapArray: Array<number>): void {
-		if (this.isMinQueue) {
-			this.minHeap.buildHeap(heapArray);
-			return;
-		}
-
-		this.maxHeap.buildHeap(heapArray);
+	public buildHeap(heapArray: number[]): void {
+		this.heap.buildHeap(heapArray);
 	}
 
-	public printHeap(): void {
-		if (this.isMinQueue) {
-			this.minHeap.printHeap();
-			return;
-		}
-
-		this.maxHeap.printHeap();
+	public print(): void {
+		this.heap.printHeap();
 	}
 
-	public isEmpty(): boolean {
-		if (this.isMinQueue) {
-			return this.minHeap.isEmpty();
-		}
-
-		return this.maxHeap.isEmpty();
+	public empty(): boolean {
+		return this.heap.isEmpty();
 	}
 
 	public size(): number {
-		if (this.isMinQueue) {
-			return this.minHeap.size();
-		}
-
-		return this.maxHeap.size();
+		return this.heap.size();
 	}
 }
 
