@@ -1,4 +1,4 @@
-import { TreeNode } from "../../node/TreeNode";
+import { TreeNode } from "../../../node/TreeNode";
 
 let index: number = -1;
 

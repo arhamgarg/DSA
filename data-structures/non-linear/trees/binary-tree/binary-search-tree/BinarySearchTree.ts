@@ -1,4 +1,4 @@
-import { TreeNode } from "../node/TreeNode";
+import { TreeNode } from "../../../node/TreeNode";
 
 function insert(root: TreeNode | null, value: number): TreeNode {
 	if (root == null) {
