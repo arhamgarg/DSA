@@ -1,4 +1,4 @@
-class MinHeap {
+class Heap {
 	private heap: Array<number> = [];
 
 	private getParent(index: number): number {
@@ -100,4 +100,4 @@ class MinHeap {
 	}
 }
 
-export { MinHeap };
+export { Heap };

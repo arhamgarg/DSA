@@ -1,45 +1,30 @@
-#include "../trees/binary-tree/heap/max-heap/MaxHeap.cpp"
-#include "../trees/binary-tree/heap/min-heap/MinHeap.cpp"
+#include "../trees/binary-tree/heap/Heap.cpp"
 
 class PriorityQueue {
-  bool isMinQueue;
-  MinHeap minHeap;
-  MaxHeap maxHeap;
+  Heap heap;
 
 public:
-  PriorityQueue(bool type = true) { isMinQueue = type; }
+  PriorityQueue() = default;
 
-  void insertItem(int key) {
-    if (isMinQueue) {
-      minHeap.insert(key);
-    } else {
-      maxHeap.insert(key);
-    }
-  }
+  void insertItem(int key) { heap.insertElement(key); }
 
   int removeTop() {
-    return isMinQueue ? minHeap.extractMin() : maxHeap.extractMax();
-  }
-
-  int topKey() { return isMinQueue ? minHeap.getMin() : maxHeap.getMax(); }
-
-  void buildHeap(vector<int> &arr) {
-    if (isMinQueue) {
-      minHeap.buildHeap(arr);
-    } else {
-      maxHeap.buildHeap(arr);
+    if (heap.empty()) {
+      return -1;
     }
+
+    return heap.removeMin();
   }
 
-  void print() {
-    if (isMinQueue) {
-      minHeap.printHeap();
-    } else {
-      maxHeap.printHeap();
+  int topKey() {
+    if (heap.empty()) {
+      return -1;
     }
+
+    return heap.getRoot();
   }
 
-  bool empty() { return isMinQueue ? minHeap.empty() : maxHeap.empty(); }
+  bool empty() { return heap.empty(); }
 
-  int size() { return isMinQueue ? minHeap.size() : maxHeap.size(); }
+  int size() { return heap.size(); }
 };
