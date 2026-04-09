@@ -15,16 +15,16 @@ public:
   }
 };
 
-static int index = -1;
+static int idx = -1;
 
 Node *buildBT(vector<int> &preorder) {
-  index++;
+  idx++;
 
-  if (preorder[index] == -1) {
+  if (preorder[idx] == -1) {
     return nullptr;
   }
 
-  Node *root = new Node(preorder[index]);
+  Node *root = new Node(preorder[idx]);
   root->left = buildBT(preorder);
   root->right = buildBT(preorder);
 
