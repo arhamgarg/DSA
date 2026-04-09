@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
 
-int getMax(vector<int> arr, int n) {
+int getMax(vector<int> &arr, int n) {
   int max = arr[0];
 
   for (int i = 1; i < n; i++)
@@ -11,7 +11,7 @@ int getMax(vector<int> arr, int n) {
   return max;
 }
 
-void countSort(vector<int> arr, int n, int exp) {
+void countSort(vector<int> &arr, int n, int exp) {
   int output[n];
   int i, count[10] = {0};
 
@@ -33,7 +33,7 @@ void countSort(vector<int> arr, int n, int exp) {
   }
 }
 
-void radixSort(vector<int> arr, int n) {
+void radixSort(vector<int> &arr, int n) {
   int max = getMax(arr, n);
 
   for (int exp = 1; max / exp > 0; exp *= 10)
