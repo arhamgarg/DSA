@@ -1,5 +1,11 @@
-# Uses MinHeap ADT from data-structures/non-linear/binary-tree/heap/min-heap/MinHeap.py
+import os
+import sys
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+heap_path = os.path.join(current_dir, '../trees/binary-tree/heap')
+sys.path.insert(0, heap_path)
+
+from Heap import Heap
 
 class Graph:
     class Node:
@@ -73,7 +79,7 @@ class Graph:
             print("Invalid start vertex")
             return
         visited = set([start])
-        heap = MinHeap()
+        heap = Heap()
         mst, total_weight = [], 0
         for neighbor, w in self.nodes[start].AList:
             heap.insert((w, start, neighbor))
@@ -116,7 +122,7 @@ class Graph:
             parent[node] = node
             rank[node] = 0
 
-        heap = MinHeap([(edge.weight, edge.v1, edge.v2) for edge in self.edges])
+        heap = Heap([(edge.weight, edge.v1, edge.v2) for edge in self.edges])
         sorted_edges = [heap.extract_min() for _ in range(len(self.edges))]
 
         MST = []
@@ -141,7 +147,7 @@ class Graph:
         parent = {v: None for v in self.vertices}
         distances[start] = 0
         visited = set()
-        heap = MinHeap([(0, start)])
+        heap = Heap([(0, start)])
         while heap.size() > 0:
             dist, u = heap.extract_min()
             if u in visited:
