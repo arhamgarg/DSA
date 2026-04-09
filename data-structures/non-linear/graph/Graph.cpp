@@ -1,11 +1,4 @@
-#include <algorithm>
-#include <climits>
-#include <iostream>
-#include <queue>
-#include <tuple>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Node {
