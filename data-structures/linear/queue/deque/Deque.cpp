@@ -106,7 +106,7 @@ public:
       cout << "Deque is empty!\n";
       return -1;
     }
-    
+
     return tail->data;
   }
 
