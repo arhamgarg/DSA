@@ -81,7 +81,7 @@ public:
     }
 
     Node *temp = tail;
-    
+
     tail = tail->prev;
 
     if (tail != nullptr) {
