@@ -1,0 +1,131 @@
+public class StrassenMatrixMultiplication {
+
+    // given 2 matrices A and B: return A X B (Strassen)
+    public static int[][] multiply(int[][] A, int[][] B) {
+        int n = A.length;
+
+        // base case: single element multiplication
+        if (n == 1) {
+            return new int[][] { { A[0][0] * B[0][0] } };
+        }
+
+        int k = n / 2;
+
+        // divide matrices into 4 parts each
+        int[][] A11 = new int[k][k], A12 = new int[k][k];
+        int[][] A21 = new int[k][k], A22 = new int[k][k];
+
+        int[][] B11 = new int[k][k], B12 = new int[k][k];
+        int[][] B21 = new int[k][k], B22 = new int[k][k];
+
+        // fill sub matrices
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < k; j++) {
+                A11[i][j] = A[i][j];
+                A12[i][j] = A[i][j + k];
+                A21[i][j] = A[i + k][j];
+                A22[i][j] = A[i + k][j + k];
+
+                B11[i][j] = B[i][j];
+                B12[i][j] = B[i][j + k];
+                B21[i][j] = B[i + k][j];
+                B22[i][j] = B[i + k][j + k];
+            }
+        }
+
+        // compute the 7 products (core idea of Strassen)
+        int[][] P1 = multiply(A11, subtract(B12, B22));
+        int[][] P2 = multiply(add(A11, A12), B22);
+        int[][] P3 = multiply(add(A21, A22), B11);
+        int[][] P4 = multiply(A22, subtract(B21, B11));
+        int[][] P5 = multiply(add(A11, A22), add(B11, B22));
+        int[][] P6 = multiply(subtract(A12, A22), add(B21, B22));
+        int[][] P7 = multiply(subtract(A11, A21), add(B11, B12));
+
+        // merge partial results into final quadrants
+        int[][] C11 = add(subtract(add(P5, P4), P2), P6);
+        int[][] C12 = add(P1, P2);
+        int[][] C21 = add(P3, P4);
+        int[][] C22 = subtract(subtract(add(P1, P5), P3), P7);
+
+        int[][] C = new int[n][n];
+
+        // place each quadrant into result matrix
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < k; j++) {
+                C[i][j] = C11[i][j];
+                C[i][j + k] = C12[i][j];
+                C[i + k][j] = C21[i][j];
+                C[i + k][j + k] = C22[i][j];
+            }
+        }
+
+        return C;
+    }
+
+    // given 2 matrices A and B: return A + B
+    private static int[][] add(int[][] A, int[][] B) {
+        int n = A.length;
+        int[][] C = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                C[i][j] = A[i][j] + B[i][j];
+            }
+        }
+        return C;
+    }
+
+    // given 2 matrices A and B: return A - B
+    private static int[][] subtract(int[][] A, int[][] B) {
+        int n = A.length;
+        int[][] C = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                C[i][j] = A[i][j] - B[i][j];
+            }
+        }
+        return C;
+    }
+
+    // print matrix
+    public static void printMatrix(int[][] m) {
+        for (int[] row : m) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // sample 4 x 4 matrix input
+        int[][] A = {
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 8 },
+                { 9, 10, 11, 12 },
+                { 13, 14, 15, 16 }
+        };
+
+        int[][] B = {
+                { 17, 18, 19, 20 },
+                { 21, 22, 23, 24 },
+                { 25, 26, 27, 28 },
+                { 29, 30, 31, 32 }
+        };
+
+        System.out.println("Matrix A:");
+        printMatrix(A);
+
+        System.out.println("Matrix B:");
+        printMatrix(B);
+
+        // perform strassen multiplication
+        int[][] C = multiply(A, B);
+
+        System.out.println("Result Matrix:");
+        printMatrix(C);
+    }
+}
