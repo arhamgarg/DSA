@@ -94,28 +94,4 @@ class StrassenMatrixMultiplication {
     }
 }
 
-// test case
-const solver = new StrassenMatrixMultiplication();
-
-// sample 4 x 4 matrix input
-const matrixA: number[][] = [
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 16],
-];
-
-const matrixB: number[][] = [
-    [17, 18, 19, 20],
-    [21, 22, 23, 24],
-    [25, 26, 27, 28],
-    [29, 30, 31, 32],
-];
-
-// perform strassen multiplication
-const resultMatrix = solver.strassen(matrixA, matrixB);
-
-console.log("Resulting Matrix:");
-console.table(resultMatrix);
-
 export { StrassenMatrixMultiplication };
