@@ -90,30 +90,3 @@ fn strassen(a: &Vec<Vec<i32>>, b: &Vec<Vec<i32>>) -> Vec<Vec<i32>> {
 
     c
 }
-
-fn main() {
-    // sample 4 x 4 matrix input
-    let a = vec![
-        vec![1, 2, 3, 4],
-        vec![5, 6, 7, 8],
-        vec![9, 10, 11, 12],
-        vec![13, 14, 15, 16],
-    ];
-
-    let b = vec![
-        vec![17, 18, 19, 20],
-        vec![21, 22, 23, 24],
-        vec![25, 26, 27, 28],
-        vec![29, 30, 31, 32],
-    ];
-
-    // perform strassen multiplication
-    let result = strassen(&a, &b);
-
-    println!("Resulting Matrix:");
-
-    // print matrix row by row
-    for row in result {
-        println!("{:?}", row);
-    }
-}

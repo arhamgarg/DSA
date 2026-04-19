@@ -107,35 +107,3 @@ Matrix strassen(const Matrix &A, const Matrix &B) {
 
   return C;
 }
-
-// print matrix
-void printMatrix(const Matrix &m) {
-  for (const auto &row : m) {
-    for (int val : row) {
-      cout << val << " ";
-    }
-    cout << endl;
-  }
-}
-
-int main() {
-  // sample 4 x 4 matrix input
-  Matrix A = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
-
-  Matrix B = {
-      {17, 18, 19, 20}, {21, 22, 23, 24}, {25, 26, 27, 28}, {29, 30, 31, 32}};
-
-  cout << "Matrix A:\n";
-  printMatrix(A);
-
-  cout << "Matrix B:\n";
-  printMatrix(B);
-
-  // perform strassen multiplication
-  Matrix C = strassen(A, B);
-
-  cout << "Result Matrix:\n";
-  printMatrix(C);
-
-  return 0;
-}
