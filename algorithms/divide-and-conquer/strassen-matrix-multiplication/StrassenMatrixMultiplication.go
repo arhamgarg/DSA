@@ -4,7 +4,6 @@ import (
 	"fmt"
 )
 
-// given 2 matrices A and B: return A + B
 func add(A, B [][]int) [][]int {
 	n := len(A)
 	C := make([][]int, n)
@@ -15,10 +14,10 @@ func add(A, B [][]int) [][]int {
 			C[i][j] = A[i][j] + B[i][j]
 		}
 	}
+	
 	return C
 }
 
-// given 2 matrices A and B: return A - B
 func subtract(A, B [][]int) [][]int {
 	n := len(A)
 	C := make([][]int, n)
@@ -29,21 +28,19 @@ func subtract(A, B [][]int) [][]int {
 			C[i][j] = A[i][j] - B[i][j]
 		}
 	}
+
 	return C
 }
 
-// given 2 matrices A and B: return A X B (Strassen)
 func Strassen(A, B [][]int) [][]int {
 	n := len(A)
 
-	// base case: single element multiplication
 	if n == 1 {
 		return [][]int{{A[0][0] * B[0][0]}}
 	}
 
 	k := n / 2
 
-	// divide matrices into 4 parts each
 	A11 := make([][]int, k)
 	A12 := make([][]int, k)
 	A21 := make([][]int, k)
@@ -54,7 +51,6 @@ func Strassen(A, B [][]int) [][]int {
 	B21 := make([][]int, k)
 	B22 := make([][]int, k)
 
-	// allocate space for sub matrices
 	for i := 0; i < k; i++ {
 		A11[i] = make([]int, k)
 		A12[i] = make([]int, k)
@@ -66,7 +62,6 @@ func Strassen(A, B [][]int) [][]int {
 		B21[i] = make([]int, k)
 		B22[i] = make([]int, k)
 
-		// fill sub matrices
 		for j := 0; j < k; j++ {
 			A11[i][j] = A[i][j]
 			A12[i][j] = A[i][j+k]
@@ -80,7 +75,6 @@ func Strassen(A, B [][]int) [][]int {
 		}
 	}
 
-	// compute the 7 products (core idea of Strassen)
 	P1 := Strassen(A11, subtract(B12, B22))
 	P2 := Strassen(add(A11, A12), B22)
 	P3 := Strassen(add(A21, A22), B11)
@@ -89,7 +83,6 @@ func Strassen(A, B [][]int) [][]int {
 	P6 := Strassen(subtract(A12, A22), add(B21, B22))
 	P7 := Strassen(subtract(A11, A21), add(B11, B12))
 
-	// merge partial results into final quadrants
 	C11 := add(subtract(add(P5, P4), P2), P6)
 	C12 := add(P1, P2)
 	C21 := add(P3, P4)
@@ -97,7 +90,6 @@ func Strassen(A, B [][]int) [][]int {
 
 	C := make([][]int, n)
 
-	// place each quadrant into result matrix
 	for i := 0; i < k; i++ {
 		C[i] = make([]int, n)
 		copy(C[i][:k], C11[i])
