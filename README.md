@@ -19,6 +19,7 @@ We’re excited to have you contribute! Whether it’s adding a new data structu
 | [Narravula Mukesh](https://github.com/mukesh1352)           | Java (.java), Rust (.rs), Python (.py) |
 | [Bhargava Sri Sai](https://github.com/Bhargi777)            | Java (.java)                           |
 | [Ananya Bottu](https://github.com/AnanyaBottu)              | Java (.java)                           |
+| [Aniruth Karthik](https://github.com/AniruthKarthik)        | All languages                          |
 
 ## **License**
 
