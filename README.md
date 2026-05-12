@@ -13,7 +13,7 @@ We’re excited to have you contribute! Whether it’s adding a new data structu
 | [Arham Garg](https://github.com/arhamgarg)                  | C++ (.cpp) & Code Review               |
 | [H Dharshan](https://github.com/Dharshan2208)               | Go (.go), Java (.java), C++ (.cpp)     |
 | [Nithin Venkat Sharma P M](https://github.com/Nithin0306)   | Python (.py) & C++ (.cpp)              |
-| [P Sanjay](https://github.com/CatFish-in-myDish)            | TypeScript (.ts) & Dart (.dart)        |
+| [P Sanjay](https://github.com/fingernailz)                  | TypeScript (.ts) & Dart (.dart)        |
 | [Chinni Samith Reddy](https://github.com/samithreddychinni) | Java (.java)                           |
 | [Ritesh Koushik](https://github.com/IAmRiteshKoushik)       | Rust (.rs) & Go (.go)                  |
 | [Narravula Mukesh](https://github.com/mukesh1352)           | Java (.java), Rust (.rs), Python (.py) |
