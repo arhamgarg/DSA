@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {

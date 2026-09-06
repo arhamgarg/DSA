@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <memory>
 #include <vector>
+
 using namespace std;
 
 using Digest = array<uint8_t, 32>;
