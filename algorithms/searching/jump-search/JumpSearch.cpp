@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cmath>
 #include <vector>
+
 using namespace std;
 
 int jumpSearch(const vector<int> &arr, int target) {
